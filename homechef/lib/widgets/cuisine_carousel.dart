@@ -150,8 +150,22 @@ class CuisineCarousel extends StatelessWidget {
                               left: 10.0,
                               bottom: 10.0,
                               child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
+                                  Text('Hello'),
+                                  SizedBox(
+                                    height: 20,
+                                    child: new Center(
+                                      child: new Container(
+                                        margin: new EdgeInsetsDirectional.only(start: 1.0, end: 1.0),
+                                        height: 5.0,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                  Divider(color: Colors.blue),
                                   Text(
                                     cuisine.name,
                                     style: TextStyle(

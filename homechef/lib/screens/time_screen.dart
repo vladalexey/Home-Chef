@@ -119,7 +119,7 @@ class _TimePageState extends State<TimePage> {
                               // shadows: Sha,
                               fontSize: 35.0,
                               fontWeight: FontWeight.w700,
-                              color: Color(0xff1D1D1D),
+                              color: Color(0xff383838),
                             ),
                           ),
                         )
