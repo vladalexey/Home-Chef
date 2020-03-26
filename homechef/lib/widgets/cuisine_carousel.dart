@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
+import 'package:homechef/screens/all_categories/all_cuisine_screen.dart';
 import 'package:homechef/screens/cuisine_screen.dart';
 
 class CuisineCarousel extends StatelessWidget {
@@ -16,13 +17,27 @@ class CuisineCarousel extends StatelessWidget {
               Text(
                 'By cuisine',
                 style: TextStyle(
+                  shadows: [
+                    Shadow(
+                      color: Colors.black12,
+                      offset: Offset(1.0, 2.0),
+                      blurRadius: 10.0,
+                    ),
+                  ],
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.5
                 ),
               ),
               GestureDetector(
-                onTap: () => print('See all'),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AllCuisinePage(
+                      cuisines: cuisines,
+                    ),
+                  ),
+                ),
                 child: Text(
                   'See all',
                   style: TextStyle(
@@ -63,7 +78,17 @@ class CuisineCarousel extends StatelessWidget {
                           height: 80.0,
                           width: 150.0,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: Offset(0, 5),
+                                blurRadius: 10,
+                                spreadRadius: 1
+                              )
+                            ],
+                            // color: Colors.white,
+                            // color: Color(0xffFFEF31),
+                            color: Colors.yellow,
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Padding(
@@ -75,15 +100,24 @@ class CuisineCarousel extends StatelessWidget {
                                 Text(
                                   '${cuisine.recipes.length} recipes',
                                   style: TextStyle(
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.black26,
+                                        offset: Offset(1.0, 2.0),
+                                        blurRadius: 10.0,
+                                      ),
+                                    ],
                                     fontSize: 18.0,
-                                    fontWeight: FontWeight.w400,
-                                    letterSpacing: 1.2,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1.0,
                                   ),
                                 ),
+                                SizedBox(height: 5.0,),
                                 Text(
                                   cuisine.description,
                                   style: TextStyle(
-                                    color: Colors.grey,
+                                    fontSize: 14,
+                                    color: Colors.grey[800],
                                   ),
                                 ),
                               ],
@@ -135,10 +169,10 @@ class CuisineCarousel extends StatelessWidget {
                                           end: FractionalOffset.bottomCenter,
                                           colors: [
                                             Colors.transparent,
-                                            Colors.black.withOpacity(0.9),
+                                            Colors.black,
                                           ],
                                           stops: [
-                                            0.7,
+                                            0.5,
                                             1.0
                                           ])
                                       ),
@@ -154,28 +188,26 @@ class CuisineCarousel extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text('Hello'),
-                                  SizedBox(
-                                    height: 20,
-                                    child: new Center(
-                                      child: new Container(
-                                        margin: new EdgeInsetsDirectional.only(start: 1.0, end: 1.0),
-                                        height: 5.0,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                                  ),
+
                                   Row(
-                                    children: <Widget> [
-                                      Container(
-                                        margin: const EdgeInsets.only(left: 15.0, right: 10.0),
-                                        height: 20.0,
-                                        child: Divider(
-                                          height: 20.0,
-                                          color: Colors.blue),
-                                      ),
-                                      ]
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 5.0),
+                                        child: SizedBox(
+                                          width: 80.0,
+                                          child: Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Divider(
+                                              height: 2.0,
+                                              color: Colors.yellow,
+                                              thickness: 2.0,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
+
                                   Text(
                                     cuisine.name,
                                     style: TextStyle(

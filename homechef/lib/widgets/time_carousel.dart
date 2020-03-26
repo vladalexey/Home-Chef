@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/time_model.dart';
-import 'package:homechef/screens/cuisine_screen.dart';
+import 'package:homechef/screens/all_categories/all_time_screen.dart';
 import 'package:homechef/screens/time_screen.dart';
 
 class TimeCarousel extends StatelessWidget {
@@ -18,13 +17,27 @@ class TimeCarousel extends StatelessWidget {
               Text(
                 'By cooking time',
                 style: TextStyle(
+                  shadows: [
+                    Shadow(
+                      color: Colors.black12,
+                      offset: Offset(1.0, 2.0),
+                      blurRadius: 10.0,
+                    ),
+                  ],
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.5
                 ),
               ),
               GestureDetector(
-                onTap: () => print('See all'),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AllTimePage(
+                      times: times,
+                    ),
+                  ),
+                ),
                 child: Text(
                   'See all',
                   style: TextStyle(
@@ -38,7 +51,7 @@ class TimeCarousel extends StatelessWidget {
           ),
         ),
         Container(
-          height: 215.0,
+          height: 220.0,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: times.length,
@@ -65,11 +78,20 @@ class TimeCarousel extends StatelessWidget {
                           height: 80.0,
                           width: 160.0,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: Offset(0, 5),
+                                blurRadius: 10,
+                                spreadRadius: 1
+                              )
+                            ],
+                            // color: Colors.white,
+                            color: Colors.yellow,
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Padding(
-                            padding: EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(8.0),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.end,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,15 +99,24 @@ class TimeCarousel extends StatelessWidget {
                                 Text(
                                   '${time.recipes.length} recipes',
                                   style: TextStyle(
+                                    shadows: [
+                                      Shadow(
+                                        color: Colors.black26,
+                                        offset: Offset(1.0, 2.0),
+                                        blurRadius: 10.0,
+                                      ),
+                                    ],
                                     fontSize: 18.0,
-                                    fontWeight: FontWeight.w400,
-                                    letterSpacing: 1.2,
+                                    fontWeight: FontWeight.w600,
+                                    letterSpacing: 1.0,
                                   ),
                                 ),
+                                SizedBox(height: 5.0,),
                                 Text(
                                   time.description,
                                   style: TextStyle(
-                                    color: Colors.grey,
+                                    fontSize: 14,
+                                    color: Colors.grey[800],
                                   ),
                                 ),
                               ],
@@ -120,7 +151,7 @@ class TimeCarousel extends StatelessWidget {
                                       borderRadius: BorderRadius.circular(20.0),
                                       child: Image(
                                         height: 120.0,
-                                        width: 160.0,
+                                        width: 140.0,
                                         image: AssetImage(time.imageUrl),
                                         fit: BoxFit.cover,
                                       ),
@@ -129,7 +160,7 @@ class TimeCarousel extends StatelessWidget {
                                         
                                     Container(
                                       height: 120.0,
-                                      width: 160.0,
+                                      width: 140.0,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20.0),
                                         gradient: LinearGradient(
@@ -137,10 +168,10 @@ class TimeCarousel extends StatelessWidget {
                                           end: FractionalOffset.bottomCenter,
                                           colors: [
                                             Colors.transparent,
-                                            Colors.black.withOpacity(0.9),
+                                            Colors.black,
                                           ],
                                           stops: [
-                                            0.7,
+                                            0.6,
                                             1.0
                                           ])
                                       ),
@@ -155,6 +186,26 @@ class TimeCarousel extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
+
+                                  Row(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 5.0),
+                                        child: SizedBox(
+                                          width: 80.0,
+                                          child: Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Divider(
+                                              height: 2.0,
+                                              color: Colors.yellow,
+                                              thickness: 2.0,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  
                                   Text(
                                     time.name,
                                     style: TextStyle(

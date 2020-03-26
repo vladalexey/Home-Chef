@@ -1,8 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/popular_model.dart';
-import 'package:homechef/models/recipe_model.dart';
-import 'package:homechef/screens/cuisine_screen.dart';
 
 class PopularCarouselPage extends StatefulWidget {
 
@@ -62,17 +61,45 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
                   colors: [
                     Colors.black.withOpacity(0.9),
                     Colors.transparent,
-                    Colors.transparent,
-                    Color(0xffFCD966),
+                    // Colors.transparent,
+                    // Color(0xffFCD966),
+                    Colors.yellow[600]
                   ],
                   stops: [
                     0.0,
                     0.2,
-                    0.5,
+                    // 0.5,
                     1.0
                   ])
               ),
             ),
+
+            Positioned(
+              bottom: 50.0,
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
+                  child: AutoSizeText(
+                    populars[index].name,
+                    maxFontSize: 55,
+                    maxLines: 1,
+                    style: TextStyle(
+                      shadows: [
+                        Shadow(
+                          color: Colors.black12,
+                          offset: Offset(0.0, 2.0),
+                          blurRadius: 10.0,
+                        ),
+                      ],
+                      fontSize: 65.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              ),
+            )
           ]
         ),
       ),
