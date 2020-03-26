@@ -205,23 +205,26 @@ class _RecipePageState extends State<RecipePage> {
 
                       Row(
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
-                            child: AutoSizeText(
-                              widget.recipe.name,
-                              maxFontSize: 55,
-                              maxLines: 1,
-                              style: TextStyle(
-                                shadows: [
-                                  Shadow(
-                                    color: Colors.black12,
-                                    offset: Offset(0.0, 2.0),
-                                    blurRadius: 10.0,
-                                  ),
-                                ],
-                                fontSize: 65.0,
-                                fontWeight: FontWeight.w400,
-                                color: Color(0xff1D1D1D),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
+                              child: AutoSizeText(
+                                widget.recipe.name,
+                                maxFontSize: 55,
+                                maxLines: 1,
+                                style: TextStyle(
+                                  shadows: [
+                                    Shadow(
+                                      color: Colors.black12,
+                                      offset: Offset(0.0, 2.0),
+                                      blurRadius: 10.0,
+                                    ),
+                                  ],
+                                  fontSize: 65.0,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xff1D1D1D),
+                                ),
                               ),
                             ),
                           )
