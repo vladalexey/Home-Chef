@@ -69,7 +69,7 @@ class _TimePageState extends State<TimePage> {
               colors: [
                 Colors.black.withOpacity(0.5),
                 Colors.transparent,
-                Color(0xffFCD966),
+                Colors.yellow[600],
               ],
               stops: [
                 0.0,
@@ -203,7 +203,13 @@ class _TimePageState extends State<TimePage> {
                     child: Text(
                       widget.time.name,
                       style: TextStyle(
-                        // shadows: Sha,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black12,
+                            offset: Offset(0.0, 2.0),
+                            blurRadius: 10.0,
+                          ),
+                        ],
                         fontSize: 35.0,
                         fontWeight: FontWeight.w700,
                         color: Color(0xff383838),

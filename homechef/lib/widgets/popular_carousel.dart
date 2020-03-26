@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/popular_model.dart';
+import 'package:homechef/screens/recipe.dart';
 
 class PopularCarouselPage extends StatefulWidget {
 
@@ -24,7 +25,15 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
   GestureDetector _buildPage(double height, int index) {
 
     return GestureDetector(
-      onTap: () => print('Popular'),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => RecipePage(
+              recipe: populars[index],
+            )
+          ));
+      },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Stack(

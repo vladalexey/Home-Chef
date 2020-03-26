@@ -69,7 +69,7 @@ class _CuisinePageState extends State<CuisinePage> {
               colors: [
                 Colors.black.withOpacity(0.5),
                 Colors.transparent,
-                Color(0xffFCD966),
+                Colors.yellow[600],
               ],
               stops: [
                 0.0,

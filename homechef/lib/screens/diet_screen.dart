@@ -70,7 +70,7 @@ class _DietPageState extends State<DietPage> {
               colors: [
                 Colors.black.withOpacity(0.5),
                 Colors.transparent,
-                Color(0xffFCD966),
+                Colors.yellow[600],
               ],
               stops: [
                 0.0,
@@ -204,7 +204,13 @@ class _DietPageState extends State<DietPage> {
                     child: Text(
                       widget.diet.name,
                       style: TextStyle(
-                        // shadows: Sha,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black12,
+                            offset: Offset(0.0, 2.0),
+                            blurRadius: 10.0,
+                          ),
+                        ],
                         fontSize: 65.0,
                         fontWeight: FontWeight.w400,
                         color: Color(0xff1D1D1D),

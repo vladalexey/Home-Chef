@@ -2,17 +2,13 @@ import 'package:flutter/material.dart';
 
 class VisibleAnimator extends StatelessWidget {
 
-  final bool show;
-  VisibleAnimator({this.show});
+
 
   @override
   Widget build(BuildContext context) {
 
-    double opacity = show ? 1.0 : 0.0;
-
     return AnimatedOpacity(
-      duration: Duration(microseconds: 50),
-      opacity: opacity,
+      opacity: _opacity,
       child: Center(
       // SEARCH BAR
         child: Container(
@@ -61,6 +57,6 @@ class VisibleAnimator extends StatelessWidget {
           ),
         ),
       ),
-    );
+    ),
   }
 }

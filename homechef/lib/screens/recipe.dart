@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/widgets/ingredients.dart';
@@ -206,10 +207,18 @@ class _RecipePageState extends State<RecipePage> {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
-                            child: Text(
+                            child: AutoSizeText(
                               widget.recipe.name,
+                              maxFontSize: 55,
+                              maxLines: 1,
                               style: TextStyle(
-                                // shadows: Sha,
+                                shadows: [
+                                  Shadow(
+                                    color: Colors.black12,
+                                    offset: Offset(0.0, 2.0),
+                                    blurRadius: 10.0,
+                                  ),
+                                ],
                                 fontSize: 65.0,
                                 fontWeight: FontWeight.w400,
                                 color: Color(0xff1D1D1D),
