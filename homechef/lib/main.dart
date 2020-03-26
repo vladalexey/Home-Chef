@@ -7,13 +7,22 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Home Chef',
-      theme: ThemeData(
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
 
-        primarySwatch: Colors.blue,
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: MaterialApp(
+        title: 'Home Chef',
+        theme: ThemeData(
+
+          primarySwatch: Colors.blue,
+        ),
+        home: MyHomePage(title: 'Home Chef'),
       ),
-      home: MyHomePage(title: 'Home Chef'),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/widgets/cuisine_carousel.dart';
 import 'package:homechef/widgets/diet_carousel.dart';
+import 'package:homechef/widgets/popular_carousel.dart';
 import 'package:homechef/widgets/time_carousel.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -26,41 +27,11 @@ class _MyHomePageState extends State<MyHomePage> {
           Stack(
             children: <Widget>[
 
-              Container(
-                height: MediaQuery.of(context).size.width * 0.7,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: Image(
-                    image: AssetImage('assets/imgs/food2.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              
-              Container(
-                height: MediaQuery.of(context).size.width * 0.7,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  gradient: LinearGradient(
-                    begin: FractionalOffset.topCenter,
-                    end: FractionalOffset.bottomCenter,
-                    colors: [
-                      Colors.black.withOpacity(0.9),
-                      Colors.transparent,
-                      Colors.transparent,
-                      Color(0xffFCD966),
-                    ],
-                    stops: [
-                      0.0,
-                      0.2,
-                      0.5,
-                      1.0
-                    ])
-                ),
+              Column(
+                children: <Widget>[
+                  // SizedBox(height: 40.0),
+                  PopularCarouselPage(),
+                ],
               ),
 
               Padding(
@@ -125,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
 
                     SizedBox(height: 
-                      MediaQuery.of(context).size.width * 0.30
+                      MediaQuery.of(context).size.width * 0.28
                     ),
 
                     Row(

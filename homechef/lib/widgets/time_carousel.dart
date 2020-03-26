@@ -159,7 +159,7 @@ class TimeCarousel extends StatelessWidget {
                                     time.name,
                                     style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 22.0,
+                                      fontSize: 20.0,
                                       fontWeight: FontWeight.w600,
                                       letterSpacing: 1.2,
                                     ),

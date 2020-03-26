@@ -165,14 +165,24 @@ class CuisineCarousel extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Divider(color: Colors.blue),
+                                  Row(
+                                    children: <Widget> [
+                                      Container(
+                                        margin: const EdgeInsets.only(left: 15.0, right: 10.0),
+                                        height: 20.0,
+                                        child: Divider(
+                                          height: 20.0,
+                                          color: Colors.blue),
+                                      ),
+                                      ]
+                                  ),
                                   Text(
                                     cuisine.name,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20.0,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: 1.2,
+                                      letterSpacing:  1.2,
                                     ),
                                   ),
                                 ],
