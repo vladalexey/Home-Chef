@@ -99,20 +99,46 @@ class _MyHomePageState extends State<MyHomePage> {
                       MediaQuery.of(context).size.width * 0.28
                     ),
 
-                    Row(
+                    Column(
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(left: 8.0, bottom: 20.0),
-                          child: Text(
-                            'Most popular',
-                            style: TextStyle(
-                              // shadows: Sha,
-                              fontSize: 30.0,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff383838),
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: Divider(
+                                height: 2.0,
+                                // color: Colors.yellow[700],
+                                // color: Color(0xff383838),
+                                color: Colors.yellow[500],
+                                thickness: 3.0,
+                              ),
                             ),
                           ),
-                        )
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(left: 8.0, bottom: 20.0),
+                              child: Text(
+                                'Most popular',
+                                style: TextStyle(
+                                  shadows: [
+                                    Shadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0.0, 2.0),
+                                      blurRadius: 6.0,
+                                    ),
+                                  ],
+                                  fontSize: 30.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     )
                   ],

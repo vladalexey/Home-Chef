@@ -207,7 +207,7 @@ class _AllTimePageState extends State<AllTimePage> {
                           Padding(
                             padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
                             child: Text(
-                              'By cuisine',
+                              'By cooking time',
                               style: TextStyle(
                                 // shadows: Sha,
                                 fontSize: 65.0,

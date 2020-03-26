@@ -193,6 +193,23 @@ class _TimePageState extends State<TimePage> {
                         MediaQuery.of(context).size.width * 0.5
                       ),
 
+                      Padding(
+                          padding: const EdgeInsets.only(left: 15.0),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.5,
+                              child: Divider(
+                                height: 2.0,
+                                // color: Colors.yellow[700],
+                                // color: Color(0xff383838),
+                                color: Colors.yellow[500],
+                                thickness: 3.0,
+                              ),
+                            ),
+                          ),
+                        ),
+
                       Row(
                         children: <Widget>[
                           Padding(

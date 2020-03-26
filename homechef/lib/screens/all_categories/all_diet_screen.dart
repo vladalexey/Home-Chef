@@ -207,7 +207,7 @@ class _AllDietPageState extends State<AllDietPage> {
                           Padding(
                             padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
                             child: Text(
-                              'By cuisine',
+                              'By diet',
                               style: TextStyle(
                                 // shadows: Sha,
                                 fontSize: 65.0,
