@@ -6,7 +6,7 @@ class Recipe {
   int rate;
   int cookTime;
   List<String> ingredients;
-  String instruction;
+  List<String> instruction;
 
   Recipe({
     this.id,
