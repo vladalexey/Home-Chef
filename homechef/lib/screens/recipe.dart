@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/widgets/ingredients.dart';
 import 'package:homechef/widgets/instructions.dart';
@@ -235,15 +236,212 @@ class _RecipePageState extends State<RecipePage> {
                 )
               ],
             ),
+
+
             Expanded(
               child: ListView(
-                  children: <Widget>[
-                    Ingredients(),
-                    SizedBox(height: 5.0),
-                    // Instructions(),
-                  ],
-                ),
+                children: <Widget>[
+                  Container(
+                    // height: 200.0,
+
+                      // STACK FOR INGREDIENTS
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 5.0,
+                            bottom: 5.0,
+                            left: 15.0,
+                            right: 15.0),
+                          child: Stack(
+                            children: <Widget>[
+
+                              // LIST INGREDIENTS
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width * 0.7,
+
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: Offset(0.0, 2.0),
+                                          blurRadius: 6.0,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                        top: 25.0, 
+                                        bottom: 10.0,
+                                        left: 30.0,
+                                        right: 10.0),
+                                      child: Text(
+                                        widget.recipe.ingredients.toString(),
+                                        style: TextStyle(
+                                          color: Colors.black87,
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w300,
+                                          letterSpacing:  1.5,
+                                        ),
+                                      )
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              // INGREDIENTS TITLE
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                child: Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
+                                    height: 40.0,
+                                    width: MediaQuery.of(context).size.width * 0.7,
+                                    decoration: BoxDecoration(
+                                      color: Colors.yellow[600],
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: Offset(0.0, 2.0),
+                                          blurRadius: 6.0,
+                                        ),
+                                      ],
+                                    ),
+
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(horizontal: 35.0,),
+                                        child: Text(
+                                          'Ingredients',
+                                          style: TextStyle(
+                                            letterSpacing: 1.2,
+                                            color: Colors.black87,
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 20.0
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                  ),
+
+                  SizedBox(height: 5.0),
+
+                  Container(
+                    height: 200.0,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 5.0,
+                          bottom: 5.0,
+                          left: 15.0,
+                          right: 15.0),
+                        child: Stack(
+                          children: <Widget>[
+
+                            // LIST INSTRUCTIONs
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width * 0.7,
+
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        offset: Offset(0.0, 2.0),
+                                        blurRadius: 6.0,
+                                      ),
+                                    ],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 25.0, 
+                                      bottom: 10.0,
+                                      left: 30.0,
+                                      right: 10.0),
+                                    child: Text(
+                                      widget.recipe.instruction.toString(),
+                                      style: TextStyle(
+                                        color: Colors.black87,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.w300,
+                                        letterSpacing:  1.5,
+                                      ),
+                                    )
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            // INSTRUCTION TITLE
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10.0),
+                              child: Align(
+                                alignment: Alignment.topLeft,
+                                child: Container(
+                                  height: 40.0,
+                                  width: MediaQuery.of(context).size.width * 0.7,
+                                  decoration: BoxDecoration(
+                                    color: Colors.yellow[600],
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        offset: Offset(0.0, 2.0),
+                                        blurRadius: 6.0,
+                                      ),
+                                    ],
+                                  ),
+
+                                  child: Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(horizontal: 35.0,),
+                                      child: Text(
+                                        'Instructions',
+                                        style: TextStyle(
+                                          letterSpacing: 1.2,
+                                          color: Colors.black87,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 20.0
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  
+                ],
+              ),
             ),
+
           ],
         )
       ),
