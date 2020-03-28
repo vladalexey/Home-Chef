@@ -23,6 +23,28 @@ class _RecipePageState extends State<RecipePage> {
       _visible = true;
       });
   }
+  
+  String parseIngredients( List<String> ingredients) {
+
+    String res = '';
+
+    for (var ingredient in ingredients) {
+      
+      res = res + '- ' + ingredient + '\n';
+    }
+    return res;
+  }
+
+  String parseInstruction( List<String> instructions) {
+
+    String res = '';
+
+    for (var index = 1; index <= instructions.length; index++) {
+      
+      res = res + index.toString() + '. ' + instructions[index - 1] + '\n';
+    }
+    return res;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +117,7 @@ class _RecipePageState extends State<RecipePage> {
                   
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
+                    mainAxisSize: MainAxisSize.min,
 
                     children: <Widget>[
                       Stack(
@@ -242,7 +264,6 @@ class _RecipePageState extends State<RecipePage> {
               child: ListView(
                 children: <Widget>[
                   Container(
-                    // height: 200.0,
 
                       // STACK FOR INGREDIENTS
                       child: Container(
@@ -258,15 +279,15 @@ class _RecipePageState extends State<RecipePage> {
 
                               // LIST INGREDIENTS
                               Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: const EdgeInsets.only(right: 15.0),
                                 child: Align(
-                                  alignment: Alignment.centerRight,
+                                  alignment: Alignment.topRight,
                                   child: Container(
                                     width: MediaQuery.of(context).size.width * 0.7,
 
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20.0),
+                                      borderRadius: BorderRadius.circular(30.0),
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.black26,
@@ -277,12 +298,12 @@ class _RecipePageState extends State<RecipePage> {
                                     ),
                                     child: Padding(
                                       padding: const EdgeInsets.only(
-                                        top: 25.0, 
+                                        top: 80.0, 
                                         bottom: 10.0,
                                         left: 30.0,
                                         right: 10.0),
                                       child: Text(
-                                        widget.recipe.ingredients.toString(),
+                                        parseIngredients(widget.recipe.ingredients),
                                         style: TextStyle(
                                           color: Colors.black87,
                                           fontSize: 15.0,
@@ -297,7 +318,7 @@ class _RecipePageState extends State<RecipePage> {
 
                               // INGREDIENTS TITLE
                               Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
+                                padding: const EdgeInsets.only(top: 15.0),
                                 child: Align(
                                   alignment: Alignment.topLeft,
                                   child: Container(
@@ -305,7 +326,7 @@ class _RecipePageState extends State<RecipePage> {
                                     width: MediaQuery.of(context).size.width * 0.7,
                                     decoration: BoxDecoration(
                                       color: Colors.yellow[600],
-                                      borderRadius: BorderRadius.circular(20.0),
+                                      borderRadius: BorderRadius.circular(30.0),
                                       boxShadow: [
                                         BoxShadow(
                                           color: Colors.black26,
@@ -339,10 +360,9 @@ class _RecipePageState extends State<RecipePage> {
                       ),
                   ),
 
-                  SizedBox(height: 5.0),
+                  SizedBox(height: 15.0),
 
                   Container(
-                    height: 200.0,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       child: Padding(
@@ -356,7 +376,7 @@ class _RecipePageState extends State<RecipePage> {
 
                             // LIST INSTRUCTIONs
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.only(right: 15.0),
                               child: Align(
                                 alignment: Alignment.centerRight,
                                 child: Container(
@@ -364,7 +384,7 @@ class _RecipePageState extends State<RecipePage> {
 
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(20.0),
+                                    borderRadius: BorderRadius.circular(30.0),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black26,
@@ -375,17 +395,18 @@ class _RecipePageState extends State<RecipePage> {
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                      top: 25.0, 
+                                      top: 80.0, 
                                       bottom: 10.0,
                                       left: 30.0,
                                       right: 10.0),
                                     child: Text(
-                                      widget.recipe.instruction.toString(),
+                                      parseInstruction(widget.recipe.instruction),
                                       style: TextStyle(
                                         color: Colors.black87,
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.w300,
                                         letterSpacing:  1.5,
+                                        wordSpacing: 1.2
                                       ),
                                     )
                                   ),
@@ -395,7 +416,7 @@ class _RecipePageState extends State<RecipePage> {
 
                             // INSTRUCTION TITLE
                             Padding(
-                              padding: const EdgeInsets.only(top: 10.0),
+                              padding: const EdgeInsets.only(top: 15.0),
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: Container(
@@ -403,7 +424,7 @@ class _RecipePageState extends State<RecipePage> {
                                   width: MediaQuery.of(context).size.width * 0.7,
                                   decoration: BoxDecoration(
                                     color: Colors.yellow[600],
-                                    borderRadius: BorderRadius.circular(20.0),
+                                    borderRadius: BorderRadius.circular(30.0),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black26,
