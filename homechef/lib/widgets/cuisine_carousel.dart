@@ -52,182 +52,184 @@ class CuisineCarousel extends StatelessWidget {
         ),
         Container(
           height: 280.0,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: cuisines.length,
-            itemBuilder: (BuildContext context, int index) {
-              Cuisine cuisine = cuisines[index];
-              return GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => CuisinePage(
-                      cuisine: cuisine,
+          child: Scrollbar(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: cuisines.length,
+              itemBuilder: (BuildContext context, int index) {
+                Cuisine cuisine = cuisines[index];
+                return GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => CuisinePage(
+                        cuisine: cuisine,
+                      ),
                     ),
                   ),
-                ),
-                child: Container(
-                  margin: EdgeInsets.all(10.0),
-                  width: 160.0,
-                  child: Stack(
-                    alignment: Alignment.topCenter,
-                    children: <Widget>[
-                      Positioned(
-                        bottom: 5.0,
-                        child: Container(
-                          height: 80.0,
-                          width: 150.0,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                offset: Offset(0, 5),
-                                blurRadius: 10,
-                                spreadRadius: 1
-                              )
-                            ],
-                            // color: Colors.white,
-                            // color: Color(0xffFFEF31),
-                            color: Colors.yellow,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(10.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  '${cuisine.recipes.length} recipes',
-                                  style: TextStyle(
-                                    shadows: [
-                                      Shadow(
-                                        color: Colors.black26,
-                                        offset: Offset(1.0, 2.0),
-                                        blurRadius: 10.0,
-                                      ),
-                                    ],
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.w600,
-                                    letterSpacing: 1.0,
-                                  ),
-                                ),
-                                SizedBox(height: 5.0,),
-                                Text(
-                                  cuisine.description,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.grey[800],
-                                  ),
-                                ),
+                  child: Container(
+                    margin: EdgeInsets.all(10.0),
+                    width: 160.0,
+                    child: Stack(
+                      alignment: Alignment.topCenter,
+                      children: <Widget>[
+                        Positioned(
+                          bottom: 5.0,
+                          child: Container(
+                            height: 80.0,
+                            width: 150.0,
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  offset: Offset(0, 5),
+                                  blurRadius: 10,
+                                  spreadRadius: 1
+                                )
                               ],
+                              // color: Colors.white,
+                              // color: Color(0xffFFEF31),
+                              color: Colors.yellow,
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: Offset(0.0, 2.0),
-                              blurRadius: 6.0,
-                            ),
-                          ],
-                        ),
-                        child: Stack(
-                          children: <Widget>[
-                            Hero(
-                              tag: cuisine.imageUrl,
-                              child: Stack(
-                                children: <Widget>[ 
-                                  Container(
-                                    height: 180.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      child: Image(
-                                        height: 180.0,
-                                        width: 140.0,
-                                        image: AssetImage(cuisine.imageUrl),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                        
-                                    Container(
-                                      height: 180.0,
-                                      width: 140.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20.0),
-                                        gradient: LinearGradient(
-                                          begin: FractionalOffset.topCenter,
-                                          end: FractionalOffset.bottomCenter,
-                                          colors: [
-                                            Colors.transparent,
-                                            Colors.black,
-                                          ],
-                                          stops: [
-                                            0.5,
-                                            1.0
-                                          ])
-                                      ),
-                                    ),
-                                ]
-                              ),
-                            ),
-                            Positioned(
-                              left: 10.0,
-                              bottom: 10.0,
+                            child: Padding(
+                              padding: EdgeInsets.all(10.0),
                               child: Column(
-                                mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-
-                                  Row(
-                                    children: <Widget>[
-                                      Padding(
-                                        padding: const EdgeInsets.only(bottom: 5.0),
-                                        child: SizedBox(
-                                          width: 80.0,
-                                          child: Align(
-                                            alignment: Alignment.bottomLeft,
-                                            child: Divider(
-                                              height: 2.0,
-                                              color: Colors.yellow,
-                                              thickness: 2.0,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-
                                   Text(
-                                    cuisine.name,
+                                    '${cuisine.recipes.length} recipes',
                                     style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20.0,
+                                      shadows: [
+                                        Shadow(
+                                          color: Colors.black26,
+                                          offset: Offset(1.0, 2.0),
+                                          blurRadius: 10.0,
+                                        ),
+                                      ],
+                                      fontSize: 18.0,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing:  1.2,
+                                      letterSpacing: 1.0,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.0,),
+                                  Text(
+                                    cuisine.description,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.grey[800],
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      )
-                    ],
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: Offset(0.0, 2.0),
+                                blurRadius: 6.0,
+                              ),
+                            ],
+                          ),
+                          child: Stack(
+                            children: <Widget>[
+                              Hero(
+                                tag: cuisine.imageUrl,
+                                child: Stack(
+                                  children: <Widget>[ 
+                                    Container(
+                                      height: 180.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20.0),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20.0),
+                                        child: Image(
+                                          height: 180.0,
+                                          width: 140.0,
+                                          image: AssetImage(cuisine.imageUrl),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                          
+                                      Container(
+                                        height: 180.0,
+                                        width: 140.0,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                          gradient: LinearGradient(
+                                            begin: FractionalOffset.topCenter,
+                                            end: FractionalOffset.bottomCenter,
+                                            colors: [
+                                              Colors.transparent,
+                                              Colors.black,
+                                            ],
+                                            stops: [
+                                              0.5,
+                                              1.0
+                                            ])
+                                        ),
+                                      ),
+                                  ]
+                                ),
+                              ),
+                              Positioned(
+                                left: 10.0,
+                                bottom: 10.0,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+
+                                    Row(
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.only(bottom: 5.0),
+                                          child: SizedBox(
+                                            width: 80.0,
+                                            child: Align(
+                                              alignment: Alignment.bottomLeft,
+                                              child: Divider(
+                                                height: 2.0,
+                                                color: Colors.yellow,
+                                                thickness: 2.0,
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+
+                                    Text(
+                                      cuisine.name,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing:  1.2,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ],
