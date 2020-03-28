@@ -227,110 +227,112 @@ class _TimePageState extends State<TimePage> {
 
   Widget categoryListBuilder() {
     return Expanded(
-      child: ListView.builder(
-        padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
-        itemCount: widget.time.recipes.length,
-        itemBuilder: (BuildContext context, int index) {
-          Recipe recipe = widget.time.recipes[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => RecipePage(
-                    recipe: recipe,
-                  )
-                ));
-            },
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
-                  height: 170.0,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black26,
-                        offset: Offset(0.0, 2.0),
-                        blurRadius: 6.0,
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                              width: 120.0,
-                              child: Text(
-                                recipe.name,
-                                style: TextStyle(
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                            ),
-                            Column(
-                              children: <Widget>[
-                                Text(
-                                  '${recipe.id}',
-                                  style: TextStyle(
-                                    fontSize: 22.0,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                                Text(
-                                  'Recipe ID',
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+      child: Scrollbar(
+        child: ListView.builder(
+          padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
+          itemCount: widget.time.recipes.length,
+          itemBuilder: (BuildContext context, int index) {
+            Recipe recipe = widget.time.recipes[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => RecipePage(
+                      recipe: recipe,
+                    )
+                  ));
+              },
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
+                    height: 170.0,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black26,
+                          offset: Offset(0.0, 2.0),
+                          blurRadius: 6.0,
                         ),
-                        Text(
-                          recipe.cookTime.toString() + ' minutes',
-                          style: TextStyle(
-                            color: Colors.grey,
-                          ),
-                        ),
-                        _buildRatingStars(recipe.rate),
-                        SizedBox(height: 10.0),
                       ],
                     ),
-                  ),
-                ),
-                Positioned(
-                  left: 20.0,
-                  top: 15.0,
-                  bottom: 15.0,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20.0),
-                    child: Image(
-                      width: 110.0,
-                      image: AssetImage(
-                        recipe.imageUrl,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                width: 120.0,
+                                child: Text(
+                                  recipe.name,
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                ),
+                              ),
+                              Column(
+                                children: <Widget>[
+                                  Text(
+                                    '${recipe.id}',
+                                    style: TextStyle(
+                                      fontSize: 22.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Recipe ID',
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Text(
+                            recipe.cookTime.toString() + ' minutes',
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                          _buildRatingStars(recipe.rate),
+                          SizedBox(height: 10.0),
+                        ],
                       ),
-                      fit: BoxFit.cover,
                     ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                  Positioned(
+                    left: 20.0,
+                    top: 15.0,
+                    bottom: 15.0,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: Image(
+                        width: 110.0,
+                        image: AssetImage(
+                          recipe.imageUrl,
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
