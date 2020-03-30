@@ -161,6 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: GestureDetector(
           onTap: () {
             searchController.clear();
+            FocusScope.of(context).unfocus();
             _iconHeight = 80.0;
             _searchContainerHeight = 0.0;
             setState(() {
@@ -181,7 +182,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.black54,
                               offset: Offset(0, 10),
                               blurRadius: 20,
-                              spreadRadius: 3
+                              spreadRadius: 5
                     )]
                 ),
 
@@ -203,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       color: Colors.grey[400],
                     ),
                     shrinkWrap: true,
-
+                    headerPadding: EdgeInsets.all(5.0),
                     searchBarPadding: EdgeInsets.all(15.0),
                     searchBarController: searchController,
                     cancellationWidget: Align(
@@ -221,6 +222,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               IconButton(
                                 onPressed: () {
                                   searchController.clear();
+                                  FocusScope.of(context).unfocus();
                                   _iconHeight = 80.0;
                                   _searchContainerHeight = 0.0;
                                   setState(() {
@@ -282,7 +284,22 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
 
                     debounceDuration: Duration(milliseconds: 500),
-                    emptyWidget: Text('No results found'),
+                    emptyWidget: Row(
+                      children: <Widget>[
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: Container(
+                            child: Text(
+                              'No results found',
+                              style: TextStyle(
+                                fontSize: 20.0,
+                                color: Colors.white
+                              ),
+                              )
+                            ),
+                        ),
+                      ],
+                    ),
 
                     minimumChars:0,
                     onSearch: search, 
@@ -400,7 +417,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30.0),
-                                color: Colors.white,
+                                color: Colors.black54,
                               ),
                               // height: 80.0,
                               width: 80.0,
@@ -414,7 +431,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 },
                                 iconSize: _iconHeight - 30 >= 0 ? _iconHeight - 30 : 0,
                                 
-                                color: Colors.black87,
+                                color: Colors.white,
                                 icon: Icon(Icons.search))
                               ,),
                           ),
