@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   auto_size_text:
   flappy_search_bar:
+  http:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -58,6 +59,9 @@ flutter:
    - assets/imgs/food11.jpg
    - assets/imgs/food12.jpg
    - assets/imgs/food13.jpg
+   - assets/sample_instruction_spoonacular.txt
+   - assets/sample_ingredients_spoonacular.json
+   - assets/sample_search_result.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
