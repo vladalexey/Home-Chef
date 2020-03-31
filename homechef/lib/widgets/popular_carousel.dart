@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/popular_model.dart';
-import 'package:homechef/screens/recipe.dart';
+import 'package:homechef/screens/recipe_screen.dart';
 
 class PopularCarouselPage extends StatefulWidget {
 
@@ -53,8 +53,8 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
               
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30.0),
-                child: Image(
-                  image: AssetImage(populars[index].imageUrl),
+                child: Image.network(
+                  populars[index].imageUrl,
                   fit: BoxFit.cover,
                 ),
               ),
