@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
+import 'package:homechef/screens/search_screen.dart';
 
 class AllCuisinePage extends StatefulWidget {
 
@@ -53,7 +54,7 @@ class _AllCuisinePageState extends State<AllCuisinePage> {
                     ],
                   ),
                   child: Hero(
-                    tag: cuisines[0].imageUrl,
+                    tag: 'assets/imgs/cuisines.jpg',
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30.0),
                       child: Image(
@@ -113,7 +114,11 @@ class _AllCuisinePageState extends State<AllCuisinePage> {
                                     icon: Icon(Icons.search),
                                     iconSize: 30.0,
                                     color: Colors.white,
-                                    onPressed: () => openSearchBar(),
+                                    onPressed: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => SearchScreen())
+                                ),
                                   ),
                                   IconButton(
                                     icon: Icon(Icons.sort),
@@ -125,59 +130,6 @@ class _AllCuisinePageState extends State<AllCuisinePage> {
                               )
                             ],
                           ),
-
-                          Visibility(
-                              visible: _visible,
-                              child: Center(
-                              // SEARCH BAR
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(30.0),
-                                    bottomRight: Radius.circular(30.0)
-                                    ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black54,
-                                              offset: Offset(0, 10),
-                                              blurRadius: 20,
-                                              spreadRadius: 3
-                                    )]
-                                ),
-
-                                width: MediaQuery.of(context).size.width,
-                                child: Material(
-                                  color: Colors.blue,
-                                  elevation: 20.0,
-                                  shadowColor: Colors.black,
-                                  borderRadius: BorderRadius.circular(30.0),
-
-                                  child: TextField(
-                                    autofocus: true,
-                                    cursorColor: Colors.amber,
-                                    style: TextStyle(height: 1.2),
-                                    decoration: InputDecoration(
-                                      
-                                      prefixIcon: Icon(
-                                        Icons.search,
-                                        color: Color(0xff383838),
-                                      ),
-                                      contentPadding: EdgeInsets.only(left: 50.0, top: 0.0, bottom: 0.0),
-                                      hintText: 'Search recipes, cuisine, dish',
-                                      hintMaxLines: 1,
-                                      border: OutlineInputBorder(
-                                        borderSide: BorderSide(color: Colors.transparent),
-                                        borderRadius: BorderRadius.circular(30.0),
-                                        ),
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-
                         ],
                       ),
 
@@ -245,7 +197,7 @@ class _AllCuisinePageState extends State<AllCuisinePage> {
                           child: Padding(
                             padding: EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
                             child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
                                 Row(

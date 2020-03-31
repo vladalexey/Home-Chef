@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/recipe_model.dart';
@@ -40,14 +41,11 @@ class _DietPageState extends State<DietPage> {
               )
             ],
           ),
-          child: Hero(
-            tag: widget.diet.imageUrl,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30.0),
-              child: Image(
-                image: AssetImage(widget.diet.imageUrl),
-                fit: BoxFit.cover,
-              ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30.0),
+            child: Image(
+              image: AssetImage(widget.diet.imageUrl),
+              fit: BoxFit.cover,
             ),
           ),
         ),
@@ -126,28 +124,31 @@ class _DietPageState extends State<DietPage> {
               ),
 
               Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: Divider(
-                        height: 2.0,
-                        // color: Colors.yellow[700],
-                        // color: Color(0xff383838),
-                        color: Colors.yellow[500],
-                        thickness: 3.0,
-                      ),
+                padding: const EdgeInsets.only(left: 15.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Divider(
+                      height: 2.0,
+                      // color: Colors.yellow[700],
+                      // color: Color(0xff383838),
+                      color: Colors.yellow[500],
+                      thickness: 3.0,
                     ),
                   ),
                 ),
+              ),
 
               Row(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
-                    child: Text(
+                    padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+                    child: AutoSizeText(
                       widget.diet.name,
+                      maxFontSize: 50.0,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: TextStyle(
                         shadows: [
                           Shadow(
