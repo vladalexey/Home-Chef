@@ -197,7 +197,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[800],
+      backgroundColor: Colors.amber,
       body: Padding(
         padding: EdgeInsets.only(top: 50.0),
         child: GestureDetector(
@@ -215,13 +215,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     bottomLeft: Radius.circular(30.0),
                     bottomRight: Radius.circular(30.0)
                     ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black54,
-                              offset: Offset(0, 10),
-                              blurRadius: 20,
-                              spreadRadius: 5
-                    )]
                 ),
 
                 width: MediaQuery.of(context).size.width,

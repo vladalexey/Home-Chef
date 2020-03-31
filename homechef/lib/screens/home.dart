@@ -1,22 +1,10 @@
 import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:homechef/models/ingredients/ingredient_list_model.dart';
-import 'package:homechef/models/ingredients/ingredient_model.dart';
-import 'package:homechef/models/instructions/instruction_list_model.dart';
-import 'package:homechef/models/instructions/instruction_model.dart';
 import 'package:homechef/screens/search_screen.dart';
-import 'package:http/http.dart' as http;
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:homechef/models/cuisine_model.dart';
-import 'package:homechef/models/popular_model.dart';
-import 'package:homechef/models/recipe_model.dart';
-import 'package:homechef/models/search_result_model.dart';
-import 'package:homechef/screens/recipe_screen.dart';
 import 'package:homechef/widgets/cuisine_carousel.dart';
 import 'package:homechef/widgets/diet_carousel.dart';
 import 'package:homechef/widgets/popular_carousel.dart';
@@ -122,29 +110,36 @@ class _MyHomePageState extends State<MyHomePage> {
                         PopularCarouselPage(),
                         buildGradientTopCarousel(),
 
-                        Positioned(
-                          right: 30.0,
-                          top: 50.0,
-                          child: AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
-                            height: 50.0,
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 50.0),
                             child: Container(
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30.0),
+                                borderRadius: BorderRadius.circular(40.0),
                                 color: Colors.black54,
                               ),
-                              // height: 80.0,
-                              width: 80.0,
-                              child: IconButton(
-                                onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => SearchScreen())
+                              height: 60.0,
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0,
+                                    vertical: 2.0
+                                    ),
+                                  child: IconButton(
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => SearchScreen())
+                                    ),
+                                  
+                                    iconSize: 30.0,
+                                    color: Colors.white,
+                                    icon: Icon(Icons.search)),
                                 ),
-                              
-                                iconSize: 50.0,
-                                color: Colors.white,
-                                icon: Icon(Icons.search))
+                              )
                               ,),
                           ),
                         ),
