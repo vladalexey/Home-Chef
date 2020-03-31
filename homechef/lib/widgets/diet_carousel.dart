@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/diet_model.dart';
@@ -51,7 +52,7 @@ class DietCarousel extends StatelessWidget {
           ),
         ),
         Container(
-          height: 210.0,
+          height: 230.0,
           child: Scrollbar(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -76,7 +77,7 @@ class DietCarousel extends StatelessWidget {
                         Positioned(
                           bottom: 15.0,
                           child: Container(
-                            height: 80.0,
+                            height: 90.0,
                             width: 200.0,
                             decoration: BoxDecoration(
                               boxShadow: [
@@ -113,8 +114,11 @@ class DietCarousel extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: 5.0,),
-                                  Text(
+                                  AutoSizeText(
                                     diet.description,
+                                    maxFontSize: 20.0,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.grey[800],
@@ -139,46 +143,43 @@ class DietCarousel extends StatelessWidget {
                           ),
                           child: Stack(
                             children: <Widget>[
-                              Hero(
-                                tag: diet.imageUrl,
-                                child: Stack(
-                                  children: <Widget>[ 
-                                    Container(
-                                      height: 120.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20.0),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20.0),
-                                        child: Image(
-                                          height: 120.0,
-                                          width: 190.0,
-                                          image: AssetImage(diet.imageUrl),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
+                              Stack(
+                                children: <Widget>[ 
+                                  Container(
+                                    height: 120.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
                                     ),
-                                          
-                                      Container(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      child: Image(
                                         height: 120.0,
                                         width: 190.0,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20.0),
-                                          gradient: LinearGradient(
-                                            begin: FractionalOffset.topCenter,
-                                            end: FractionalOffset.bottomCenter,
-                                            colors: [
-                                              Colors.transparent,
-                                              Colors.black,
-                                            ],
-                                            stops: [
-                                              0.5,
-                                              1.0
-                                            ])
-                                        ),
+                                        image: AssetImage(diet.imageUrl),
+                                        fit: BoxFit.cover,
                                       ),
-                                  ]
-                                ),
+                                    ),
+                                  ),
+                                        
+                                    Container(
+                                      height: 120.0,
+                                      width: 190.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20.0),
+                                        gradient: LinearGradient(
+                                          begin: FractionalOffset.topCenter,
+                                          end: FractionalOffset.bottomCenter,
+                                          colors: [
+                                            Colors.transparent,
+                                            Colors.black,
+                                          ],
+                                          stops: [
+                                            0.5,
+                                            1.0
+                                          ])
+                                      ),
+                                    ),
+                                ]
                               ),
                               
                               Positioned(

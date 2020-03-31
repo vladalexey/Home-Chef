@@ -139,46 +139,43 @@ class TimeCarousel extends StatelessWidget {
                           ),
                           child: Stack(
                             children: <Widget>[
-                              Hero(
-                                tag: time.imageUrl,
-                                child: Stack(
-                                  children: <Widget>[ 
-                                    Container(
-                                      height: 120.0,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20.0),
-                                      ),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20.0),
-                                        child: Image(
-                                          height: 120.0,
-                                          width: 140.0,
-                                          image: AssetImage(time.imageUrl),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
+                              Stack(
+                                children: <Widget>[ 
+                                  Container(
+                                    height: 120.0,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
                                     ),
-                                          
-                                      Container(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      child: Image(
                                         height: 120.0,
                                         width: 140.0,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20.0),
-                                          gradient: LinearGradient(
-                                            begin: FractionalOffset.topCenter,
-                                            end: FractionalOffset.bottomCenter,
-                                            colors: [
-                                              Colors.transparent,
-                                              Colors.black,
-                                            ],
-                                            stops: [
-                                              0.6,
-                                              1.0
-                                            ])
-                                        ),
+                                        image: AssetImage(time.imageUrl),
+                                        fit: BoxFit.cover,
                                       ),
-                                  ]
-                                ),
+                                    ),
+                                  ),
+                                        
+                                    Container(
+                                      height: 120.0,
+                                      width: 140.0,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20.0),
+                                        gradient: LinearGradient(
+                                          begin: FractionalOffset.topCenter,
+                                          end: FractionalOffset.bottomCenter,
+                                          colors: [
+                                            Colors.transparent,
+                                            Colors.black,
+                                          ],
+                                          stops: [
+                                            0.6,
+                                            1.0
+                                          ])
+                                      ),
+                                    ),
+                                ]
                               ),
                               
                               Positioned(

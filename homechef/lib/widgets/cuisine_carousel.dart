@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
@@ -209,8 +210,11 @@ class CuisineCarousel extends StatelessWidget {
                                       ],
                                     ),
 
-                                    Text(
+                                    AutoSizeText(
                                       cuisine.name,
+                                      maxLines: 2,
+                                      maxFontSize: 18.0,
+                                      overflow: TextOverflow.ellipsis,
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20.0,
