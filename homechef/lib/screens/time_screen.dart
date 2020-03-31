@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/models/time_model.dart';
-import 'package:homechef/screens/recipe.dart';
+import 'package:homechef/screens/recipe_screen.dart';
 
 class TimePage extends StatefulWidget {
 

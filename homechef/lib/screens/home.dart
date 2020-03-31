@@ -1,3 +1,11 @@
+import 'dart:convert';
+
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:homechef/models/ingredients/ingredient_list_model.dart';
+import 'package:homechef/models/ingredients/ingredient_model.dart';
+import 'package:homechef/models/instructions/instruction_list_model.dart';
+import 'package:homechef/models/instructions/instruction_model.dart';
+import 'package:http/http.dart' as http;
 import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +15,7 @@ import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/popular_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/models/search_result_model.dart';
-import 'package:homechef/screens/recipe.dart';
+import 'package:homechef/screens/recipe_screen.dart';
 import 'package:homechef/widgets/cuisine_carousel.dart';
 import 'package:homechef/widgets/diet_carousel.dart';
 import 'package:homechef/widgets/popular_carousel.dart';
@@ -30,13 +38,60 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<List<Recipe>> search(String text) async {
 
+    List<Recipe> apiResult = [];
     List<Recipe> foundResult = [];
 
-    await Future.delayed(Duration(seconds: 1));
-    for (Recipe recipe in searchResults) {
-      if (recipe.name.contains(text)) {
-        foundResult.add(recipe);
+    // Get list recipe IDs with search text
+    final searchResult = await http.get('https://api.spoonacular.com/recipes/search?query=' + text + 
+      '&number=1&apiKey=9f7bda2769fc41088b86b77db2d45ef1');
+
+    if (searchResult.statusCode == 200) {
+
+      final Map<String, dynamic> result = json.decode(searchResult.body);
+      
+      for (Map<String, dynamic> obj in result['results']) {
+
+        List<Instruction> parsedInstruction;
+        List<Ingredient> parsedIngredients;
+
+        final instructionResp = await http.get('https://api.spoonacular.com/recipes/' + obj['id'].toString() + '/analyzedInstructions?apiKey=9f7bda2769fc41088b86b77db2d45ef1');
+       
+        if (instructionResp.statusCode == 200) {
+          parsedInstruction = InstructionList.fromJson(json.decode(instructionResp.body)).instructions;
+        } else {
+          print('Failed to get instructions ' + instructionResp.statusCode.toString());
+        }
+
+        final ingredientResp = await http.get('https://api.spoonacular.com/recipes/' + obj['id'].toString() + '/ingredientWidget.json?apiKey=9f7bda2769fc41088b86b77db2d45ef1');
+        
+        if (ingredientResp.statusCode == 200) {
+          parsedIngredients = IngredientList.fromJson(json.decode(ingredientResp.body)).ingredients;
+        } else {
+          print('Failed to get ingredients ' + ingredientResp.statusCode.toString());
+        }
+
+        Recipe newRecipe = new Recipe(
+          id: obj['id'].toString(),
+          imageUrl: 'https://spoonacular.com/recipeImages/' + obj['id'].toString() + '-556x370.jpg' ,
+          name: obj['title'],
+          cookTime: obj['readyInMinutes'],
+          ingredients: parsedIngredients,
+          instruction: parsedInstruction
+        );
+
+        apiResult.add(
+          newRecipe
+        );
       }
+
+      for (Recipe recipe in apiResult) {
+        if (recipe.name.contains(text)) {
+          foundResult.add(recipe);
+        }
+      }
+
+    } else {
+      print('Failed to load Recipe. Resp Code: ' + searchResult.statusCode.toString());
     }
 
     return foundResult;
@@ -90,10 +145,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: <Widget>[
                       Container(
                         width: 120.0,
-                        child: Text(
+                        child: AutoSizeText(
                           recipe.name,
+                          maxFontSize: 18.0,
                           style: TextStyle(
-                            fontSize: 18.0,
                             fontWeight: FontWeight.w600,
                           ),
                           overflow: TextOverflow.ellipsis,
@@ -102,10 +157,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       Column(
                         children: <Widget>[
-                          Text(
+                          AutoSizeText(
                             '${recipe.id}',
+                            maxLines: 1,
                             style: TextStyle(
-                              fontSize: 22.0,
+                              fontSize: 12.0,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -137,11 +193,9 @@ class _MyHomePageState extends State<MyHomePage> {
             bottom: 15.0,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
-              child: Image(
+              child: Image.network(
+                recipe.imageUrl,
                 width: 110.0,
-                image: AssetImage(
-                  recipe.imageUrl,
-                ),
                 fit: BoxFit.cover,
               ),
             ),

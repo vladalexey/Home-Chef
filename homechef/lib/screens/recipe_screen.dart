@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homechef/models/cuisine_model.dart';
+import 'package:homechef/models/ingredients/ingredient_model.dart';
+import 'package:homechef/models/instructions/instruction_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/widgets/ingredients.dart';
 import 'package:homechef/widgets/instructions.dart';
@@ -24,24 +26,24 @@ class _RecipePageState extends State<RecipePage> {
       });
   }
   
-  String parseIngredients( List<String> ingredients) {
+  String parseIngredients( List<Ingredient> ingredients) {
 
     String res = '';
 
     for (var ingredient in ingredients) {
       
-      res = res + '- ' + ingredient + '\n';
+      res = res + '- ' + ingredient.name + '\n';
     }
     return res;
   }
 
-  String parseInstruction( List<String> instructions) {
+  String parseInstruction( List<Instruction> instructions) {
 
     String res = '';
 
     for (var index = 1; index <= instructions.length; index++) {
       
-      res = res + index.toString() + '. ' + instructions[index - 1] + '\n';
+      res = res + index.toString() + '. ' + instructions[index - 1].instruction + '\n';
     }
     return res;
   }
@@ -80,8 +82,9 @@ class _RecipePageState extends State<RecipePage> {
                     tag: widget.recipe.imageUrl,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30.0),
-                      child: Image(
-                        image: AssetImage(widget.recipe.imageUrl),
+                      child: Image.network(
+                        widget.recipe.imageUrl,
+                        // image: AssetImage(widget.recipe.imageUrl),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -235,7 +238,7 @@ class _RecipePageState extends State<RecipePage> {
                               child: AutoSizeText(
                                 widget.recipe.name,
                                 maxFontSize: 55,
-                                maxLines: 1,
+                                maxLines: 2,
                                 style: TextStyle(
                                   shadows: [
                                     Shadow(
