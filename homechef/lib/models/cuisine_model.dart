@@ -42,23 +42,44 @@ final List<Recipe> recipes = [
   ),
 ];
 
-final List<Cuisine> cuisines = [
-  Cuisine(
-    imageUrl: 'assets/imgs/food1.jpg',
-    name: 'Indian',
-    description: 'Lorem ipsum dolor sit amet.',
-    recipes: recipes,
-  ),
-  Cuisine(
-    imageUrl: 'assets/imgs/food2.jpg',
-    name: 'Japanese',
-    description: 'Lorem ipsum dolor sit amet.',
-    recipes: recipes,
-  ),
-  Cuisine(
-    imageUrl: 'assets/imgs/food3.jpg',
-    name: 'Fast Food',
-    description: 'Lorem ipsum dolor sit amet.',
-    recipes: recipes,
-  ),
+List<String> cuisine_list = [
+  'African',
+  'American',
+  'British',
+  'Cajun',
+  'Caribbean',
+  'Chinese',
+  'Eastern European',
+  'European',
+  'French',
+  'German',
+  'Greek',
+  'Indian',
+  'Irish',
+  'Italian',
+  'Japanese',
+  'Jewish',
+  'Korean',
+  'Latin American',
+  'Mediterranean',
+  'Mexican',
+  'Middle Eastern',
+  'Nordic',
+  'Southern',
+  'Spanish',
+  'Thai',
+  'Vietnamese',
 ];
+
+List<Cuisine> cuisines = new List<Cuisine>.generate(cuisine_list.length, (int index) {
+  print('assets/imgs/' + cuisine_list[index].replaceAll(' ', '').toLowerCase() + '.jpg');
+  return new Cuisine(
+    imageUrl: 'assets/imgs/' + cuisine_list[index].replaceAll(' ', '').toLowerCase() + '.jpg',
+    name: cuisine_list[index],
+    description: 'Lorem ipsum dolor sit amet.',
+    recipes: recipes
+  );
+});
+
+
+
