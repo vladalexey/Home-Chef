@@ -1,3 +1,6 @@
+import 'ingredients/ingredient_model.dart';
+import 'instructions/instruction_model.dart';
+
 class Recipe {
   String id;
   String imageUrl;
@@ -5,8 +8,8 @@ class Recipe {
   String description;
   int rate;
   int cookTime;
-  List<String> ingredients;
-  List<String> instruction;
+  List<Ingredient> ingredients;
+  List<Instruction> instruction;
 
   Recipe({
     this.id,
@@ -18,5 +21,26 @@ class Recipe {
     this.ingredients,
     this.instruction
   });
+
+  // factory Recipe.fromJson(Map<String, dynamic> json) {
+
+  //   var ingredient_list = json['ingredients'] as List;
+  //   List<Ingredient> ingredients = ingredient_list.map((f) => Ingredient.fromJson(f)).toList();
+
+  //   var instruction_list = json['instructions'] as List;
+  //   List<Instruction> instructions = instruction_list.map((f) => Instruction.fromJson(f)).toList();
+
+  //   return new Recipe(
+      
+  //     id: json['id'].toString(),
+  //     imageUrl: json['imageUrl'],
+  //     name: json['name'],
+  //     rate: 5,
+  //     cookTime: 15,
+  //     description: 'This is a sample text',
+  //     instruction: instructions,
+  //     ingredients: ingredients,
+  //   );
+  // }
 }
 
