@@ -5,8 +5,6 @@ import 'package:homechef/models/ingredients/ingredient_model.dart';
 import 'package:homechef/models/instructions/instruction_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/search_screen.dart';
-import 'package:homechef/widgets/ingredients.dart';
-import 'package:homechef/widgets/instructions.dart';
 
 class RecipePage extends StatefulWidget {
 
