@@ -16,14 +16,6 @@ class RecipePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<RecipePage> {
-
-  bool _visible = false;
-
-  void openSearchBar() {
-    setState(() {
-      _visible = true;
-      });
-  }
   
   String parseIngredients( List<Ingredient> ingredients) {
 
@@ -400,7 +392,6 @@ class _RecipePageState extends State<RecipePage> {
 
         if (!currentFocus.hasPrimaryFocus) {
           currentFocus.unfocus();
-          _visible = false;
           setState(() {});
         }
       },

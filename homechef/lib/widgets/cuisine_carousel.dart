@@ -4,8 +4,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/screens/all_categories/all_cuisine_screen.dart';
 import 'package:homechef/screens/cuisine_screen.dart';
+import 'package:homechef/widgets/size_route.dart';
 
 class CuisineCarousel extends StatelessWidget {
+
+  List<Cuisine> shuffled = cuisines.toList()..shuffle();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -56,14 +60,16 @@ class CuisineCarousel extends StatelessWidget {
           child: Scrollbar(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: cuisines.length,
+              // itemCount: cuisines.length,
+              itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
-                Cuisine cuisine = cuisines[index];
+                
+                Cuisine cuisine = shuffled[index];
                 return GestureDetector(
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => CuisinePage(
+                    SizeRoute(
+                      page: CuisinePage(
                         cuisine: cuisine,
                       ),
                     ),

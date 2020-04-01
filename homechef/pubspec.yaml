@@ -56,12 +56,24 @@ flutter:
    - assets/imgs/food8.jpg
    - assets/imgs/food9.jpg
    - assets/imgs/food10.jpg
-   - assets/imgs/food11.jpg
-   - assets/imgs/food12.jpg
-   - assets/imgs/food13.jpg
+
+   - assets/imgs/15min.jpg
+   - assets/imgs/30min.jpg
+   - assets/imgs/45min.jpg
 
    - assets/imgs/cuisines.jpg
-   
+
+   - assets/imgs/glutenfree.jpg
+   - assets/imgs/vegan.jpg
+   - assets/imgs/vegetarian.png
+   - assets/imgs/whole30.jpg
+   - assets/imgs/primal.jpg
+   - assets/imgs/paleo.jpeg
+   - assets/imgs/pescetarian.jpg
+   - assets/imgs/ovovegetarian.png
+   - assets/imgs/lactovegetarian.jpg
+   - assets/imgs/keto.jpg
+
    - assets/imgs/african.jpg
    - assets/imgs/american.jpg
    - assets/imgs/british.jpg

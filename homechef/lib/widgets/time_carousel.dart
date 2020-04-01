@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/time_model.dart';
 import 'package:homechef/screens/all_categories/all_time_screen.dart';
 import 'package:homechef/screens/time_screen.dart';
+import 'package:homechef/widgets/size_route.dart';
 
 class TimeCarousel extends StatelessWidget {
   @override
@@ -61,8 +62,8 @@ class TimeCarousel extends StatelessWidget {
                 return GestureDetector(
                   onTap: () => Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (_) => TimePage(
+                    SizeRoute(
+                      page: TimePage(
                         time: time,
                       ),
                     ),
@@ -139,43 +140,46 @@ class TimeCarousel extends StatelessWidget {
                           ),
                           child: Stack(
                             children: <Widget>[
-                              Stack(
-                                children: <Widget>[ 
-                                  Container(
-                                    height: 120.0,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                    ),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      child: Image(
-                                        height: 120.0,
-                                        width: 140.0,
-                                        image: AssetImage(time.imageUrl),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                        
+                              Hero(
+                                tag:time.imageUrl,
+                                child: Stack(
+                                  children: <Widget>[ 
                                     Container(
                                       height: 120.0,
-                                      width: 140.0,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20.0),
-                                        gradient: LinearGradient(
-                                          begin: FractionalOffset.topCenter,
-                                          end: FractionalOffset.bottomCenter,
-                                          colors: [
-                                            Colors.transparent,
-                                            Colors.black,
-                                          ],
-                                          stops: [
-                                            0.6,
-                                            1.0
-                                          ])
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(20.0),
+                                        child: Image(
+                                          height: 120.0,
+                                          width: 140.0,
+                                          image: AssetImage(time.imageUrl),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
-                                ]
+                                          
+                                      Container(
+                                        height: 120.0,
+                                        width: 140.0,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20.0),
+                                          gradient: LinearGradient(
+                                            begin: FractionalOffset.topCenter,
+                                            end: FractionalOffset.bottomCenter,
+                                            colors: [
+                                              Colors.transparent,
+                                              Colors.black,
+                                            ],
+                                            stops: [
+                                              0.6,
+                                              1.0
+                                            ])
+                                        ),
+                                      ),
+                                  ]
+                                ),
                               ),
                               
                               Positioned(

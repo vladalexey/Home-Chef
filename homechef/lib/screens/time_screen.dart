@@ -41,11 +41,14 @@ class _TimePageState extends State<TimePage> {
               )
             ],
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30.0),
-            child: Image(
-              image: AssetImage(widget.time.imageUrl),
-              fit: BoxFit.cover,
+          child: Hero(
+            tag: widget.time.imageUrl,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30.0),
+              child: Image(
+                image: AssetImage(widget.time.imageUrl),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

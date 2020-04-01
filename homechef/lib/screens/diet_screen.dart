@@ -41,12 +41,15 @@ class _DietPageState extends State<DietPage> {
               )
             ],
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30.0),
-            child: Image(
-              image: AssetImage(widget.diet.imageUrl),
-              fit: BoxFit.cover,
-            ),
+          child: Hero(
+            tag: widget.diet.imageUrl,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30.0),
+                child: Image(
+                  image: AssetImage(widget.diet.imageUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
           ),
         ),
         
