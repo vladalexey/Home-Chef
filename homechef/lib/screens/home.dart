@@ -21,6 +21,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  double _searchBarWidth;
+
   Widget buildGradientTopCarousel() {
     return Padding(
       padding: EdgeInsets.only(
@@ -86,8 +88,51 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget searchBarHome() {
+    return GestureDetector(
+      onTap: () {
+
+        setState(() {
+          _searchBarWidth = 0.0;
+        });
+        
+        Navigator.push(
+          context, 
+          MaterialPageRoute(
+            builder: (_) => SearchScreen()
+          )
+        );
+      },
+      
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(40.0),
+          color: Colors.black54,
+        ),
+        height: 60.0,
+        width: _searchBarWidth,
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10.0,
+              vertical: 2.0
+              ),
+            child: Icon(Icons.search,
+              size: 30.0,
+              color: Colors.white)
+              ),
+          ),
+        )
+
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    _searchBarWidth = MediaQuery.of(context).size.width * 0.8;
+
     return DefaultTabController (
 
       length:3,
@@ -112,35 +157,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
                         Align(
                           alignment: Alignment.topCenter,
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 50.0),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(40.0),
-                                color: Colors.black54,
-                              ),
-                              height: 60.0,
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0,
-                                    vertical: 2.0
-                                    ),
-                                  child: IconButton(
-                                    onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => SearchScreen())
-                                    ),
-                                  
-                                    iconSize: 30.0,
-                                    color: Colors.white,
-                                    icon: Icon(Icons.search)),
-                                ),
-                              )
-                              ,),
+                          child: AnimatedContainer(
+                            duration: Duration(milliseconds: 200),
+                            width: _searchBarWidth,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 50.0),
+                              child: searchBarHome()),
                           ),
                         ),
                         
@@ -165,11 +187,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
 
             new Container(
-                color: Colors.yellow,
-              ),
-              new Container(
-                color: Colors.orange,
-                ),
+              color: Colors.yellow,
+            ),
+            new Container(
+              color: Colors.orange,
+            ),
           ],
         ),
 
