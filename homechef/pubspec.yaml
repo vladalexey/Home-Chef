@@ -62,6 +62,8 @@ flutter:
    - assets/imgs/45min.jpg
 
    - assets/imgs/cuisines.jpg
+   - assets/imgs/diet.jpg
+   - assets/imgs/time.jpg
 
    - assets/imgs/glutenfree.jpg
    - assets/imgs/vegan.jpg
@@ -104,6 +106,8 @@ flutter:
    - assets/sample_instruction_spoonacular.txt
    - assets/sample_ingredients_spoonacular.json
    - assets/sample_search_result.json
+
+   - assets/API_KEY.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

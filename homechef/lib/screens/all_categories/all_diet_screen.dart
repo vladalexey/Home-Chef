@@ -2,7 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/diet_model.dart';
+import 'package:homechef/screens/diet_screen.dart';
 import 'package:homechef/screens/search_screen.dart';
+import 'package:homechef/widgets/size_route.dart';
 
 class AllDietPage extends StatefulWidget {
 
@@ -32,11 +34,14 @@ class _AllDietPageState extends State<AllDietPage> {
               )
             ],
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30.0),
-            child: Image(
-              image: AssetImage(widget.diets[0].imageUrl),
-              fit: BoxFit.cover,
+          child: Hero(
+            tag: 'assets/imgs/diet.jpg',
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30.0),
+              child: Image(
+                image: AssetImage('assets/imgs/diet.jpg'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
@@ -154,91 +159,101 @@ class _AllDietPageState extends State<AllDietPage> {
   }
 
   Widget buildDietElement(Diet diet) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
-          height: 190.0,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20.0),
+    return GestureDetector(
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => DietPage(
+            diet: diet,
           ),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      width: 120.0,
-                      child: AutoSizeText(
-                        diet.name,
-                        maxFontSize: 50.0,
-                        style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      ),
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Text(
-                          '${diet.recipes.length}',
+        ),
+      ),
+      child: Stack(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
+            height: 190.0,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        width: 120.0,
+                        child: AutoSizeText(
+                          diet.name,
+                          maxFontSize: 50.0,
                           style: TextStyle(
-                            fontSize: 22.0,
+                            fontSize: 18.0,
                             fontWeight: FontWeight.w600,
                           ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
-                        Text(
-                          'Recipes',
-                          style: TextStyle(
-                            color: Colors.grey,
+                      ),
+                      Column(
+                        children: <Widget>[
+                          Text(
+                            '${diet.recipes.length}',
+                            style: TextStyle(
+                              fontSize: 22.0,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 80.0,
-                  child: AutoSizeText(
-                    diet.description,
-                    minFontSize: 15.0,
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Colors.grey,
+                          Text(
+                            'Recipes',
+                            style: TextStyle(
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 80.0,
+                    child: AutoSizeText(
+                      diet.description,
+                      minFontSize: 15.0,
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(height: 10.0),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          left: 20.0,
-          top: 15.0,
-          bottom: 15.0,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Image(
-              width: 110.0,
-              image: AssetImage(
-                diet.imageUrl,
+                  SizedBox(height: 10.0),
+                ],
               ),
-              fit: BoxFit.cover,
             ),
           ),
-        ),
-      ],
+          Positioned(
+            left: 20.0,
+            top: 15.0,
+            bottom: 15.0,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image(
+                width: 110.0,
+                image: AssetImage(
+                  diet.imageUrl,
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

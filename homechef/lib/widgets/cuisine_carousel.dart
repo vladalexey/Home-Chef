@@ -8,7 +8,7 @@ import 'package:homechef/widgets/size_route.dart';
 
 class CuisineCarousel extends StatelessWidget {
 
-  List<Cuisine> shuffled = cuisines.toList()..shuffle();
+  final List<Cuisine> shuffled = cuisines.toList()..shuffle();
 
   @override
   Widget build(BuildContext context) {

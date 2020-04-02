@@ -13,6 +13,7 @@ import 'package:homechef/models/instructions/instruction_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
 import 'package:homechef/screens/search_screen.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 
 class SearchBarWidget extends StatefulWidget {
@@ -26,6 +27,11 @@ class SearchBarWidget extends StatefulWidget {
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
 
+  Future<String> getFileData(String path) async {
+    return await rootBundle.loadString(path);
+  }
+  
+
   SearchScreen parent;
   _SearchBarWidgetState({this.parent});
 
@@ -35,12 +41,14 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   Map<String, bool>  cuisine;
   Map<String, bool>  time;
-
+  
   GlobalKey dietOptionKey = GlobalKey();
 
   final SearchBarController<Recipe> searchController = SearchBarController(); 
 
   Future<List<Recipe>> search(String text, ) async {
+
+    String apiKey = await getFileData('assets/API_KEY.txt');
 
     List<Recipe> apiResult = [];
     List<Recipe> foundResult = [];
@@ -65,7 +73,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     // Get list recipe IDs with search text
     String searchURL = 'https://api.spoonacular.com/recipes/search?query=' + text + 
       _cuisine + _diet + _time +
-      '&number=5&apiKey=9f7bda2769fc41088b86b77db2d45ef1';
+      '&number=5&apiKey=' + apiKey;
 
     final searchResult = await http.get(searchURL);
 
@@ -80,7 +88,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         List<Instruction> parsedInstruction;
         List<Ingredient> parsedIngredients;
 
-        final instructionResp = await http.get('https://api.spoonacular.com/recipes/' + obj['id'].toString() + '/analyzedInstructions?apiKey=9f7bda2769fc41088b86b77db2d45ef1');
+        final instructionResp = await http.get('https://api.spoonacular.com/recipes/' + obj['id'].toString() + '/analyzedInstructions?apiKey=' + apiKey);
        
         if (instructionResp.statusCode == 200) {
           parsedInstruction = InstructionList.fromJson(json.decode(instructionResp.body)).instructions;
@@ -88,7 +96,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           print('Failed to get instructions ' + instructionResp.statusCode.toString());
         }
 
-        final ingredientResp = await http.get('https://api.spoonacular.com/recipes/' + obj['id'].toString() + '/ingredientWidget.json?apiKey=9f7bda2769fc41088b86b77db2d45ef1');
+        final ingredientResp = await http.get('https://api.spoonacular.com/recipes/' + obj['id'].toString() + '/ingredientWidget.json?apiKey=' + apiKey);
         
         if (ingredientResp.statusCode == 200) {
           parsedIngredients = IngredientList.fromJson(json.decode(ingredientResp.body)).ingredients;
@@ -233,6 +241,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           decoration: BoxDecoration(
             color: Colors.amberAccent,
             borderRadius: BorderRadius.circular(20.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0.0, 2.0),
+                blurRadius: 6.0,
+              ),
+            ],
             ),
           child: IconButton(
             icon: Icon(
@@ -252,6 +267,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           decoration: BoxDecoration(
             color: Colors.amberAccent,
             borderRadius: BorderRadius.circular(20.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0.0, 2.0),
+                blurRadius: 6.0,
+              ),
+            ],
             ),
           child: IconButton(
             icon: Icon(
@@ -270,6 +292,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           decoration: BoxDecoration(
             color: Colors.amberAccent,
             borderRadius: BorderRadius.circular(20.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0.0, 2.0),
+                blurRadius: 6.0,
+              ),
+            ],
             ),
           child: IconButton(
             icon: Icon(
@@ -288,6 +317,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           decoration: BoxDecoration(
             color: Colors.amberAccent,
             borderRadius: BorderRadius.circular(20.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0.0, 2.0),
+                blurRadius: 6.0,
+              ),
+            ],
             ),
           child: IconButton(
             icon: Icon(
@@ -306,6 +342,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           decoration: BoxDecoration(
             color: Colors.amberAccent,
             borderRadius: BorderRadius.circular(20.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black26,
+                offset: Offset(0.0, 2.0),
+                blurRadius: 6.0,
+              ),
+            ],
             ),
           child: IconButton(
             icon: Icon(
