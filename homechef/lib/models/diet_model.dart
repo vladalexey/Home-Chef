@@ -14,6 +14,10 @@ class Diet {
   });
 }
 
+Map<String, bool> dietOptions = {'veganBool': false, 'vegetarianBool': false, 'ovoVegetarianBool': false, 'lactoVegetarianBool': false, 'glutenFreeBool': false, 
+  'paleoBool': false, 'pescetarianBool': false, 'primalBool': false, 'whole30Bool': false, 'ketoBool': false};
+
+
 final List<Recipe> recipes = [
   Recipe(
     id: '1',
