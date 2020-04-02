@@ -1,5 +1,4 @@
 import 'package:homechef/models/instructions/instruction_model.dart';
-import 'package:homechef/widgets/instructions.dart';
 
 class InstructionList {
   final List<Instruction> instructions;
