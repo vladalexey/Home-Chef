@@ -383,7 +383,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 onPressed: () {
                   searchController.clear();
                   FocusScope.of(context).unfocus();
-                  Navigator.pop(context);
+                  // Navigator.pop(context);
                 },
                 icon: Icon(Icons.cancel))
             ),

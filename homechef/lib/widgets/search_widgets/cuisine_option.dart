@@ -78,8 +78,9 @@ class _CuisineOptionState extends State<CuisineOption> {
                     child: Center(
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
-                          Flexible(child: Text(foundCuisine)),
+                          Expanded(child: Text(foundCuisine)),
                           Flexible(
                             child: Checkbox(
                               value: cuisineOptions[encodeCuisineName(foundCuisine)],

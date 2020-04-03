@@ -31,7 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
         widthDiet = MediaQuery.of(context).size.width * 0.8;
         heightDiet = 600.0;
 
-        if (widthCuisine == 200.0) {
+        if (widthCuisine == MediaQuery.of(context).size.width * 0.8) {
           widthCuisine = 0.0;
           heightCuisine = 0.0;
         }
@@ -43,11 +43,11 @@ class _SearchScreenState extends State<SearchScreen> {
     print('Toggle cuisine option');
     setState(() {
       
-      if (widthCuisine == 200.0) {
+      if (widthCuisine == MediaQuery.of(context).size.width * 0.8) {
         widthCuisine = 0.0;
         heightCuisine = 0.0;
       } else {
-        widthCuisine = 200.0;
+        widthCuisine = MediaQuery.of(context).size.width * 0.8;
         heightCuisine = 200.0;
 
         if (widthDiet == MediaQuery.of(context).size.width * 0.8) {

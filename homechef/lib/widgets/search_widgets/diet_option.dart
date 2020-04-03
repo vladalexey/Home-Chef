@@ -32,6 +32,16 @@ class _DietOptionState extends State<DietOption> {
 
                 Row(
                   children: <Widget>[
+                    Expanded(child: Center(child: Text(
+                      'Choose a diet',
+                      style: TextStyle(fontSize: 18.0),)),),
+                  ],
+                ),
+
+                Divider(color: Colors.yellow,thickness: 2.0,),
+
+                Row(
+                  children: <Widget>[
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
