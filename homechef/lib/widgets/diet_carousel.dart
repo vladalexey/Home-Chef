@@ -63,8 +63,8 @@ class DietCarousel extends StatelessWidget {
                 return GestureDetector(
                   onTap: () => Navigator.push(
                     context,
-                    SizeRoute(
-                      page: DietPage(
+                    MaterialPageRoute(
+                      builder: (_) => DietPage(
                         diet: diet,
                       ),
                     ),

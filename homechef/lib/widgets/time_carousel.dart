@@ -62,8 +62,8 @@ class TimeCarousel extends StatelessWidget {
                 return GestureDetector(
                   onTap: () => Navigator.push(
                     context,
-                    SizeRoute(
-                      page: TimePage(
+                    MaterialPageRoute(
+                      builder: (_) => TimePage(
                         time: time,
                       ),
                     ),

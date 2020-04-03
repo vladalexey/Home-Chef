@@ -68,8 +68,8 @@ class CuisineCarousel extends StatelessWidget {
                 return GestureDetector(
                   onTap: () => Navigator.push(
                     context,
-                    SizeRoute(
-                      page: CuisinePage(
+                    MaterialPageRoute(
+                      builder: (_) => CuisinePage(
                         cuisine: cuisine,
                       ),
                     ),
