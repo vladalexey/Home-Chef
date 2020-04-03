@@ -241,14 +241,17 @@ class _AllDietPageState extends State<AllDietPage> {
             left: 20.0,
             top: 15.0,
             bottom: 15.0,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image(
-                width: 110.0,
-                image: AssetImage(
-                  diet.imageUrl,
+            child: Hero(
+              tag: diet.imageUrl,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: Image(
+                  width: 110.0,
+                  image: AssetImage(
+                    diet.imageUrl,
+                  ),
+                  fit: BoxFit.cover,
                 ),
-                fit: BoxFit.cover,
               ),
             ),
           ),
