@@ -71,10 +71,18 @@ List<String> cuisine_list = [
   'Vietnamese',
 ];
 
+String encodeCuisineName(String toEncode) {
+  return toEncode.replaceAll(' ', '').toLowerCase();
+}
+
+Map<String, bool> cuisineOptions = Map.fromIterable(cuisine_list,
+  key: (cuisine) => encodeCuisineName(cuisine),
+  value: (_) => false
+);
+
 List<Cuisine> cuisines = new List<Cuisine>.generate(cuisine_list.length, (int index) {
-  print('assets/imgs/' + cuisine_list[index].replaceAll(' ', '').toLowerCase() + '.jpg');
   return new Cuisine(
-    imageUrl: 'assets/imgs/' + cuisine_list[index].replaceAll(' ', '').toLowerCase() + '.jpg',
+    imageUrl: 'assets/imgs/' + encodeCuisineName(cuisine_list[index]) + '.jpg',
     name: cuisine_list[index],
     description: 'Lorem ipsum dolor sit amet.',
     recipes: recipes
