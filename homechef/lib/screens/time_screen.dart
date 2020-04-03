@@ -61,13 +61,13 @@ class _TimePageState extends State<TimePage> {
               begin: FractionalOffset.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Colors.black.withOpacity(0.5),
+                Colors.black.withOpacity(0.9),
                 Colors.transparent,
-                Colors.yellow[600],
+                Colors.black.withOpacity(0.9),
               ],
               stops: [
                 0.0,
-                0.3,
+                0.4,
                 1.0
               ])
           ),

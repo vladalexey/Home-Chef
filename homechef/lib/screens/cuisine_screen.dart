@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
@@ -61,13 +62,13 @@ class _CuisinePageState extends State<CuisinePage> {
               begin: FractionalOffset.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Colors.black.withOpacity(0.5),
+                Colors.black.withOpacity(0.9),
                 Colors.transparent,
-                Colors.yellow[600],
+                Colors.black.withOpacity(0.9),
               ],
               stops: [
                 0.0,
-                0.3,
+                0.4,
                 1.0
               ])
           ),
@@ -149,16 +150,22 @@ class _CuisinePageState extends State<CuisinePage> {
                 ),
 
               Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 18.0, bottom: 0.0),
-                    child: Text(
-                      widget.cuisine.name,
-                      style: TextStyle(
-                        // shadows: Sha,
-                        fontSize: 65.0,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff1D1D1D),
+                  Expanded(
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
+                        child: AutoSizeText(
+                          widget.cuisine.name,
+                          maxLines: 1,
+                          style: TextStyle(
+                            // shadows: Sha,
+                            fontSize: 65.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   )

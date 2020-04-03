@@ -61,13 +61,13 @@ class _DietPageState extends State<DietPage> {
               begin: FractionalOffset.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Colors.black.withOpacity(0.5),
+                Colors.black.withOpacity(0.9),
                 Colors.transparent,
-                Colors.yellow[600],
+                Colors.black.withOpacity(0.9),
               ],
               stops: [
                 0.0,
-                0.3,
+                0.4,
                 1.0
               ])
           ),
@@ -145,24 +145,28 @@ class _DietPageState extends State<DietPage> {
 
               Row(
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
-                    child: AutoSizeText(
-                      widget.diet.name,
-                      maxFontSize: 50.0,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: TextStyle(
-                        shadows: [
-                          Shadow(
-                            color: Colors.black12,
-                            offset: Offset(0.0, 2.0),
-                            blurRadius: 10.0,
+                  Expanded(
+                    child: Container(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+                        child: AutoSizeText(
+                          widget.diet.name,
+                          maxFontSize: 50.0,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style: TextStyle(
+                            shadows: [
+                              Shadow(
+                                color: Colors.black12,
+                                offset: Offset(0.0, 2.0),
+                                blurRadius: 10.0,
+                              ),
+                            ],
+                            fontSize: 65.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
                           ),
-                        ],
-                        fontSize: 65.0,
-                        fontWeight: FontWeight.w400,
-                        color: Color(0xff1D1D1D),
+                        ),
                       ),
                     ),
                   )
