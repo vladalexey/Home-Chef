@@ -33,20 +33,17 @@ class _DietOptionState extends State<DietOption> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Vegan', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['veganBool'],
-                              onChanged: (bool value) {
-                                setState(() {
-                                  dietOptions['veganBool'] = value;
-                                });
-                              },
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['veganBool'] = ! dietOptions['veganBool'];
+                           Navigator.pop(context);
+                        },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Vegan', style: TextStyle(fontSize: 20.0),),
+                          ),
                         ),
                       ),
                     ),
@@ -54,21 +51,17 @@ class _DietOptionState extends State<DietOption> {
 
                     
                     Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text('Vegetarian', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['vegetarianBool'],
-                              onChanged: (bool value) {
-                                setState(() {
-                                  dietOptions['vegetarianBool']= value;
-                                });
-                              },
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['vegetarianBool'] = ! dietOptions['vegetarianBool'];
+                           Navigator.pop(context);
+                        },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Vegetarian', style: TextStyle(fontSize: 20.0),),
+                          ),
                         ),
                       ),
                     ),
@@ -78,41 +71,33 @@ class _DietOptionState extends State<DietOption> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            Text('Lacto Vegetarian', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['lactoVegetarianBool'],
-                              onChanged: (bool value) {
-                                setState(() {
-                                  dietOptions['lactoVegetarianBool'] = value;
-                                });
-                              },
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['lactoVegetarianBool'] = ! dietOptions['lactoVegetarianBool'];
+                           Navigator.pop(context);
+                        },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Lacto Vegetarian', style: TextStyle(fontSize: 20.0),),
+                          ),
                         ),
                       ),
                     ),
 
                     Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Ovo Vegetarian', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['ovoVegetarianBool'],
-                              onChanged: (bool value) {
-                                setState(() {
-                                  dietOptions['ovoVegetarianBool'] = value;
-                                });
-                              },
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['ovoVegetarianBool'] = ! dietOptions['ovoVegetarianBool'];
+                           Navigator.pop(context);
+                        },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Ovo Vegetarian', style: TextStyle(fontSize: 20.0),),
+                          ),
                         ),
                       ),
                     ),
@@ -124,39 +109,33 @@ class _DietOptionState extends State<DietOption> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Keto', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['ketoBool'],
-                              onChanged: (bool value) {
-                                setState(() {
-                                  dietOptions['ketoBool'] = value;
-                                });
-                              },
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['ketoBool'] = ! dietOptions['ketoBool'];
+                           Navigator.pop(context);
+                        },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Keto', style: TextStyle(fontSize: 20.0),),
+                          ),
                         ),
                       ),
                     ),
 
                     Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Whole30', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['whole30Bool'],
-                              onChanged: (bool value) {
-                                setState(() {
-                                  dietOptions['whole30Bool'] = value;
-                                });
-                              },
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['whole30Bool'] = ! dietOptions['whole30Bool'];
+                           Navigator.pop(context);
+                        },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Whole30', style: TextStyle(fontSize: 20.0),),
+                          ),
                         ),
                       ),
                     ),
@@ -166,41 +145,33 @@ class _DietOptionState extends State<DietOption> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Gluten Free', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['glutenFreeBool'],
-                              onChanged: (bool value) {
-                                dietOptions['glutenFreeBool'] = value;
-                                setState(() {
-                                  
-                                });
-                              },
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['glutenFreeBool'] = ! dietOptions['glutenFreeBool'];
+                           Navigator.pop(context);
+                        },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Gluten Free', style: TextStyle(fontSize: 20.0),),
+                          ),
                         ),
                       ),
                     ),
 
                     Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Paleo', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['paleoBool'],
-                              onChanged: (bool value) {
-                                dietOptions['paleoBool'] = value;
-                                setState(() {
-                                  
-                                });
-                              },
-                            ),
-                          ],
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['paleoBool'] = ! dietOptions['paleoBool'];
+                           Navigator.pop(context);
+                        },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Paleo', style: TextStyle(fontSize: 20.0),),
+                          ),
                         ),
                       ),
                     )
@@ -214,71 +185,39 @@ class _DietOptionState extends State<DietOption> {
                 Row(
                   children: <Widget>[
                     Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Primal', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['primalBool'],
-                              onChanged: (bool value) {
-                                setState(() {
-                                  dietOptions['primalBool'] = value;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      child: Card(
-                        elevation: 1.0,
-                        child: Column(
-                          children: <Widget>[
-                            Text('Pescetarian', style: TextStyle(fontSize: 20.0),),
-                            Checkbox(
-                              value: dietOptions['pescetarianBool'],
-                              onChanged: (bool value) {
-                                setState(() {
-                                  dietOptions['pescetarianBool'] = value;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-
-                Row(
-                  children: <Widget>[
-                    Divider(color: Colors.black54,),
-                    SizedBox(height: 20.0),
-                  ],
-                ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Expanded(
-                      child: FlatButton(
-                        child: Text(
-                          'Done',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 20.0
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['primalBool'] = ! dietOptions['primalBool'];
+                           Navigator.pop(context);
+                        },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Primal', style: TextStyle(fontSize: 20.0),),
                           ),
                         ),
-                        onPressed: () {
-                          widget.callSearchScreen();
+                      ),
+                    ),
+
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                           dietOptions['pescetarianBool'] = ! dietOptions['pescetarianBool'];
+                           Navigator.pop(context);
                         },
+                        child: Card(
+                          elevation: 1.0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Pescetarian', style: TextStyle(fontSize: 20.0),),
+                          ),
+                        ),
                       ),
                     ),
                   ],
-                )
+                ),
+
               ],
 
             ),

@@ -18,8 +18,8 @@ import 'package:http/http.dart' as http;
 
 class SearchBarWidget extends StatefulWidget {
 
-  final Function() callSearchScreen;
-  SearchBarWidget({@required this.callSearchScreen});
+  final Function() callSearchScreenDiet, callSearchScreenCuisine;
+  SearchBarWidget({@required this.callSearchScreenDiet, @required this.callSearchScreenCuisine});
 
   @override
   _SearchBarWidgetState createState() => _SearchBarWidgetState();
@@ -282,7 +282,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             ),
             onPressed: () {
 
-              widget.callSearchScreen();
+              widget.callSearchScreenDiet();
 
             },
           ),
@@ -306,9 +306,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
               color: Colors.black87,
             ),
             onPressed: () {
-              searchController.sortList((Recipe a, Recipe b) {
-                return a.name.compareTo(b.name);
-              });
+              widget.callSearchScreenCuisine();
             },
           ),
         ),
