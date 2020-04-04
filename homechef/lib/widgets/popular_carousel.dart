@@ -72,7 +72,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
                     Colors.transparent,
                     // Colors.transparent,
                     // Color(0xffFCD966),
-                    Colors.yellow[600]
+                    Colors.black.withOpacity(0.9),
                   ],
                   stops: [
                     0.0,
@@ -84,7 +84,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
             ),
 
             Positioned(
-              bottom: 50.0,
+              bottom: 20.0,
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Padding(
@@ -127,7 +127,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
     height: isActive ? 12 : 8,
     width: isActive ? 12 : 8,
     decoration: BoxDecoration(
-        color: isActive ? Colors.black : Colors.yellow,
+        color: isActive ? Colors.white : Colors.yellow,
         borderRadius: BorderRadius.all(Radius.circular(12))),
   );
 }

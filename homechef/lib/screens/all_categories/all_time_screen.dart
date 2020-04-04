@@ -54,9 +54,9 @@ class _AllTimePageState extends State<AllTimePage> {
               begin: FractionalOffset.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Colors.black.withOpacity(0.5),
+                Colors.black.withOpacity(0.9),
                 Colors.transparent,
-                Color(0xffFCD966),
+                Colors.black.withOpacity(0.9),
               ],
               stops: [
                 0.0,
@@ -153,7 +153,7 @@ class _AllTimePageState extends State<AllTimePage> {
                         ],
                         fontSize: 55.0,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xff1D1D1D),
+                        color: Colors.white,
                       ),
                     ),
                   )

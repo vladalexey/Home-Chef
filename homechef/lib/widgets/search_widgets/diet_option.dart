@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homechef/models/diet_model.dart';
 
@@ -11,6 +12,68 @@ class DietOption extends StatefulWidget {
 }
 
 class _DietOptionState extends State<DietOption> {
+
+  Row populateDietCard(Diet diet, Diet diet2) {
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+                
+                
+                if (dietOptions[encodeDietName(diet.name)] == false) {
+                  setAllFalse();
+                }
+
+                dietOptions[encodeDietName(diet.name)] = !dietOptions[encodeDietName(diet.name)];
+                setState(() {
+                  
+                });
+                // widget.callSearchScreen();
+            },
+            child: Card(
+              color: dietOptions[encodeDietName(diet.name)] ? Colors.blue[300] : Colors.white,
+              elevation: 1.0,
+              child: Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Center(child: AutoSizeText(diet.name, maxLines: 1, style: TextStyle(fontSize: 20.0),)),
+              ),
+            ),
+          ),
+        ),
+        
+
+        
+        Expanded(
+          child: GestureDetector(
+            onTap: () {
+
+                if (dietOptions[encodeDietName(diet2.name)] == false) {
+                  setAllFalse();
+                }
+                dietOptions[encodeDietName(diet2.name)] = !dietOptions[encodeDietName(diet2.name)];
+                setState(() {
+                  
+                });
+
+            },
+            child: Card(
+              color: dietOptions[encodeDietName(diet2.name)] ? Colors.blue[300] : Colors.white,
+              elevation: 1.0,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: AutoSizeText(diet2.name, maxLines: 1, style: TextStyle(fontSize: 20.0),),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return FittedBox(
@@ -31,202 +94,33 @@ class _DietOptionState extends State<DietOption> {
               children: <Widget>[
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Expanded(child: Center(child: Text(
-                      'Choose a diet',
-                      style: TextStyle(fontSize: 18.0),)),),
+                    Expanded(child: Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Text(
+                        'Choose a diet',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.w300),
+                        ),
+                    ),),
+                    IconButton(
+                      icon: Icon(Icons.cancel),
+                      // color: Colors.blue,
+                      onPressed: () {
+                        widget.callSearchScreen();
+                      },)
                   ],
                 ),
 
                 Divider(color: Colors.yellow,thickness: 2.0,),
 
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['veganBool'] = ! dietOptions['veganBool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Vegan', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    ),
-                    
-
-                    
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['vegetarianBool'] = ! dietOptions['vegetarianBool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Vegetarian', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                    
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['lactoVegetarianBool'] = ! dietOptions['lactoVegetarianBool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Lacto Vegetarian', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['ovoVegetarianBool'] = ! dietOptions['ovoVegetarianBool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Ovo Vegetarian', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    ),
-                    
-                  ],
-                ),
-
-
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['ketoBool'] = ! dietOptions['ketoBool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Keto', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['whole30Bool'] = ! dietOptions['whole30Bool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Whole30', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['glutenFreeBool'] = ! dietOptions['glutenFreeBool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Gluten Free', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['paleoBool'] = ! dietOptions['paleoBool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Paleo', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    )
-
-
-                  ],
-                ),
-
-
-                
-                Row(
-                  children: <Widget>[
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['primalBool'] = ! dietOptions['primalBool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Primal', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                           dietOptions['pescetarianBool'] = ! dietOptions['pescetarianBool'];
-                           Navigator.pop(context);
-                        },
-                        child: Card(
-                          elevation: 1.0,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text('Pescetarian', style: TextStyle(fontSize: 20.0),),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                populateDietCard(diets[0], diets[1]),
+                populateDietCard(diets[2], diets[3]),
+                populateDietCard(diets[4], diets[5]),
+                populateDietCard(diets[6], diets[7]),
+                populateDietCard(diets[8], diets[9]),
 
               ],
 

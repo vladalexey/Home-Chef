@@ -29,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
       padding: EdgeInsets.only(
         left: 20.0,
         right: 20.0,
-        top: 30.0,
+        top: 10.0,
         bottom: 5.0
       ),
       
@@ -110,7 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 spreadRadius: 3
               )
             ],
-            color: Colors.yellow[200],
+            color: Colors.amber[300].withOpacity(0.9),
             
           ),
           height: 60.0,

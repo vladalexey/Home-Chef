@@ -17,6 +17,16 @@ class Diet {
 Map<String, bool> dietOptions = {'veganBool': false, 'vegetarianBool': false, 'ovoVegetarianBool': false, 'lactoVegetarianBool': false, 'glutenFreeBool': false, 
   'paleoBool': false, 'pescetarianBool': false, 'primalBool': false, 'whole30Bool': false, 'ketoBool': false};
 
+void setAllFalse() {
+  for (String key in dietOptions.keys) {
+    dietOptions[key] = false;
+  }
+}
+
+String encodeDietName(String name) {
+
+  return name.substring(0, 1).toLowerCase() + name.substring(1, name.length).replaceAll(' ', '') + 'Bool';
+}
 
 final List<Recipe> recipes = [
   Recipe(
@@ -74,14 +84,14 @@ final List<Diet> diets = [
 
     Diet(
     imageUrl: 'assets/imgs/lactovegetarian.jpg',
-    name: 'Lacto-Vegetarian',
+    name: 'Lacto Vegetarian',
     description: 'All ingredients must be vegetarian and none of the ingredients can be or contain egg.',
     recipes: recipes,
     ),
 
     Diet(
     imageUrl: 'assets/imgs/ovovegetarian.png',
-    name: 'Ovo-Vegetarian',
+    name: 'Ovo Vegetarian',
     description: 'All ingredients must be vegetarian and none of the ingredients can be or contain dairy.',
     recipes: recipes,
     ),

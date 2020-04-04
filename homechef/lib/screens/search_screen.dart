@@ -94,12 +94,13 @@ class _SearchScreenState extends State<SearchScreen> {
       },
 
       onTap: () {
+        FocusScope.of(context).unfocus();
         setState(() {
           if (widthDiet == MediaQuery.of(context).size.width * 0.8) {
             widthDiet = 0.0;
             heightDiet = 0.0;
           }
-          if (widthCuisine == 200.0) {
+          if (widthCuisine == MediaQuery.of(context).size.width * 0.8) {
             widthCuisine = 0.0;
             heightCuisine = 0.0;
           }

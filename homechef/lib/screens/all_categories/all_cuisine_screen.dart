@@ -53,9 +53,9 @@ class _AllCuisinePageState extends State<AllCuisinePage> {
               begin: FractionalOffset.topCenter,
               end: FractionalOffset.bottomCenter,
               colors: [
-                Colors.black.withOpacity(0.5),
+                Colors.black.withOpacity(0.9),
                 Colors.transparent,
-                Color(0xffFCD966),
+                Colors.black.withOpacity(0.9),
               ],
               stops: [
                 0.0,
@@ -144,7 +144,7 @@ class _AllCuisinePageState extends State<AllCuisinePage> {
                         // shadows: Sha,
                         fontSize: 65.0,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xff1D1D1D),
+                        color: Colors.white,
                       ),
                     ),
                   )
