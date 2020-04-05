@@ -4,6 +4,7 @@ import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
 import 'package:homechef/screens/search_screen.dart';
+import 'package:homechef/widgets/rating_stars.dart';
 
 class DietPage extends StatefulWidget {
 
@@ -15,16 +16,7 @@ class DietPage extends StatefulWidget {
 }
 
 class _DietPageState extends State<DietPage> {
-
-  Text _buildRatingStars(int rating) {
-    String stars = '';
-    for (int i = 0; i < rating; i++) {
-      stars += '⭐ ';
-    }
-    stars.trim();
-    return Text(stars);
-  }
-
+  
   Widget topPart() {
     return Stack(
       children: <Widget>[
@@ -261,7 +253,7 @@ class _DietPageState extends State<DietPage> {
                               color: Colors.grey,
                             ),
                           ),
-                          _buildRatingStars(recipe.rate),
+                          RatingStars(rating: recipe.rate),
                           SizedBox(height: 10.0),
                         ],
                       ),

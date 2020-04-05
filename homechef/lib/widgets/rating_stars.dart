@@ -1,4 +1,12 @@
-Text _buildRatingStars(int rating) {
+import 'package:flutter/material.dart';
+
+class RatingStars extends StatelessWidget {
+
+  final int rating;
+  RatingStars({@required this.rating});
+
+  Text _buildRatingStars(int rating) {
+    
     String stars = '';
     for (int i = 0; i < rating; i++) {
       stars += '⭐ ';
@@ -6,3 +14,10 @@ Text _buildRatingStars(int rating) {
     stars.trim();
     return Text(stars);
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return _buildRatingStars(this.rating);
+  }
+}
+

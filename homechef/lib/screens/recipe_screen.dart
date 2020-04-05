@@ -6,6 +6,7 @@ import 'package:homechef/models/ingredients/ingredient_model.dart';
 import 'package:homechef/models/instructions/instruction_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/search_screen.dart';
+import 'package:homechef/widgets/rating_stars.dart';
 
 class RecipePage extends StatefulWidget {
 
@@ -36,15 +37,6 @@ class _RecipePageState extends State<RecipePage> {
       res = res + index.toString() + '. ' + instructions[index - 1].instruction + '\n';
     }
     return res;
-  }
-
-  Text _buildRatingStars(int rating) {
-    String stars = '';
-    for (int i = 0; i < rating; i++) {
-      stars += '⭐ ';
-    }
-    stars.trim();
-    return Text(stars, style: TextStyle(fontSize: 20.0),);
   }
 
   Widget displayIngredientList() {
@@ -396,7 +388,7 @@ class _RecipePageState extends State<RecipePage> {
                     ),
 
                     Flexible(
-                      child: _buildRatingStars(widget.recipe.rate),
+                      child: RatingStars(rating: widget.recipe.rate),
                     ),
 
                   ],

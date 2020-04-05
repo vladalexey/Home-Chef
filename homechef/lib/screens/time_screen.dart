@@ -3,6 +3,7 @@ import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/models/time_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
 import 'package:homechef/screens/search_screen.dart';
+import 'package:homechef/widgets/rating_stars.dart';
 
 class TimePage extends StatefulWidget {
 
@@ -14,16 +15,6 @@ class TimePage extends StatefulWidget {
 }
 
 class _TimePageState extends State<TimePage> {
-
-  Text _buildRatingStars(int rating) {
-    String stars = '';
-    for (int i = 0; i < rating; i++) {
-      stars += '⭐ ';
-    }
-    stars.trim();
-    return Text(stars);
-  }
-
 
   Widget topPart() {
     return Stack(
@@ -253,7 +244,7 @@ class _TimePageState extends State<TimePage> {
                               color: Colors.grey,
                             ),
                           ),
-                          _buildRatingStars(recipe.rate),
+                          RatingStars(rating: recipe.rate),
                           SizedBox(height: 10.0),
                         ],
                       ),
