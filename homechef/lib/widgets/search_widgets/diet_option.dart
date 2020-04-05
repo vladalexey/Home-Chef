@@ -13,8 +13,6 @@ class DietOption extends StatefulWidget {
 
 class _DietOptionState extends State<DietOption> with SingleTickerProviderStateMixin {
 
-  
-
   Row populateDietCard(Diet diet, Diet diet2) {
 
     return Row(
@@ -24,16 +22,13 @@ class _DietOptionState extends State<DietOption> with SingleTickerProviderStateM
           child: GestureDetector(
             onTap: () {
                 
-                
                 if (dietOptions[encodeDietName(diet.name)] == false) {
                   setAllFalse();
                 }
-
                 dietOptions[encodeDietName(diet.name)] = !dietOptions[encodeDietName(diet.name)];
                 setState(() {
                   
                 });
-                // widget.callSearchScreen();
             },
             child: Card(
               color: dietOptions[encodeDietName(diet.name)] ? Colors.blue[300] : Colors.white,
@@ -46,8 +41,6 @@ class _DietOptionState extends State<DietOption> with SingleTickerProviderStateM
           ),
         ),
         
-
-        
         Expanded(
           child: GestureDetector(
             onTap: () {
@@ -57,9 +50,7 @@ class _DietOptionState extends State<DietOption> with SingleTickerProviderStateM
                 }
                 dietOptions[encodeDietName(diet2.name)] = !dietOptions[encodeDietName(diet2.name)];
                 setState(() {
-                  
                 });
-
             },
             child: Card(
               color: dietOptions[encodeDietName(diet2.name)] ? Colors.blue[300] : Colors.white,
@@ -77,17 +68,13 @@ class _DietOptionState extends State<DietOption> with SingleTickerProviderStateM
     );
   }
 
-  
-
-  
-
   @override
   Widget build(BuildContext context) {
     return FittedBox(
       fit: BoxFit.contain,
 
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.9,
+        width: MediaQuery.of(context).size.width * 0.8,
 
         child: Card(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
@@ -112,12 +99,12 @@ class _DietOptionState extends State<DietOption> with SingleTickerProviderStateM
                           fontWeight: FontWeight.w300),
                         ),
                     ),),
-                    IconButton(
-                      icon: Icon(Icons.cancel),
-                      // color: Colors.blue,
+                    FlatButton(
                       onPressed: () {
                         widget.callSearchScreen();
-                      },)
+                      },
+                      child: Text('Done', style: TextStyle(fontSize: 18.0, color: Colors.blue,),),
+                      )
                   ],
                 ),
 

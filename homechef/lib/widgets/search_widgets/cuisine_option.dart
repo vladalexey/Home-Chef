@@ -25,17 +25,12 @@ Future<List<String>> searchCuisine(String text) async {
   return matchCuisine;
 }
 
-List<Widget> populateChosenCuisine() {
-
-
-
-}
-
 class _CuisineOptionState extends State<CuisineOption> {
   @override
   Widget build(BuildContext context) {
     return Container(
       // height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width * 0.9,
       child: Padding(
         padding: EdgeInsets.all(15.0),
 
@@ -50,16 +45,18 @@ class _CuisineOptionState extends State<CuisineOption> {
 
               Flexible(
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.cancel),
-                      // color: Colors.blue,
-                      onPressed: () {
-                        widget.callSearchScreen();
-                      },
-                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: FlatButton(
+                        onPressed: () {
+                          widget.callSearchScreen();
+                        },
+                        child: Text('Done', style: TextStyle(fontSize: 18.0, color: Colors.blue,),),
+                        ),
+                    )
                   ],
                 ),
               ),
@@ -82,12 +79,8 @@ class _CuisineOptionState extends State<CuisineOption> {
                   onSearch: searchCuisine,
                   shrinkWrap: true,
                   minimumChars: 0,
-                  // cancellationWidget: Center(child: 
-                  //   IconButton(
-                  //     onPressed: () {
-                  //     },
-                  //     icon: Icon(Icons.cancel))
-                  // ),
+                  hintText: 'Select cuisines by searching',
+                  hintStyle: TextStyle(color: Colors.grey),
                   onItemFound: (String foundCuisine, int index) {
                     
                     return GestureDetector(

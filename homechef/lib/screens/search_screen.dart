@@ -61,16 +61,12 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
     setState(() {
 
       if (dietOpen) {
-        
         expandControllerDiet.reverse();
-
       } else {
-
         if (cuisineOpen) {
           cuisineOpen = !cuisineOpen;
           expandController.reverse();
         }
-
         expandControllerDiet.forward();
       }
 
@@ -83,18 +79,14 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
     print('Toggle cuisine option');
 
     setState(() {
-      
 
       if (cuisineOpen) {
         expandController.reverse();
-
       } else {
-        
         if (dietOpen) {
           dietOpen = !dietOpen;
           expandControllerDiet.reverse();
         }
-
         expandController.forward();
       }
 
@@ -128,8 +120,15 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
 
       onTap: () {
         FocusScope.of(context).unfocus();
-        expandController.reverse();
-        expandControllerDiet.reverse();
+        if (dietOpen) {
+          dietOpen = !dietOpen;
+          expandControllerDiet.reverse();
+        }
+
+        if (cuisineOpen) {
+          cuisineOpen = !cuisineOpen;
+          expandController.reverse();
+        }
         
       },
 
@@ -180,10 +179,6 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
                         Center(
                           child: ScaleTransition(
                             scale: animationDiet,
-                            // height: heightDiet,
-                            // width: widthDiet,
-                            // curve: Curves.bounceInOut,
-                            // duration: Duration(milliseconds: 100),
                             child: dietOption,
                           ),
                         ),
@@ -191,10 +186,6 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
                         Center(
                           child: ScaleTransition(
                             scale: animation,
-                            // height: heightCuisine,
-                            // width: widthCuisine,
-                            // curve: Curves.bounceInOut,
-                            // duration: Duration(milliseconds: 100),
                             child: cuisineOption,
                           ),
                         ),

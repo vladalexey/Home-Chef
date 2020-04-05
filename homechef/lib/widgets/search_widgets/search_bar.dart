@@ -15,6 +15,7 @@ import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
 import 'package:homechef/screens/search_screen.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:homechef/widgets/rating_stars.dart';
 import 'package:http/http.dart' as http;
 
 class SearchBarWidget extends StatefulWidget {
@@ -174,7 +175,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -190,23 +193,28 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                           maxLines: 2,
                         ),
                       ),
-                      Column(
-                        children: <Widget>[
-                          AutoSizeText(
-                            '${recipe.id}',
-                            maxLines: 1,
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w600,
+                      Expanded(
+                        child: Column(
+                          children: <Widget>[
+                            AutoSizeText(
+                              '${recipe.id}',
+                              maxLines: 1,
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Recipe ID',
-                            style: TextStyle(
-                              color: Colors.grey,
+                            AutoSizeText(
+                              'Recipe ID',
+                              maxFontSize: 15.0,
+                              maxLines: 1,
+                              style: TextStyle(
+                                color: Colors.grey,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -216,7 +224,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                       color: Colors.grey,
                     ),
                   ),
-                  _buildRatingStars(recipe.rate),
+                  RatingStars(rating: recipe.rate),
                   SizedBox(height: 10.0),
                 ],
               ),
@@ -241,133 +249,105 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   }
 
   Widget buildHeaderRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.amberAccent,
-            borderRadius: BorderRadius.circular(20.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: Offset(0.0, 2.0),
-                blurRadius: 6.0,
+        Divider(indent: 10.0, endIndent: 10.0,),
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: OutlineButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Icon(
+                    Icons.access_time, 
+                    color: Colors.black87,
+                  ),
+                  onPressed: () {
+                    searchController.sortList((Recipe a, Recipe b) {
+                      return a.name.compareTo(b.name);
+                    });
+                  },
+                ),
               ),
-            ],
             ),
-          child: IconButton(
-            icon: Icon(
-              Icons.access_time, 
-              color: Colors.black87,
-            ),
-            onPressed: () {
-              searchController.sortList((Recipe a, Recipe b) {
-                return a.name.compareTo(b.name);
-              });
-            },
-          ),
-        ),
 
-        Container(
-          key: dietOptionKey,
-          decoration: BoxDecoration(
-            color: Colors.amberAccent,
-            borderRadius: BorderRadius.circular(20.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: Offset(0.0, 2.0),
-                blurRadius: 6.0,
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: OutlineButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Icon(
+                    Icons.warning, 
+                    color: Colors.black87,
+                  ),
+                  onPressed: () {
+
+                    widget.callSearchScreenDiet();
+
+                  },
+                ),
               ),
-            ],
             ),
-          child: IconButton(
-            icon: Icon(
-              Icons.warning, 
-              color: Colors.black87,
-            ),
-            onPressed: () {
 
-              widget.callSearchScreenDiet();
-
-            },
-          ),
-        ),
-
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.amberAccent,
-            borderRadius: BorderRadius.circular(20.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: Offset(0.0, 2.0),
-                blurRadius: 6.0,
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: OutlineButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Icon(
+                    Icons.flag, 
+                    color: Colors.black87,
+                  ),
+                  onPressed: () {
+                    widget.callSearchScreenCuisine();
+                  },
+                ),
               ),
-            ],
             ),
-          child: IconButton(
-            icon: Icon(
-              Icons.flag, 
-              color: Colors.black87,
-            ),
-            onPressed: () {
-              widget.callSearchScreenCuisine();
-            },
-          ),
-        ),
 
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.amberAccent,
-            borderRadius: BorderRadius.circular(20.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: Offset(0.0, 2.0),
-                blurRadius: 6.0,
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: OutlineButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Icon(
+                    FontAwesomeIcons.sortAlphaDown, 
+                    color: Colors.black87,
+                  ),
+                  onPressed: () {
+                    searchController.sortList((Recipe a, Recipe b) {
+                      return a.name.compareTo(b.name);
+                    });
+                  },
+                ),
               ),
-            ],
             ),
-          child: IconButton(
-            icon: Icon(
-              FontAwesomeIcons.sortAlphaDown, 
-              color: Colors.black87,
-            ),
-            onPressed: () {
-              searchController.sortList((Recipe a, Recipe b) {
-                return a.name.compareTo(b.name);
-              });
-            },
-          ),
-        ),
 
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.amberAccent,
-            borderRadius: BorderRadius.circular(20.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black26,
-                offset: Offset(0.0, 2.0),
-                blurRadius: 6.0,
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: OutlineButton(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+                  child: Icon(
+                    FontAwesomeIcons.sortAlphaUp, 
+                    color: Colors.black87,
+                  ),
+                  onPressed: () {
+                    searchController.sortList((Recipe a, Recipe b) {
+                      return b.name.compareTo(a.name);
+                    });
+                  },
+                ),
               ),
-            ],
             ),
-          child: IconButton(
-            icon: Icon(
-              FontAwesomeIcons.sortAlphaUp, 
-              color: Colors.black87,
-            ),
-            onPressed: () {
-              searchController.sortList((Recipe a, Recipe b) {
-                return b.name.compareTo(a.name);
-              });
-            },
-          ),
+          ],
         ),
+        Divider(color: Colors.amber[300], thickness: 1.0, indent: 5.0, endIndent: 5.0,),
       ],
     );
   }

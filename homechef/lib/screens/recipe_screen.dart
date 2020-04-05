@@ -34,7 +34,7 @@ class _RecipePageState extends State<RecipePage> {
     String res = '';
 
     for (var index = 1; index <= instructions.length; index++) {
-      res = res + index.toString() + '. ' + instructions[index - 1].instruction + '\n';
+      res = res + index.toString() + '. ' + instructions[index - 1].instruction + '\n\n';
     }
     return res;
   }
@@ -340,9 +340,9 @@ class _RecipePageState extends State<RecipePage> {
                 ),
 
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.9,
+                    Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
                         child: AutoSizeText(
