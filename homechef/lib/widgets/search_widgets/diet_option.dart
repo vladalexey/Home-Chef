@@ -11,7 +11,9 @@ class DietOption extends StatefulWidget {
   _DietOptionState createState() => _DietOptionState();
 }
 
-class _DietOptionState extends State<DietOption> {
+class _DietOptionState extends State<DietOption> with SingleTickerProviderStateMixin {
+
+  
 
   Row populateDietCard(Diet diet, Diet diet2) {
 
@@ -74,6 +76,11 @@ class _DietOptionState extends State<DietOption> {
       ],
     );
   }
+
+  
+
+  
+
   @override
   Widget build(BuildContext context) {
     return FittedBox(

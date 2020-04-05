@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/widgets/search_widgets/cuisine_option.dart';
 import 'package:homechef/widgets/search_widgets/diet_option.dart';
 import 'package:homechef/widgets/search_widgets/search_bar.dart';
@@ -9,13 +10,48 @@ class SearchScreen extends StatefulWidget {
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
-  
-  double heightCuisine = 0.0;
-  double widthCuisine = 0.0;
+class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMixin{
 
-  double heightDiet = 0.0;
-  double widthDiet = 0.0;
+  AnimationController expandController, expandControllerDiet;
+  Animation<double> animation, animationDiet;
+
+  bool dietOpen = false, cuisineOpen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    prepareAnimation();
+
+  }
+
+  @override
+  void dispose() {
+    expandController.dispose();
+    super.dispose();
+  }
+
+  void prepareAnimation() {
+    expandController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200)
+    );
+
+    expandControllerDiet = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200)
+    );
+
+    animation = CurvedAnimation(
+      parent: expandController,
+      curve: Curves.bounceInOut,
+    );
+
+    animationDiet = CurvedAnimation(
+      parent: expandControllerDiet,
+      curve: Curves.bounceInOut,
+    );
+
+  }
 
   void toggleDietOptionfromSearchBar() {
 
@@ -23,57 +59,56 @@ class _SearchScreenState extends State<SearchScreen> {
 
     print('Toggle diet option');
     setState(() {
-      
-      if (widthDiet == MediaQuery.of(context).size.width * 0.8) {
-        widthDiet = 0.0;
-        heightDiet = 0.0;
-      } else {
-        widthDiet = MediaQuery.of(context).size.width * 0.8;
-        heightDiet = 600.0;
 
-        if (widthCuisine == MediaQuery.of(context).size.width * 0.8) {
-          widthCuisine = 0.0;
-          heightCuisine = 0.0;
+      if (dietOpen) {
+        
+        expandControllerDiet.reverse();
+
+      } else {
+
+        if (cuisineOpen) {
+          cuisineOpen = !cuisineOpen;
+          expandController.reverse();
         }
+
+        expandControllerDiet.forward();
       }
+
+      dietOpen = !dietOpen;
+
     });
   }
 
   void toggleCuisineOptionfromSearchBar() {
     print('Toggle cuisine option');
+
     setState(() {
       
-      if (widthCuisine == MediaQuery.of(context).size.width * 0.8) {
-        widthCuisine = 0.0;
-        heightCuisine = 0.0;
-      } else {
-        widthCuisine = MediaQuery.of(context).size.width * 0.8;
-        heightCuisine = 200.0;
 
-        if (widthDiet == MediaQuery.of(context).size.width * 0.8) {
-          widthDiet = 0.0;
-          heightDiet = 0.0;
-        }
+      if (cuisineOpen) {
+        expandController.reverse();
+
+      } else {
         
+        if (dietOpen) {
+          dietOpen = !dietOpen;
+          expandControllerDiet.reverse();
+        }
+
+        expandController.forward();
       }
+
+      cuisineOpen = !cuisineOpen;
     });
   }
-
-  // void getDietOption() {
-    
-  // }
-
-  // Offset getWarningPos() {
-  //   final RenderBox warningBox = dietOptionKey.currentContext.findRenderObject();
-  //   final warningPos = warningBox.localToGlobal(Offset.zero);
-  //   print(warningPos.dy);
-  //   return warningPos;
-  // }
   
   @override
   Widget build(BuildContext context) {
 
     double startPos, dis;
+
+    DietOption dietOption = DietOption(callSearchScreen: toggleDietOptionfromSearchBar,);
+    CuisineOption cuisineOption = CuisineOption(callSearchScreen: toggleCuisineOptionfromSearchBar,);
 
     return GestureDetector(
       onPanStart: (DragStartDetails details) {
@@ -83,28 +118,18 @@ class _SearchScreenState extends State<SearchScreen> {
         dis = details.globalPosition.dx - startPos;
       },
       onPanEnd: (DragEndDetails details) {
-        if (dis > 0) {
+        if (dis > MediaQuery.of(context).size.width * 0.1) {
           FocusScope.of(context).unfocus();
           Navigator.pop(context);
-          setState(() {
-            heightCuisine = 0.0;
-            widthCuisine = 0.0;
-          });
+          expandController.reverse();
+          expandControllerDiet.reverse();
         }
       },
 
       onTap: () {
         FocusScope.of(context).unfocus();
-        setState(() {
-          if (widthDiet == MediaQuery.of(context).size.width * 0.8) {
-            widthDiet = 0.0;
-            heightDiet = 0.0;
-          }
-          if (widthCuisine == MediaQuery.of(context).size.width * 0.8) {
-            widthCuisine = 0.0;
-            heightCuisine = 0.0;
-          }
-        });
+        expandController.reverse();
+        expandControllerDiet.reverse();
         
       },
 
@@ -153,20 +178,24 @@ class _SearchScreenState extends State<SearchScreen> {
                         ),
 
                         Center(
-                          child: AnimatedContainer(
-                            width: widthDiet,
-                            curve: Curves.bounceInOut,
-                            duration: Duration(milliseconds: 200),
-                            child: DietOption(callSearchScreen: toggleDietOptionfromSearchBar,),
+                          child: ScaleTransition(
+                            scale: animationDiet,
+                            // height: heightDiet,
+                            // width: widthDiet,
+                            // curve: Curves.bounceInOut,
+                            // duration: Duration(milliseconds: 100),
+                            child: dietOption,
                           ),
                         ),
 
                         Center(
-                          child: AnimatedContainer(
-                            width: widthCuisine,
-                            curve: Curves.bounceInOut,
-                            duration: Duration(milliseconds: 200),
-                            child: CuisineOption(callSearchScreen: toggleCuisineOptionfromSearchBar,),
+                          child: ScaleTransition(
+                            scale: animation,
+                            // height: heightCuisine,
+                            // width: widthCuisine,
+                            // curve: Curves.bounceInOut,
+                            // duration: Duration(milliseconds: 100),
+                            child: cuisineOption,
                           ),
                         ),
                         

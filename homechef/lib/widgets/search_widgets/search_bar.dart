@@ -5,6 +5,7 @@ import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/ingredients/ingredient_list_model.dart';
 import 'package:homechef/models/ingredients/ingredient_model.dart';
@@ -56,15 +57,22 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     if (dietOptions.containsValue(true)) {
       for (String key in dietOptions.keys) {
         if (dietOptions[key] == true) {
-          _diet = '&diet=' + key.substring(0, key.length - 4);
+          _diet = '&diet=' + key.substring(0, key.length - 4).toLowerCase();
           break;
         }
       }
     }
 
-    // if (cuisine != null) {
-    //   _cuisine = '&cuisine=' + cuisine.name;
-    // }
+    _cuisine = '&cuisine=';
+
+    for (String key in cuisineOptions.keys) {
+      if (cuisineOptions[key] == true) {
+        _cuisine = _cuisine + key + ',';
+      }
+    }
+
+    _cuisine = _cuisine.substring(0, _cuisine.length - 1);
+    
 
     // if (time != null) {
     //   _time = '&time=' + time.name;

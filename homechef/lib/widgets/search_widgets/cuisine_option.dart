@@ -35,104 +35,100 @@ class _CuisineOptionState extends State<CuisineOption> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // fit: BoxFit.cover,
-      child: SizedBox(
-        height: 300.0,
-        width: 200.0,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+      // height: MediaQuery.of(context).size.height,
+      child: Padding(
+        padding: EdgeInsets.all(15.0),
 
-          child: Card(
-            elevation: 3.0,
-            color: Colors.white,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-            
-            child: Container(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
+        child: Card(
+          elevation: 3.0,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+          
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(Icons.cancel),
+                      // color: Colors.blue,
+                      onPressed: () {
+                        widget.callSearchScreen();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              
+              Expanded(
+                child: SearchBar<String>(
+                  header: Column(
                     children: <Widget>[
-                      Container(
-                        child: IconButton(
-                          icon: Icon(Icons.cancel),
-                          // color: Colors.blue,
-                          onPressed: () {
-                            widget.callSearchScreen();
-                          },
-                        ),
-                      ),
+                      Divider(color: Colors.amber, thickness: 2.0, indent: 15.0, endIndent: 15.0,),
+                      Center(child: Text('Choose cuisines:')),
+                      Divider(indent: 15.0,endIndent: 15.0,),
                     ],
                   ),
-                  
-                  Expanded(
-                    child: SearchBar<String>(
-                      header: Column(
-                        children: <Widget>[
-                          Divider(color: Colors.amber, thickness: 2.0, indent: 15.0, endIndent: 15.0,),
-                          Center(child: Text('Choose cuisines:')),
-                          Divider(indent: 15.0,endIndent: 15.0,),
-                        ],
-                      ),
-                      headerPadding: EdgeInsets.symmetric(horizontal: 5.0),
+                  headerPadding: EdgeInsets.symmetric(horizontal: 5.0),
 
-                      searchBarStyle: SearchBarStyle(
-                        backgroundColor: Colors.white,
-                      ),
-                      searchBarPadding: EdgeInsets.all(5.0),
-                      onSearch: searchCuisine,
-                      minimumChars: 0,
-                      // cancellationWidget: Center(child: 
-                      //   IconButton(
-                      //     onPressed: () {
-                      //     },
-                      //     icon: Icon(Icons.cancel))
-                      // ),
-                      onItemFound: (String foundCuisine, int index) {
-                        
-                        return GestureDetector(
-                          onTap: () {
-                            foundCuisine = encodeCuisineName(foundCuisine);
-                            print(cuisineOptions);
-                            setState(() {
-                              cuisineOptions[foundCuisine] = !cuisineOptions[foundCuisine];
-                            });
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Card(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                              child: Center(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: <Widget>[
-                                    Expanded(child: Text(foundCuisine)),
-                                    Flexible(
-                                      child: Checkbox(
-                                        value: cuisineOptions[encodeCuisineName(foundCuisine)],
-                                        onChanged: (value) {
-                                          setState(() {
-                                            cuisineOptions[encodeCuisineName(foundCuisine)] = value;
-                                          });
-                                        },
-                                        ),
-                                    )
-                                  ],
-                                )),
-                            ),
-                          ),
-                        );
-                      },
-
-                      onError: (Error error) { print(error.toString()); return Text(error.toString());},
-                    ),
+                  searchBarStyle: SearchBarStyle(
+                    backgroundColor: Colors.white,
                   ),
-                ],
+                  searchBarPadding: EdgeInsets.all(5.0),
+                  onSearch: searchCuisine,
+                  shrinkWrap: true,
+                  minimumChars: 0,
+                  // cancellationWidget: Center(child: 
+                  //   IconButton(
+                  //     onPressed: () {
+                  //     },
+                  //     icon: Icon(Icons.cancel))
+                  // ),
+                  onItemFound: (String foundCuisine, int index) {
+                    
+                    return GestureDetector(
+                      onTap: () {
+                        foundCuisine = encodeCuisineName(foundCuisine);
+                        print(cuisineOptions);
+                        setState(() {
+                          cuisineOptions[foundCuisine] = !cuisineOptions[foundCuisine];
+                        });
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                          child: Center(
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Expanded(child: Text(foundCuisine)),
+                                Flexible(
+                                  child: Checkbox(
+                                    value: cuisineOptions[encodeCuisineName(foundCuisine)],
+                                    onChanged: (value) {
+                                      setState(() {
+                                        cuisineOptions[encodeCuisineName(foundCuisine)] = value;
+                                      });
+                                    },
+                                    ),
+                                )
+                              ],
+                            )),
+                        ),
+                      ),
+                    );
+                  },
+
+                  onError: (Error error) { print(error.toString()); return Text(error.toString());},
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),
