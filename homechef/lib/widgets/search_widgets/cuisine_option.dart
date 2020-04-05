@@ -75,7 +75,7 @@ class _CuisineOptionState extends State<CuisineOption> {
                   searchBarStyle: SearchBarStyle(
                     backgroundColor: Colors.white,
                   ),
-                  searchBarPadding: EdgeInsets.all(5.0),
+                  searchBarPadding: EdgeInsets.symmetric(horizontal: 5.0),
                   onSearch: searchCuisine,
                   shrinkWrap: true,
                   minimumChars: 0,
@@ -84,6 +84,7 @@ class _CuisineOptionState extends State<CuisineOption> {
                   onItemFound: (String foundCuisine, int index) {
                     
                     return GestureDetector(
+
                       onTap: () {
                         foundCuisine = encodeCuisineName(foundCuisine);
                         print(cuisineOptions);

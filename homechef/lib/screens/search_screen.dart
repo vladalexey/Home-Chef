@@ -60,6 +60,8 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
     print('Toggle diet option');
     setState(() {
 
+      FocusScope.of(context).unfocus();
+
       if (dietOpen) {
         expandControllerDiet.reverse();
       } else {
@@ -79,6 +81,8 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
     print('Toggle cuisine option');
 
     setState(() {
+
+      FocusScope.of(context).unfocus();
 
       if (cuisineOpen) {
         expandController.reverse();

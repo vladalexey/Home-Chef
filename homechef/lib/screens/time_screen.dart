@@ -124,8 +124,6 @@ class _TimePageState extends State<TimePage> {
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: Divider(
                         height: 2.0,
-                        // color: Colors.yellow[700],
-                        // color: Color(0xff383838),
                         color: Colors.yellow[500],
                         thickness: 3.0,
                       ),
@@ -149,7 +147,7 @@ class _TimePageState extends State<TimePage> {
                         ],
                         fontSize: 35.0,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xff383838),
+                        color: Colors.white,
                       ),
                     ),
                   )

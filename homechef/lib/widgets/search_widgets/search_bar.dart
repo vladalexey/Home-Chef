@@ -133,15 +133,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return apiResult;
   }
 
-  Text _buildRatingStars(int rating) {
-    String stars = '';
-    for (int i = 0; i < rating; i++) {
-      stars += '⭐ ';
-    }
-    stars.trim();
-    return Text(stars);
-  }
-
   Widget buildSearchRecipeResult(Recipe recipe) {
     return GestureDetector(
       onTap: () => Navigator.push(
@@ -411,7 +402,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       ),
       shrinkWrap: true,
       headerPadding: EdgeInsets.all(5.0),
-      searchBarPadding: EdgeInsets.all(15.0),
+      searchBarPadding: EdgeInsets.only(left: 15.0, right: 15.0),
       searchBarController: searchController,
       cancellationWidget: cancelWidget,
       onError: (Error error) { return Text(error.toString());},
