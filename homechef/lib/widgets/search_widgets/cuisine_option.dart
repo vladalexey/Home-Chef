@@ -17,7 +17,9 @@ Future<List<String>> searchCuisine(String text) async {
 
   for (String cuisine in cuisine_list) {
 
-    if (text.length <= cuisine.length && cuisine.substring(0, text.length).toLowerCase() == text.toLowerCase()) {
+    if (cuisineOptions[encodeCuisineName(cuisine)]) {
+      matchCuisine.insert(0, cuisine);
+    } else if (text.length <= cuisine.length && cuisine.substring(0, text.length).toLowerCase() == text.toLowerCase()) {
       matchCuisine.add(cuisine);
     }
   }
@@ -28,101 +30,112 @@ Future<List<String>> searchCuisine(String text) async {
 class _CuisineOptionState extends State<CuisineOption> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width * 0.9,
-      child: Padding(
-        padding: EdgeInsets.all(15.0),
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
 
-        child: Card(
-          elevation: 3.0,
-          color: Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-          
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
+        width: MediaQuery.of(context).size.width * 0.9,
+        child: Padding(
+          padding: EdgeInsets.all(15.0),
 
-              Flexible(
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
+          child: Card(
+            elevation: 3.0,
+            color: Colors.white,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+            
+            child: Container(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 8.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: FlatButton(
-                        onPressed: () {
-                          widget.callSearchScreen();
-                        },
-                        child: Text('Done', style: TextStyle(fontSize: 18.0, color: Colors.blue,),),
+
+                    Flexible(
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5.0, left: 0.0),
+                            child: FlatButton(
+                              onPressed: () {
+                                widget.callSearchScreen();
+                              },
+                              child: Icon(Icons.arrow_back_ios)
+                              ),
+                          )
+                        ],
+                      ),
+                    ),
+                    
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: SearchBar<String>(
+                          header: Column(
+                            children: <Widget>[
+                              Divider(indent: 15.0, endIndent: 15.0,),
+                              Center(child: Text('Choose cuisines:')),
+                              Divider(indent: 15.0,endIndent: 15.0,),
+                            ],
+                          ),
+                          headerPadding: EdgeInsets.symmetric(horizontal: 5.0),
+
+                          searchBarStyle: SearchBarStyle(
+                            backgroundColor: Colors.white,
+                          ),
+                          searchBarPadding: EdgeInsets.symmetric(horizontal: 5.0),
+                          onSearch: searchCuisine,
+                          shrinkWrap: true,
+                          minimumChars: 0,
+                          hintText: 'Select cuisines by searching',
+                          hintStyle: TextStyle(color: Colors.grey),
+                          onItemFound: (String foundCuisine, int index) {
+                            
+                            return GestureDetector(
+
+                              onTap: () {
+                                foundCuisine = encodeCuisineName(foundCuisine);
+                                print(cuisineOptions);
+                                setState(() {
+                                  cuisineOptions[foundCuisine] = !cuisineOptions[foundCuisine];
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: <Widget>[
+                                        Expanded(child: Text(foundCuisine)),
+                                        Flexible(
+                                          child: Checkbox(
+                                            value: cuisineOptions[encodeCuisineName(foundCuisine)],
+                                            onChanged: (value) {
+                                              setState(() {
+                                                cuisineOptions[encodeCuisineName(foundCuisine)] = value;
+                                              });
+                                            },
+                                            ),
+                                        )
+                                      ],
+                                    )),
+                                ),
+                              ),
+                            );
+                          },
+
+                          onError: (Error error) { print(error.toString()); return Text(error.toString());},
                         ),
-                    )
+                      ),
+                    ),
                   ],
                 ),
               ),
-              
-              Expanded(
-                child: SearchBar<String>(
-                  header: Column(
-                    children: <Widget>[
-                      Divider(color: Colors.amber, thickness: 2.0, indent: 15.0, endIndent: 15.0,),
-                      Center(child: Text('Choose cuisines:')),
-                      Divider(indent: 15.0,endIndent: 15.0,),
-                    ],
-                  ),
-                  headerPadding: EdgeInsets.symmetric(horizontal: 5.0),
-
-                  searchBarStyle: SearchBarStyle(
-                    backgroundColor: Colors.white,
-                  ),
-                  searchBarPadding: EdgeInsets.symmetric(horizontal: 5.0),
-                  onSearch: searchCuisine,
-                  shrinkWrap: true,
-                  minimumChars: 0,
-                  hintText: 'Select cuisines by searching',
-                  hintStyle: TextStyle(color: Colors.grey),
-                  onItemFound: (String foundCuisine, int index) {
-                    
-                    return GestureDetector(
-
-                      onTap: () {
-                        foundCuisine = encodeCuisineName(foundCuisine);
-                        print(cuisineOptions);
-                        setState(() {
-                          cuisineOptions[foundCuisine] = !cuisineOptions[foundCuisine];
-                        });
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Card(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                          child: Center(
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                Expanded(child: Text(foundCuisine)),
-                                Flexible(
-                                  child: Checkbox(
-                                    value: cuisineOptions[encodeCuisineName(foundCuisine)],
-                                    onChanged: (value) {
-                                      setState(() {
-                                        cuisineOptions[encodeCuisineName(foundCuisine)] = value;
-                                      });
-                                    },
-                                    ),
-                                )
-                              ],
-                            )),
-                        ),
-                      ),
-                    );
-                  },
-
-                  onError: (Error error) { print(error.toString()); return Text(error.toString());},
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),

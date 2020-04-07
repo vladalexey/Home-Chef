@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:homechef/models/recipe_model.dart';
+import 'package:homechef/widgets/bounce_button.dart';
 
 class Diet {
   String imageUrl;
@@ -27,6 +29,52 @@ String encodeDietName(String name) {
 
   return name.substring(0, 1).toLowerCase() + name.substring(1, name.length).replaceAll(' ', '') + 'Bool';
 }
+
+List<AnimatedButton> getDietButtons(List<AnimationController> parentControllers) {
+
+  return List<AnimatedButton>.generate(
+    diets.length, (int index,) {
+    
+      return AnimatedButton(
+        parentController: parentControllers[index],
+        parentControllers: parentControllers,
+        onTap: () {
+          if (dietOptions[encodeDietName(diets[index].name)] == false) {
+            setAllFalse();
+          }
+          dietOptions[encodeDietName(diets[index].name)] = !dietOptions[encodeDietName(diets[index].name)];
+        },
+
+        animationDuration: const Duration(milliseconds: 500),
+        initialText: diets[index].name,
+        finalText: diets[index].name,
+        iconData: Icons.check,
+        iconSize: 18.0,
+
+        buttonStyle: ButtonStyle(
+          primaryColor: Colors.white,
+          secondaryColor: Colors.amber[300],
+          elevation: 5.0,
+          initialTextStyle: TextStyle(
+            fontSize: 15,
+            color: Colors.black87,
+          ),
+          finalTextStyle: TextStyle(
+            fontSize: 10.0,
+            color: Colors.black87,
+          ),
+          borderRadius: 10.0,
+        ),
+      );
+    } 
+  ); 
+}
+
+// void assignControllerDietButtons(List<AnimationController> parentControllers) {
+//   dietButtons.forEach( (AnimatedButton button) {
+//     button.parentController = parentControllers[dietButtons.indexOf(button)];
+//   });
+// }
 
 final List<Recipe> recipes = [
   Recipe(

@@ -1,3 +1,4 @@
+import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 
 class Cuisine {
@@ -15,32 +16,32 @@ class Cuisine {
 }
 
 
-final List<Recipe> recipes = [
-  Recipe(
-    id: '1',
-    imageUrl: 'assets/imgs/food4.jpg',
-    name: 'Sushi',
-    description: 'Lorem ipsum dolor sit amet.',
-    ingredients: [],
-    instruction: []
-  ),
-  Recipe(
-    id: '2',
-    imageUrl: 'assets/imgs/food5.jpg',
-    name: 'Yellow Curry',
-    description: 'Lorem ipsum dolor sit amet.',
-    ingredients: [],
-    instruction: []
-  ),
-  Recipe(
-    id: '3',
-    imageUrl: 'assets/imgs/food6.jpg',
-    name: 'Cheeseburger',
-    description: 'Lorem ipsum dolor sit amet.',
-    ingredients: [],
-    instruction: []
-  ),
-];
+// final List<Recipe> recipes = [
+//   Recipe(
+//     id: '1',
+//     imageUrl: 'assets/imgs/food4.jpg',
+//     name: 'Sushi',
+//     description: 'Lorem ipsum dolor sit amet.',
+//     ingredients: [],
+//     instruction: []
+//   ),
+//   Recipe(
+//     id: '2',
+//     imageUrl: 'assets/imgs/food5.jpg',
+//     name: 'Yellow Curry',
+//     description: 'Lorem ipsum dolor sit amet.',
+//     ingredients: [],
+//     instruction: []
+//   ),
+//   Recipe(
+//     id: '3',
+//     imageUrl: 'assets/imgs/food6.jpg',
+//     name: 'Cheeseburger',
+//     description: 'Lorem ipsum dolor sit amet.',
+//     ingredients: [],
+//     instruction: []
+//   ),
+// ];
 
 List<String> cuisine_list = [
   'African',

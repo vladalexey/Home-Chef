@@ -22,8 +22,9 @@ class _DietPageState extends State<DietPage> {
       children: <Widget>[
 
         Container(
-          height: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
+          height: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(  
             borderRadius: BorderRadius.circular(30.0),
             boxShadow: [
               BoxShadow(
@@ -35,18 +36,21 @@ class _DietPageState extends State<DietPage> {
           ),
           child: Hero(
             tag: widget.diet.imageUrl,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30.0),
-                child: Image(
-                  image: AssetImage(widget.diet.imageUrl),
-                  fit: BoxFit.cover,
-                ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30.0),
+              child: Image(
+                // height: double.maxFinite,
+                // width: double.maxFinite,
+                image: AssetImage(widget.diet.imageUrl),
+                fit: BoxFit.cover,
               ),
+            ),
           ),
         ),
         
         Container(
-          height: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0),
             gradient: LinearGradient(
@@ -59,112 +63,105 @@ class _DietPageState extends State<DietPage> {
               ],
               stops: [
                 0.0,
-                0.4,
+                0.5,
                 1.0
               ])
           ),
         ),
 
-        Padding(
-          padding: EdgeInsets.only(
-            left: 20.0,
-            right: 20.0,
-            top: 70.0
-          ),
-          
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-
-            children: <Widget>[
-              Stack(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Positioned(
+          top: 60.0,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Flexible(
+                  flex: 1,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    iconSize: 30.0,
+                    color: Colors.white,
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ), 
+                Flexible(
+                  flex: 5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       IconButton(
-                        icon: Icon(Icons.arrow_back_ios),
+                        icon: Icon(Icons.search),
+                        iconSize: 30.0,
+                        color: Colors.white,
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => SearchScreen())
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.sort),
                         iconSize: 30.0,
                         color: Colors.white,
                         onPressed: () => Navigator.pop(context),
-                      ), 
-                      Row(
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(Icons.search),
-                            iconSize: 30.0,
-                            color: Colors.white,
-                            onPressed: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => SearchScreen())
-                                ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.sort),
-                            iconSize: 30.0,
-                            color: Colors.white,
-                            onPressed: () => Navigator.pop(context),
-                          )
-                        ],
                       )
                     ],
                   ),
+                )
+              ],
+            ),
+          ),
+        ),
 
-                ],
-              ),
+        Positioned(
+          bottom: 20.0,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget> [
 
-              SizedBox(height: 
-                MediaQuery.of(context).size.width * 0.45
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    child: Divider(
-                      height: 2.0,
-                      // color: Colors.yellow[700],
-                      // color: Color(0xff383838),
-                      color: Colors.yellow[500],
-                      thickness: 3.0,
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Divider(
+                        height: 2.0,
+                        color: Colors.yellow[500],
+                        thickness: 3.0,
+                      ),
                     ),
                   ),
                 ),
               ),
 
-              Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Container(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
-                        child: AutoSizeText(
-                          widget.diet.name,
-                          maxFontSize: 50.0,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                          style: TextStyle(
-                            shadows: [
-                              Shadow(
-                                color: Colors.black12,
-                                offset: Offset(0.0, 2.0),
-                                blurRadius: 10.0,
-                              ),
-                            ],
-                            fontSize: 65.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
-                          ),
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
+                      child: AutoSizeText(
+                        widget.diet.name,
+                        maxLines: 1,
+                        maxFontSize: 50.0,
+                        style: TextStyle(
+                          // shadows: Sha,
+                          fontSize: 65.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white,
                         ),
                       ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               )
-            ],
+            ]
           ),
         )
       ],
@@ -218,7 +215,7 @@ class _DietPageState extends State<DietPage> {
                             children: <Widget>[
                               Container(
                                 width: 120.0,
-                                child: Text(
+                                child: AutoSizeText(
                                   recipe.name,
                                   style: TextStyle(
                                     fontSize: 18.0,

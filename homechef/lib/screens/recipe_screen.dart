@@ -240,7 +240,8 @@ class _RecipePageState extends State<RecipePage> {
       children: <Widget>[
 
         Container(
-          height: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0),
             boxShadow: [
@@ -262,7 +263,8 @@ class _RecipePageState extends State<RecipePage> {
         ),
         
         Container(
-          height: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0),
             gradient: LinearGradient(

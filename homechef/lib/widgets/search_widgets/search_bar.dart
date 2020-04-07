@@ -33,6 +33,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return await rootBundle.loadString(path);
   }
   
+  bool filterUp = false;
 
   SearchScreen parent;
   _SearchBarWidgetState({this.parent});
@@ -48,7 +49,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   final SearchBarController<Recipe> searchController = SearchBarController(); 
 
-  Future<List<Recipe>> search(String text, ) async {
+  Future<List<Recipe>> search(String text) async {
 
     String apiKey = await getFileData('assets/API_KEY.txt');
 
@@ -249,96 +250,120 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             
-            Flexible(
+            Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: OutlineButton(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                  child: Icon(
-                    Icons.access_time, 
-                    color: Colors.black87,
-                  ),
-                  onPressed: () {
-                    searchController.sortList((Recipe a, Recipe b) {
-                      return a.name.compareTo(b.name);
-                    });
-                  },
+                padding: const EdgeInsets.all(2.0),
+                child: Column(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.access_time, 
+                        color: Colors.black87,
+                      ),
+                      onPressed: () {
+                        searchController.sortList((Recipe a, Recipe b) {
+                          return a.name.compareTo(b.name);
+                        });
+                      },
+                    ),
+
+                    AutoSizeText(
+                      'Time',
+                      maxLines: 1,
+                      maxFontSize: 20.0,
+                    ),
+                  ],
                 ),
               ),
             ),
 
-            Flexible(
+            Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: OutlineButton(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                  child: Icon(
-                    Icons.warning, 
-                    color: Colors.black87,
-                  ),
-                  onPressed: () {
+                padding: const EdgeInsets.all(2.0),
+                child: Column(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.warning, 
+                        color: Colors.black87,
+                      ),
+                      onPressed: () {
 
-                    widget.callSearchScreenDiet();
+                        widget.callSearchScreenDiet();
 
-                  },
+                      },
+                    ),
+
+                    AutoSizeText(
+                      'Diet',
+                      maxLines: 1,
+                      maxFontSize: 20.0,
+                    ),
+                  ],
                 ),
               ),
             ),
 
-            Flexible(
+            Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: OutlineButton(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                  child: Icon(
-                    Icons.flag, 
-                    color: Colors.black87,
-                  ),
-                  onPressed: () {
-                    widget.callSearchScreenCuisine();
-                  },
+                padding: const EdgeInsets.all(2.0),
+                child: Column(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.flag, 
+                        color: Colors.black87,
+                      ),
+                      onPressed: () {
+                        widget.callSearchScreenCuisine();
+                      },
+                    ),
+
+                    AutoSizeText(
+                      'Cuisine',
+                      maxLines: 1,
+                      maxFontSize: 20.0,
+                    ),
+                  ],
                 ),
               ),
             ),
 
-            Flexible(
+            Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: OutlineButton(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                  child: Icon(
-                    FontAwesomeIcons.sortAlphaDown, 
-                    color: Colors.black87,
-                  ),
-                  onPressed: () {
-                    searchController.sortList((Recipe a, Recipe b) {
-                      return a.name.compareTo(b.name);
-                    });
-                  },
-                ),
-              ),
-            ),
+                padding: const EdgeInsets.all(2.0),
+                child: Column(
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        filterUp ? FontAwesomeIcons.sortAlphaUp : FontAwesomeIcons.sortAlphaDown, 
+                        color: Colors.black87,
+                      ),
+                      onPressed: () {
+                        filterUp ? searchController.sortList((Recipe a, Recipe b) {
+                          return b.name.compareTo(a.name);
+                        }) : searchController.sortList((Recipe a, Recipe b) {
+                          return a.name.compareTo(b.name);
+                        });
+                        
+                        setState(() {
+                          filterUp = !filterUp;
+                        });
+                      },
+                    ),
 
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: OutlineButton(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-                  child: Icon(
-                    FontAwesomeIcons.sortAlphaUp, 
-                    color: Colors.black87,
-                  ),
-                  onPressed: () {
-                    searchController.sortList((Recipe a, Recipe b) {
-                      return b.name.compareTo(a.name);
-                    });
-                  },
+                    AutoSizeText(
+                      'Filter',
+                      maxLines: 1,
+                      maxFontSize: 20.0,
+                    ),
+                  ],
                 ),
               ),
             ),
           ],
         ),
-        Divider(color: Colors.amber[300], thickness: 1.0, indent: 5.0, endIndent: 5.0,),
+        Divider(thickness: 1.0, indent: 5.0, endIndent: 5.0,),
       ],
     );
   }
