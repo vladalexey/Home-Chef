@@ -124,41 +124,32 @@ class _DietPageState extends State<DietPage> {
 
               Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: Divider(
-                        height: 2.0,
-                        color: Colors.yellow[500],
-                        thickness: 3.0,
-                      ),
+                  padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Divider(
+                      height: 2.0,
+                      color: Colors.yellow[500],
+                      thickness: 3.0,
                     ),
                   ),
                 ),
               ),
 
               Flexible(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
-                      child: AutoSizeText(
-                        widget.diet.name,
-                        maxLines: 1,
-                        maxFontSize: 50.0,
-                        style: TextStyle(
-                          // shadows: Sha,
-                          fontSize: 65.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                        ),
-                      ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
+                  child: AutoSizeText(
+                    widget.diet.name,
+                    maxLines: 1,
+                    maxFontSize: 50.0,
+                    style: TextStyle(
+                      // shadows: Sha,
+                      fontSize: 65.0,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white,
                     ),
-                  ],
+                  ),
                 ),
               )
             ]

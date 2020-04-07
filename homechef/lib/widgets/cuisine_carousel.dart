@@ -188,18 +188,19 @@ class CuisineCarousel extends StatelessWidget {
                                   ]
                                 ),
                               ),
+
                               Positioned(
                                 left: 10.0,
                                 bottom: 10.0,
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
+                                child: Container(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
 
-                                    Row(
-                                      children: <Widget>[
-                                        Padding(
+                                      Flexible(
+                                        child: Padding(
                                           padding: const EdgeInsets.only(bottom: 5.0),
                                           child: SizedBox(
                                             width: 80.0,
@@ -212,23 +213,27 @@ class CuisineCarousel extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                        )
-                                      ],
-                                    ),
-
-                                    AutoSizeText(
-                                      cuisine.name,
-                                      maxLines: 2,
-                                      maxFontSize: 18.0,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing:  1.2,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+
+                                      Flexible(
+                                        child: FittedBox(
+                                          child: AutoSizeText(
+                                            cuisine.name,
+                                            maxLines: 2,
+                                            maxFontSize: 18.0,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20.0,
+                                              fontWeight: FontWeight.w600,
+                                              letterSpacing:  1.2,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],

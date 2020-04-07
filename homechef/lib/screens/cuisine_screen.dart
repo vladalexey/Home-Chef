@@ -118,14 +118,14 @@ class _CuisinePageState extends State<CuisinePage> {
 
         Positioned(
           bottom: 20.0,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget> [
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget> [
 
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
+                Flexible(
                   child: Padding(
                     padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
                     child: SizedBox(
@@ -138,30 +138,24 @@ class _CuisinePageState extends State<CuisinePage> {
                     ),
                   ),
                 ),
-              ),
 
-              Flexible(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
-                      child: AutoSizeText(
-                        widget.cuisine.name,
-                        maxLines: 1,
-                        style: TextStyle(
-                          // shadows: Sha,
-                          fontSize: 65.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                        ),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
+                    child: AutoSizeText(
+                      widget.cuisine.name,
+                      maxLines: 1,
+                      style: TextStyle(
+                        // shadows: Sha,
+                        fontSize: 65.0,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
                       ),
                     ),
-                  ],
-                ),
-              )
-            ]
+                  ),
+                )
+              ]
+            ),
           ),
         )
       ],
