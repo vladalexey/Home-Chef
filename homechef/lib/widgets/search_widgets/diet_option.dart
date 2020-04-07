@@ -1,12 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homechef/models/diet_model.dart';
+import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/widgets/bounce_button.dart';
+import 'package:homechef/widgets/flappy_search_bar-1.7.2-modified/lib/flappy_search_bar.dart';
 
 class DietOption extends StatefulWidget {
 
+  final SearchBarController<Recipe> searchController;
   final Function() callSearchScreen;
-  DietOption({@required this.callSearchScreen});
+  DietOption({
+    @required this.callSearchScreen,
+    @required this.searchController});
 
   @override
   _DietOptionState createState() => _DietOptionState();
@@ -84,6 +89,7 @@ class _DietOptionState extends State<DietOption> with TickerProviderStateMixin {
                       
                       FlatButton(
                         onPressed: () {
+                          widget.searchController.triggerSearch();
                           widget.callSearchScreen();
                         },
                         child: Icon(Icons.arrow_back_ios)

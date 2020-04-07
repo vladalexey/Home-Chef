@@ -190,11 +190,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Tab(icon: new Icon(Icons.favorite),)
             ],
-            labelColor: Colors.yellow,
+            labelColor: Colors.amber[300],
             unselectedLabelColor: Colors.black,
             indicatorSize: TabBarIndicatorSize.label,
             indicatorPadding: EdgeInsets.all(5.0),
-            indicatorColor: Colors.yellow,
+            indicatorColor: Colors.amber[300],
           ),
           backgroundColor: Colors.white,
       ),

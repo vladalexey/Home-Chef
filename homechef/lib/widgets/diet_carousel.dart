@@ -90,7 +90,7 @@ class DietCarousel extends StatelessWidget {
                                 )
                               ],
                               // color: Colors.white,
-                              color: Colors.yellow,
+                              color: Colors.amber[300],
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(

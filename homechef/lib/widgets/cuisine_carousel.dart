@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/screens/all_categories/all_cuisine_screen.dart';
 import 'package:homechef/screens/cuisine_screen.dart';
-import 'package:homechef/widgets/size_route.dart';
 
 class CuisineCarousel extends StatelessWidget {
 
@@ -96,7 +95,7 @@ class CuisineCarousel extends StatelessWidget {
                               ],
                               // color: Colors.white,
                               // color: Color(0xffFFEF31),
-                              color: Colors.yellow,
+                              color: Colors.amber[300],
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(

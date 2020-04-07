@@ -21,6 +21,7 @@ dependencies:
     sdk: flutter
   auto_size_text:
   flappy_search_bar:
+    path: ./lib/widgets/flappy_search_bar-1.7.2-modified
   http:
 
   # The following adds the Cupertino Icons font to your application.
@@ -108,6 +109,7 @@ flutter:
    - assets/sample_search_result.json
 
    - assets/API_KEY.txt
+   - assets/API_KEY_RAPIDAPI.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

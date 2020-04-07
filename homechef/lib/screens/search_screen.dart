@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homechef/models/diet_model.dart';
+import 'package:homechef/models/recipe_model.dart';
+import 'package:homechef/widgets/flappy_search_bar-1.7.2-modified/lib/flappy_search_bar.dart';
 import 'package:homechef/widgets/search_widgets/cuisine_option.dart';
 import 'package:homechef/widgets/search_widgets/diet_option.dart';
 import 'package:homechef/widgets/search_widgets/search_bar.dart';
@@ -12,6 +14,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMixin{
 
+  SearchBarController<Recipe> searchController = SearchBarController();
   AnimationController expandController, expandControllerDiet;
   Animation<double> animation, animationDiet;
 
@@ -21,7 +24,6 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
   void initState() {
     super.initState();
     prepareAnimation();
-
   }
 
   @override
@@ -103,8 +105,12 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
 
     double startPos, dis;
 
-    DietOption dietOption = DietOption(callSearchScreen: toggleDietOptionfromSearchBar,);
-    CuisineOption cuisineOption = CuisineOption(callSearchScreen: toggleCuisineOptionfromSearchBar,);
+    DietOption dietOption = DietOption(
+      searchController: searchController,
+      callSearchScreen: toggleDietOptionfromSearchBar,);
+    CuisineOption cuisineOption = CuisineOption(
+      searchController: searchController,
+      callSearchScreen: toggleCuisineOptionfromSearchBar,);
 
     return GestureDetector(
       onPanStart: (DragStartDetails details) {
@@ -174,6 +180,7 @@ class _SearchScreenState extends State<SearchScreen> with TickerProviderStateMix
                               ),
                               elevation: 5.0,
                               child: SearchBarWidget(
+                                searchController: searchController,
                                 callSearchScreenDiet: toggleDietOptionfromSearchBar,
                                 callSearchScreenCuisine: toggleCuisineOptionfromSearchBar,)
                             ),

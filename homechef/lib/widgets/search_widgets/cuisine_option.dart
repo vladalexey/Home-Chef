@@ -1,12 +1,15 @@
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:homechef/models/cuisine_model.dart';
+import 'package:homechef/models/recipe_model.dart';
+import 'package:homechef/widgets/flappy_search_bar-1.7.2-modified/lib/flappy_search_bar.dart';
+import 'package:homechef/widgets/flappy_search_bar-1.7.2-modified/lib/search_bar_style.dart';
 
 class CuisineOption extends StatefulWidget {
 
   final Function() callSearchScreen;
-  CuisineOption({@required this.callSearchScreen});
+  final SearchBarController<Recipe> searchController;
+  CuisineOption({@required this.callSearchScreen,
+    @required this.searchController});
 
   @override
   _CuisineOptionState createState() => _CuisineOptionState();
@@ -60,6 +63,7 @@ class _CuisineOptionState extends State<CuisineOption> {
                             child: FlatButton(
                               onPressed: () {
                                 widget.callSearchScreen();
+                                widget.searchController.triggerSearch();
                               },
                               child: Icon(Icons.arrow_back_ios)
                               ),

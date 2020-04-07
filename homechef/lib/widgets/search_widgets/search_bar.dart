@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/search_bar_style.dart';
+// import 'package:flappy_search_bar/flappy_search_bar.dart';
+// import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
@@ -18,16 +18,23 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:homechef/widgets/rating_stars.dart';
 import 'package:http/http.dart' as http;
 
+import '../flappy_search_bar-1.7.2-modified/lib/flappy_search_bar.dart';
+import '../flappy_search_bar-1.7.2-modified/lib/search_bar_style.dart';
+
 class SearchBarWidget extends StatefulWidget {
 
+  final SearchBarController<Recipe> searchController;
   final Function() callSearchScreenDiet, callSearchScreenCuisine;
-  SearchBarWidget({@required this.callSearchScreenDiet, @required this.callSearchScreenCuisine});
+  SearchBarWidget({
+    @required this.callSearchScreenDiet, 
+    @required this.callSearchScreenCuisine,
+    @required this.searchController});
 
   @override
   _SearchBarWidgetState createState() => _SearchBarWidgetState();
 }
 
-class _SearchBarWidgetState extends State<SearchBarWidget> {
+class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderStateMixin{
 
   Future<String> getFileData(String path) async {
     return await rootBundle.loadString(path);
@@ -47,11 +54,18 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   
   GlobalKey dietOptionKey = GlobalKey();
 
-  final SearchBarController<Recipe> searchController = SearchBarController(); 
-
+  // final SearchBarController<Recipe> searchController = SearchBarController();
+  
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   searchController.setListener(this);
+  // }
+  
   Future<List<Recipe>> search(String text) async {
 
-    String apiKey = await getFileData('assets/API_KEY.txt');
+    String apiKey = await getFileData('assets/API_KEY_RAPIDAPI.txt');
+    Map<String, String> _headers;
 
     List<Recipe> apiResult = [];
     List<Recipe> foundResult = [];
@@ -81,11 +95,22 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     // }
 
     // Get list recipe IDs with search text
-    String searchURL = 'https://api.spoonacular.com/recipes/search?query=' + text + 
+
+    // String baseURL = 'https://api.spoonacular.com';
+    String baseURL = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
+
+    String searchURL = baseURL + '/recipes/search?query=' + text + 
       _cuisine + _diet + _time +
       '&number=5&apiKey=' + apiKey;
 
-    final searchResult = await http.get(searchURL);
+    if (searchURL.contains('rapidapi')) {
+       _headers = {
+        "content-type": "application/json",
+        "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+        "x-rapidapi-key": apiKey,
+      };
+    }
+    final searchResult = await http.get(searchURL, headers: searchURL.contains('rapidapi') ? _headers : null);
 
     print(searchURL);
 
@@ -98,7 +123,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         List<Instruction> parsedInstruction;
         List<Ingredient> parsedIngredients;
 
-        final instructionResp = await http.get('https://api.spoonacular.com/recipes/' + obj['id'].toString() + '/analyzedInstructions?apiKey=' + apiKey);
+        final instructionResp = await http.get(
+          baseURL + '/recipes/' + obj['id'].toString() + '/analyzedInstructions?apiKey=' + apiKey,
+          headers: searchURL.contains('rapidapi') ? _headers : null);
        
         if (instructionResp.statusCode == 200) {
           parsedInstruction = InstructionList.fromJson(json.decode(instructionResp.body)).instructions;
@@ -106,7 +133,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           print('Failed to get instructions ' + instructionResp.statusCode.toString());
         }
 
-        final ingredientResp = await http.get('https://api.spoonacular.com/recipes/' + obj['id'].toString() + '/ingredientWidget.json?apiKey=' + apiKey);
+        final ingredientResp = await http.get(
+          baseURL + '/recipes/' + obj['id'].toString() + '/ingredientWidget.json?apiKey=' + apiKey,
+          headers: searchURL.contains('rapidapi') ? _headers : null);
         
         if (ingredientResp.statusCode == 200) {
           parsedIngredients = IngredientList.fromJson(json.decode(ingredientResp.body)).ingredients;
@@ -261,7 +290,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                         color: Colors.black87,
                       ),
                       onPressed: () {
-                        searchController.sortList((Recipe a, Recipe b) {
+                        widget.searchController.sortList((Recipe a, Recipe b) {
                           return a.name.compareTo(b.name);
                         });
                       },
@@ -290,7 +319,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                       onPressed: () {
 
                         widget.callSearchScreenDiet();
-
+                    
                       },
                     ),
 
@@ -340,9 +369,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                         color: Colors.black87,
                       ),
                       onPressed: () {
-                        filterUp ? searchController.sortList((Recipe a, Recipe b) {
+                        filterUp ? widget.searchController.sortList((Recipe a, Recipe b) {
                           return b.name.compareTo(a.name);
-                        }) : searchController.sortList((Recipe a, Recipe b) {
+                        }) : widget.searchController.sortList((Recipe a, Recipe b) {
                           return a.name.compareTo(b.name);
                         });
                         
@@ -385,7 +414,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           child: Center(child: 
               IconButton(
                 onPressed: () {
-                  searchController.clear();
+                  widget.searchController.clear();
                   FocusScope.of(context).unfocus();
                   // Navigator.pop(context);
                 },
@@ -413,7 +442,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     );
 
     return SearchBar<Recipe>(
-
       searchBarStyle: SearchBarStyle(
         backgroundColor: Colors.white,
         borderRadius: BorderRadius.circular(30.0),
@@ -428,7 +456,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       shrinkWrap: true,
       headerPadding: EdgeInsets.all(5.0),
       searchBarPadding: EdgeInsets.only(left: 15.0, right: 15.0),
-      searchBarController: searchController,
+      searchBarController: widget.searchController,
       cancellationWidget: cancelWidget,
       onError: (Error error) { return Text(error.toString());},
       onCancelled: () {

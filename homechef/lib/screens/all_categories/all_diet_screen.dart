@@ -18,13 +18,14 @@ class AllDietPage extends StatefulWidget {
 
 class _AllDietPageState extends State<AllDietPage> {
 
-  Widget displayTopPart() {
+  Widget topPart() {
     return Stack(
       children: <Widget>[
 
         Container(
-          height: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
+          height: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(  
             borderRadius: BorderRadius.circular(30.0),
             boxShadow: [
               BoxShadow(
@@ -35,11 +36,13 @@ class _AllDietPageState extends State<AllDietPage> {
             ],
           ),
           child: Hero(
-            tag: 'assets/imgs/diet.jpg',
+            tag: "assets/imgs/diet.jpg",
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30.0),
               child: Image(
-                image: AssetImage('assets/imgs/diet.jpg'),
+                // height: double.maxFinite,
+                // width: double.maxFinite,
+                image: AssetImage("assets/imgs/diet.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -47,7 +50,8 @@ class _AllDietPageState extends State<AllDietPage> {
         ),
         
         Container(
-          height: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.width * 0.7,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0),
             gradient: LinearGradient(
@@ -60,74 +64,74 @@ class _AllDietPageState extends State<AllDietPage> {
               ],
               stops: [
                 0.0,
-                0.3,
+                0.5,
                 1.0
               ])
           ),
         ),
 
-        Padding(
-          padding: EdgeInsets.only(
-            left: 20.0,
-            right: 20.0,
-            top: 70.0
-          ),
-          
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-
-            children: <Widget>[
-              Stack(
-                children: <Widget> [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Positioned(
+          top: 60.0,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Flexible(
+                  flex: 1,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    iconSize: 30.0,
+                    color: Colors.white,
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ), 
+                Flexible(
+                  flex: 5,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       IconButton(
-                        icon: Icon(Icons.arrow_back_ios),
+                        icon: Icon(Icons.search),
                         iconSize: 30.0,
                         color: Colors.white,
-                        onPressed: () => Navigator.pop(context),
-                      ), 
-                      Row(
-                        children: <Widget>[
-                          IconButton(
-                            icon: Icon(Icons.search),
-                            iconSize: 30.0,
-                            color: Colors.white,
-                            onPressed: () => Navigator.push(
+                        onPressed: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (_) => SearchScreen())
                         ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.sort),
-                            iconSize: 30.0,
-                            color: Colors.white,
-                            onPressed: () => Navigator.pop(context),
-                          )
-                        ],
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.sort),
+                        iconSize: 30.0,
+                        color: Colors.white,
+                        onPressed: () => Navigator.pop(context),
                       )
                     ],
                   ),
-                ],
-              ),
+                )
+              ],
+            ),
+          ),
+        ),
 
-              SizedBox(height: 
-                MediaQuery.of(context).size.width * 0.45
-              ),
+        Positioned(
+          bottom: 20.0,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget> [
 
-              Padding(
-                  padding: const EdgeInsets.only(left: 15.0),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
                     child: SizedBox(
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: Divider(
                         height: 2.0,
-                        // color: Colors.yellow[700],
-                        // color: Color(0xff383838),
                         color: Colors.yellow[500],
                         thickness: 3.0,
                       ),
@@ -135,12 +139,12 @@ class _AllDietPageState extends State<AllDietPage> {
                   ),
                 ),
 
-              Row(
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
-                    child: Text(
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
+                    child: AutoSizeText(
                       'By diet',
+                      maxLines: 1,
                       style: TextStyle(
                         // shadows: Sha,
                         fontSize: 65.0,
@@ -148,10 +152,10 @@ class _AllDietPageState extends State<AllDietPage> {
                         color: Colors.white,
                       ),
                     ),
-                  )
-                ],
-              )
-            ],
+                  ),
+                )
+              ]
+            ),
           ),
         )
       ],
@@ -275,7 +279,7 @@ class _AllDietPageState extends State<AllDietPage> {
         body: Column(
           children: <Widget>[
             
-            displayTopPart(),
+            topPart(),
 
             Expanded(
               child: Scrollbar(
