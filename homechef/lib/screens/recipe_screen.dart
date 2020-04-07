@@ -1,7 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/ingredients/ingredient_model.dart';
 import 'package:homechef/models/instructions/instruction_model.dart';
 import 'package:homechef/models/recipe_model.dart';
@@ -424,9 +423,41 @@ class _RecipePageState extends State<RecipePage> {
               child: ListView(
                 children: <Widget>[
                   
-                  displayIngredientList(),     
+                  FutureBuilder<List>(
+                    future: getIngredients(widget.recipe),
+                    builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+                      print(snapshot.data);
+
+                      if (snapshot.hasError) return ErrorWidget(snapshot.error);
+                      if (snapshot.hasData) {
+                        return displayIngredientList();
+                      } else {
+                        return Center(
+                          child: new Container(
+                            child: const CircularProgressIndicator()
+                          ),
+                        );
+                      }
+                    }
+                  ),     
                   SizedBox(height: 15.0),
-                  displayInstructionList(),
+                  FutureBuilder<List>(
+                    future: getInstructions(widget.recipe),
+                    builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+                      print(snapshot.data);
+                      
+                      if (snapshot.hasError) return ErrorWidget(snapshot.error);
+                      if (snapshot.hasData) {
+                        return displayInstructionList();
+                      } else {
+                        return Center(
+                          child: Container(
+                            child: const CircularProgressIndicator()
+                          ),
+                        );
+                      }
+                    }
+                  ),    
 
                 ],
               ),

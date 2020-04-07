@@ -1,16 +1,10 @@
 import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
-// import 'package:flappy_search_bar/flappy_search_bar.dart';
-// import 'package:flappy_search_bar/search_bar_style.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/diet_model.dart';
-import 'package:homechef/models/ingredients/ingredient_list_model.dart';
-import 'package:homechef/models/ingredients/ingredient_model.dart';
-import 'package:homechef/models/instructions/instruction_list_model.dart';
-import 'package:homechef/models/instructions/instruction_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
 import 'package:homechef/screens/search_screen.dart';
@@ -54,13 +48,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
   
   GlobalKey dietOptionKey = GlobalKey();
 
-  // final SearchBarController<Recipe> searchController = SearchBarController();
-  
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   searchController.setListener(this);
-  // }
   
   Future<List<Recipe>> search(String text) async {
 
@@ -120,36 +107,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
       
       for (Map<String, dynamic> obj in result['results']) {
 
-        List<Instruction> parsedInstruction;
-        List<Ingredient> parsedIngredients;
-
-        final instructionResp = await http.get(
-          baseURL + '/recipes/' + obj['id'].toString() + '/analyzedInstructions?apiKey=' + apiKey,
-          headers: searchURL.contains('rapidapi') ? _headers : null);
-       
-        if (instructionResp.statusCode == 200) {
-          parsedInstruction = InstructionList.fromJson(json.decode(instructionResp.body)).instructions;
-        } else {
-          print('Failed to get instructions ' + instructionResp.statusCode.toString());
-        }
-
-        final ingredientResp = await http.get(
-          baseURL + '/recipes/' + obj['id'].toString() + '/ingredientWidget.json?apiKey=' + apiKey,
-          headers: searchURL.contains('rapidapi') ? _headers : null);
-        
-        if (ingredientResp.statusCode == 200) {
-          parsedIngredients = IngredientList.fromJson(json.decode(ingredientResp.body)).ingredients;
-        } else {
-          print('Failed to get ingredients ' + ingredientResp.statusCode.toString());
-        }
-
         Recipe newRecipe = new Recipe(
           id: obj['id'].toString(),
           imageUrl: 'https://spoonacular.com/recipeImages/' + obj['id'].toString() + '-556x370.jpg' ,
           name: obj['title'],
           cookTime: obj['readyInMinutes'],
-          ingredients: parsedIngredients,
-          instruction: parsedInstruction
         );
 
         apiResult.add(
@@ -465,7 +427,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
 
       header: buildHeaderRow(),
 
-      debounceDuration: Duration(milliseconds: 500),
+      debounceDuration: Duration(milliseconds: 1500),
       emptyWidget: emptyWidget,
 
       minimumChars:2,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/widgets/flappy_search_bar-1.7.2-modified/lib/flappy_search_bar.dart';
 import 'package:homechef/widgets/search_widgets/cuisine_option.dart';
