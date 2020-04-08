@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/time_model.dart';
 import 'package:homechef/screens/search_screen.dart';
 import 'package:homechef/screens/time_screen.dart';
-import 'package:homechef/widgets/size_route.dart';
 
 class AllTimePage extends StatefulWidget {
 

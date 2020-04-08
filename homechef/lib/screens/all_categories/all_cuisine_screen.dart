@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/screens/cuisine_screen.dart';
 import 'package:homechef/screens/search_screen.dart';
-import 'package:homechef/widgets/size_route.dart';
 
 class AllCuisinePage extends StatefulWidget {
 

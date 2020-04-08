@@ -1,16 +1,15 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:homechef/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:homechef/widgets/cuisine_carousel.dart';
-import 'package:homechef/widgets/diet_carousel.dart';
-import 'package:homechef/widgets/popular_carousel.dart';
-import 'package:homechef/widgets/time_carousel.dart';
+import 'package:homechef/widgets/carousels/cuisine_carousel.dart';
+import 'package:homechef/widgets/carousels/diet_carousel.dart';
+import 'package:homechef/widgets/carousels/popular_carousel.dart';
+import 'package:homechef/widgets/carousels/time_carousel.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
