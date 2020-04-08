@@ -25,4 +25,13 @@ final List<Recipe> populars = [
     ingredients: [],
     instruction: []
   ),
+
+  Recipe(
+    id: '4',
+    imageUrl: 'https://spoonacular.com/recipeImages/323794-636x393.jpg',
+    name: 'Frosted Coconut Strawberry Ice Cream',
+    description: 'Lorem ipsum dolor sit amet.',
+    ingredients: [],
+    instruction: []
+  ),
 ];

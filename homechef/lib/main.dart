@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Home Chef',
         theme: ThemeData(
-          // fontFamily: 'Roboto',
           primarySwatch: Colors.blue,
         ),
+        darkTheme: ThemeData(),
         home: MyHomePage(title: 'Home Chef'),
       ),
     );

@@ -19,7 +19,7 @@ class DietCarousel extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
                 child: Text(
-                  'By diet',
+                  'By Diet',
                   style: TextStyle(
                     shadows: [
                       Shadow(
@@ -28,7 +28,7 @@ class DietCarousel extends StatelessWidget {
                         blurRadius: 10.0,
                       ),
                     ],
-                    fontSize: 18.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w600,
                     // letterSpacing: 1.5
                   ),

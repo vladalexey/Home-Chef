@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:homechef/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Padding(
                 padding: const EdgeInsets.only(left: 18.0),
                 child: Text(
-                  'Most trending',
+                  'Most Trending',
                   style: TextStyle(
                     shadows: [
                       Shadow(
@@ -80,7 +81,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                     fontSize: 12.0,
                     // fontWeight: FontWeight.w600,
-                    color: Colors.grey,
+                    color: Colors.grey[600],
                     // letterSpacing: -0.5,
                   ),
                 ),
@@ -137,6 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: Colors.yellow[600],
           title: appTitle,
           actions: <Widget>[
+
             Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: InkWell(
@@ -150,6 +152,21 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
+
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: InkWell(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Ionicons.ios_log_out),
+                    iconSize: 28.0,
+                    color: Colors.black87
+                  ),
+                ),
+              ),
+            ),
+
           ],
 
         ),
@@ -160,26 +177,31 @@ class _MyHomePageState extends State<MyHomePage> {
             SafeArea(
               child: Stack(
                 children: <Widget>[
-                  ListView(
-                    children: <Widget>[
-                      
-                      buildGradientTopCarousel(),
+                  SizedBox.expand(
+                    child: Container(color: Colors.grey[200],)
+                  ),
+                  Scrollbar(
+                    child: ListView(
+                      children: <Widget>[
+                        
+                        buildGradientTopCarousel(),
 
-                      PopularCarouselPage(),
-                      // SizedBox(height: 10.0),
-                      
-                      Divider(indent: 8.0, endIndent: 8.0,),
-                      CuisineCarousel(),
-                      SizedBox(height: 5.0),
-                      
-                      Divider(indent: 8.0, endIndent: 8.0,),
-                      DietCarousel(),
-                      SizedBox(height: 5.0),
-                      
-                      Divider(indent: 8.0, endIndent: 8.0,),
-                      TimeCarousel(),
-                      
-                    ],
+                        PopularCarouselPage(),
+                        // SizedBox(height: 10.0),
+                        
+                        Divider(indent: 8.0, endIndent: 8.0,),
+                        CuisineCarousel(),
+                        SizedBox(height: 5.0),
+                        
+                        Divider(indent: 8.0, endIndent: 8.0,),
+                        DietCarousel(),
+                        SizedBox(height: 5.0),
+                        
+                        Divider(indent: 8.0, endIndent: 8.0,),
+                        TimeCarousel(),
+                        
+                      ],
+                    ),
                   ),
                   
                 ],

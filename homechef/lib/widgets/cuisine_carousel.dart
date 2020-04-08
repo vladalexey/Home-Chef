@@ -22,16 +22,16 @@ class CuisineCarousel extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
                 child: Text(
-                  'By cuisine',
+                  'By Cuisine',
                   style: TextStyle(
                     shadows: [
                       Shadow(
-                        color: Colors.black12,
-                        offset: Offset(1.0, 2.0),
+                        color: Colors.black26,
+                        offset: Offset(2.0, 3.0),
                         blurRadius: 10.0,
                       ),
                     ],
-                    fontSize: 18.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w600,
                     // letterSpacing: 1.5
                   ),
@@ -78,12 +78,14 @@ class CuisineCarousel extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   child: Container(
                     margin: EdgeInsets.all(10.0),
                     width: 150.0,
                     child: Stack(
                       alignment: Alignment.topCenter,
                       children: <Widget>[
+
                         Positioned(
                           bottom: 5.0,
                           child: Container(
@@ -92,14 +94,12 @@ class CuisineCarousel extends StatelessWidget {
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black26,
+                                  color: Colors.black12,
                                   offset: Offset(0, 5),
                                   blurRadius: 10,
                                   spreadRadius: 1
                                 )
                               ],
-                              // color: Colors.white,
-                              // color: Color(0xffFFEF31),
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
@@ -137,6 +137,7 @@ class CuisineCarousel extends StatelessWidget {
                             ),
                           ),
                         ),
+
                         Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
@@ -145,7 +146,7 @@ class CuisineCarousel extends StatelessWidget {
                               BoxShadow(
                                 color: Colors.black26,
                                 offset: Offset(0.0, 2.0),
-                                blurRadius: 6.0,
+                                blurRadius: 10.0,
                               ),
                             ],
                           ),

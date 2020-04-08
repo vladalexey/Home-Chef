@@ -17,7 +17,7 @@ class TimeCarousel extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
                 child: Text(
-                  'By cooking time',
+                  'By Cook Time',
                   style: TextStyle(
                     shadows: [
                       Shadow(
@@ -26,7 +26,7 @@ class TimeCarousel extends StatelessWidget {
                         blurRadius: 10.0,
                       ),
                     ],
-                    fontSize: 18.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w600,
                     // letterSpacing: 1.5
                   ),
