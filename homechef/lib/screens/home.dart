@@ -24,7 +24,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   GlobalKey topPartKey = GlobalKey();
-  double _searchBarWidth;
 
   Widget buildGradientTopCarousel() {
     return Padding(
@@ -116,125 +115,39 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    _searchBarWidth = MediaQuery.of(context).size.width * 0.2;
-
-    Row appTitle = Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget> [
-        Image.asset(
-          'assets/imgs/appLogo3.png',
-          fit: BoxFit.contain,
-          height: 120.0,
-        ),
-    ]);
-
-    return DefaultTabController (
-
-      length:3,
-      child: new Scaffold(
-
-        appBar: AppBar(
-          elevation: 10.0,
-          backgroundColor: Colors.yellow[600],
-          title: appTitle,
-          actions: <Widget>[
-
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: InkWell(
-                child: IconButton(
-                  onPressed: () => Navigator.push(
-                    context, 
-                    MaterialPageRoute(builder: (_) => SearchScreen())),
-                  icon: Icon(Icons.search),
-                  iconSize: 30.0,
-                  color: Colors.black87
-                ),
-              ),
-            ),
-
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: InkWell(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Ionicons.ios_log_out),
-                    iconSize: 28.0,
-                    color: Colors.black87
-                  ),
-                ),
-              ),
-            ),
-
-          ],
-
-        ),
-
-        body: TabBarView(
-          children: <Widget>[
-            
-            SafeArea(
-              child: Stack(
-                children: <Widget>[
-                  SizedBox.expand(
-                    child: Container(color: Colors.grey[200],)
-                  ),
-                  Scrollbar(
-                    child: ListView(
-                      children: <Widget>[
-                        
-                        buildGradientTopCarousel(),
-
-                        PopularCarouselPage(),
-                        // SizedBox(height: 10.0),
-                        
-                        Divider(indent: 8.0, endIndent: 8.0,),
-                        CuisineCarousel(),
-                        SizedBox(height: 5.0),
-                        
-                        Divider(indent: 8.0, endIndent: 8.0,),
-                        DietCarousel(),
-                        SizedBox(height: 5.0),
-                        
-                        Divider(indent: 8.0, endIndent: 8.0,),
-                        TimeCarousel(),
-                        
-                      ],
-                    ),
-                  ),
-                  
-                ],
-              ),
-            ),
-
-            new Container(
-              color: Colors.yellow,
-            ),
-            new Container(
-              color: Colors.orange,
-            ),
-          ],
-        ),
-
-        bottomNavigationBar: new TabBar(
-            tabs: [
-              Tab(
-                icon: new Icon(Icons.home),
-              ),
-              Tab(
-                icon: new Icon(Icons.person),
-              ),
-              Tab(icon: new Icon(Icons.favorite),)
-            ],
-            labelColor: Colors.amber[300],
-            unselectedLabelColor: Colors.black,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorPadding: EdgeInsets.all(5.0),
-            indicatorColor: Colors.amber[300],
+    return SafeArea(
+      child: Stack(
+        children: <Widget>[
+          SizedBox.expand(
+            child: Container(color: Colors.grey[200],)
           ),
-          backgroundColor: Colors.white,
+          Scrollbar(
+            child: ListView(
+              children: <Widget>[
+                
+                buildGradientTopCarousel(),
+
+                PopularCarouselPage(),
+                // SizedBox(height: 10.0),
+                
+                Divider(indent: 8.0, endIndent: 8.0,),
+                CuisineCarousel(),
+                SizedBox(height: 5.0),
+                
+                Divider(indent: 8.0, endIndent: 8.0,),
+                DietCarousel(),
+                SizedBox(height: 5.0),
+                
+                Divider(indent: 8.0, endIndent: 8.0,),
+                TimeCarousel(),
+                
+              ],
+            ),
+          ),
+          
+        ],
       ),
     );
+    
   }
 }
