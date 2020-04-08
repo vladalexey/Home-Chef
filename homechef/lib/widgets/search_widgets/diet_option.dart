@@ -44,7 +44,7 @@ class _DietOptionState extends State<DietOption> with TickerProviderStateMixin {
           children: <Widget>[
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(3.0),
+                padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 5.0),
                 child: Container(
                   child: dietButtons[index]
 
@@ -54,7 +54,7 @@ class _DietOptionState extends State<DietOption> with TickerProviderStateMixin {
             
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(3.0),
+                padding: const EdgeInsets.symmetric(vertical: 1.0, horizontal: 5.0),
                 child: Container(
                   child: dietButtons[index + 1]
                 ),
@@ -77,7 +77,7 @@ class _DietOptionState extends State<DietOption> with TickerProviderStateMixin {
           width: MediaQuery.of(context).size.width * 0.8,
 
           child: Card(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
             elevation: 20.0,
 
             child: Column(
@@ -124,9 +124,13 @@ class _DietOptionState extends State<DietOption> with TickerProviderStateMixin {
                 Divider(color: Colors.amber[300], thickness: 1.0, indent: 10.0, endIndent: 10.0,),
 
                 populateDietCard(0),
+                Divider(),
                 populateDietCard(2),
+                Divider(),
                 populateDietCard(4),
+                Divider(),
                 populateDietCard(6),
+                Divider(),
                 populateDietCard(8),
 
                 SizedBox(height: 10.0,)

@@ -8,7 +8,8 @@ class CuisineOption extends StatefulWidget {
 
   final Function() callSearchScreen;
   final SearchBarController<Recipe> searchController;
-  CuisineOption({@required this.callSearchScreen,
+  CuisineOption({
+    @required this.callSearchScreen,
     @required this.searchController});
 
   @override

@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget> [
         Image.asset(
-          'assets/imgs/appLogo3.png',
+          'assets/imgs/appLogo4.png',
           fit: BoxFit.contain,
           height: 120.0,
         ),
