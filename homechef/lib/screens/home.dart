@@ -112,9 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return topPart.localToGlobal(Offset.zero).dx;
   }
 
-  @override
-  Widget build(BuildContext context) {
-
+  SafeArea homeScreen() {
     return SafeArea(
       child: Stack(
         children: <Widget>[
@@ -148,6 +146,99 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
-    
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    Row appTitle = Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget> [
+        Image.asset(
+          'assets/imgs/appLogo3.png',
+          fit: BoxFit.contain,
+          height: 120.0,
+        ),
+    ]);
+
+    return DefaultTabController (
+
+      length:3,
+      child: new Scaffold(
+
+        appBar: AppBar(
+          elevation: 10.0,
+          backgroundColor: Colors.yellow[600],
+          title: appTitle,
+          actions: <Widget>[
+
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: InkWell(
+                child: IconButton(
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => SearchScreen())
+                  ),
+                  icon: Icon(Icons.search),
+                  iconSize: 30.0,
+                  color: Colors.black87
+                ),
+              ),
+            ),
+
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: InkWell(
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Ionicons.ios_log_out),
+                    iconSize: 28.0,
+                    color: Colors.black87
+                  ),
+                ),
+              ),
+            ),
+
+          ],
+
+        ),
+
+        body: TabBarView(
+          children: <Widget>[
+
+            homeScreen(),
+
+            new Container(
+              color: Colors.yellow,
+            ),
+            new Container(
+              color: Colors.orange,
+            ),
+          ],
+        ),
+
+        bottomNavigationBar: new TabBar(
+            tabs: [
+              Tab(
+                icon: new Icon(Icons.home),
+              ),
+              Tab(
+                icon: new Icon(Icons.person),
+              ),
+              Tab(icon: new Icon(Icons.favorite),)
+            ],
+            
+            labelColor: Colors.amber[300],
+            unselectedLabelColor: Colors.black,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorPadding: EdgeInsets.all(5.0),
+            indicatorColor: Colors.amber[300],
+          ),
+          backgroundColor: Colors.white,
+      ),
+    ); 
   }
 }
