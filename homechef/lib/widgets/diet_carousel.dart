@@ -16,19 +16,22 @@ class DietCarousel extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
-                'By diet',
-                style: TextStyle(
-                  shadows: [
-                    Shadow(
-                      color: Colors.black12,
-                      offset: Offset(1.0, 2.0),
-                      blurRadius: 10.0,
-                    ),
-                  ],
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+                child: Text(
+                  'By diet',
+                  style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.black12,
+                        offset: Offset(1.0, 2.0),
+                        blurRadius: 10.0,
+                      ),
+                    ],
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                    // letterSpacing: 1.5
+                  ),
                 ),
               ),
               GestureDetector(
@@ -89,8 +92,8 @@ class DietCarousel extends StatelessWidget {
                                   spreadRadius: 1
                                 )
                               ],
-                              // color: Colors.white,
-                              color: Colors.amber[300],
+                              color: Colors.white,
+                              // color: Colors.amber[300],
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
@@ -111,7 +114,7 @@ class DietCarousel extends StatelessWidget {
                                       ],
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: 1.0,
+                                      // letterSpacing: 1.0,
                                     ),
                                   ),
                                   SizedBox(height: 5.0,),
@@ -122,7 +125,7 @@ class DietCarousel extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.grey[800],
+                                      color: Colors.grey,
                                     ),
                                   ),
                                 ],
@@ -215,7 +218,7 @@ class DietCarousel extends StatelessWidget {
                                     Text(
                                       diet.name,
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Colors.white.withOpacity(0.8),
                                         fontSize: 22.0,
                                         fontWeight: FontWeight.w600,
                                         letterSpacing: 1.2,

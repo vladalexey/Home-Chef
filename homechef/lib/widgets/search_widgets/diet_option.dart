@@ -34,30 +34,35 @@ class _DietOptionState extends State<DietOption> with TickerProviderStateMixin {
     dietButtons = getDietButtons(parentControllers);
   }
 
-  Row populateDietCard(int index) {
+  Flexible populateDietCard(int index) {
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: Container(
-              child: dietButtons[index]
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Container(
+                  child: dietButtons[index]
 
+                ),
+              ),
             ),
-          ),
-        ),
-        
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: Container(
-              child: dietButtons[index + 1]
+            
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Container(
+                  child: dietButtons[index + 1]
+                ),
+              ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
@@ -75,50 +80,58 @@ class _DietOptionState extends State<DietOption> with TickerProviderStateMixin {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
             elevation: 20.0,
 
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      
-                      FlatButton(
-                        onPressed: () {
-                          widget.searchController.triggerSearch();
-                          widget.callSearchScreen();
-                        },
-                        child: Icon(Icons.arrow_back_ios)
-                      ),
-                      
-                      Expanded(child: Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Text(
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            widget.searchController.triggerSearch();
+                            widget.callSearchScreen();
+                          },
+                          child: Icon(Icons.arrow_back_ios)
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                
+                Flexible(
+                  child: Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
                           'Choose a diet',
                           style: TextStyle(
-                            fontSize: 20.0,
-                            fontWeight: FontWeight.w300),
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w600
+                            ),
                           ),
-                      ),),
-                      
-                    ],
+                      ],
+                    ),
                   ),
+                ),
 
-                  Divider(color: Colors.amber[300], thickness: 1.0,),
+                Divider(color: Colors.amber[300], thickness: 1.0, indent: 10.0, endIndent: 10.0,),
 
-                  populateDietCard(0),
-                  populateDietCard(2),
-                  populateDietCard(4),
-                  populateDietCard(6),
-                  populateDietCard(8),
+                populateDietCard(0),
+                populateDietCard(2),
+                populateDietCard(4),
+                populateDietCard(6),
+                populateDietCard(8),
 
-                ],
+                SizedBox(height: 10.0,)
+              ],
 
-              ),
             ),
           ),
         ),

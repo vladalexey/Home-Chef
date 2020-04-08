@@ -14,25 +14,30 @@ class CuisineCarousel extends StatelessWidget {
     return Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
-                'By cuisine',
-                style: TextStyle(
-                  shadows: [
-                    Shadow(
-                      color: Colors.black12,
-                      offset: Offset(1.0, 2.0),
-                      blurRadius: 10.0,
-                    ),
-                  ],
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5
+
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+                child: Text(
+                  'By cuisine',
+                  style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.black12,
+                        offset: Offset(1.0, 2.0),
+                        blurRadius: 10.0,
+                      ),
+                    ],
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                    // letterSpacing: 1.5
+                  ),
                 ),
               ),
+
               GestureDetector(
                 onTap: () => Navigator.push(
                   context,
@@ -75,7 +80,7 @@ class CuisineCarousel extends StatelessWidget {
                   ),
                   child: Container(
                     margin: EdgeInsets.all(10.0),
-                    width: 160.0,
+                    width: 150.0,
                     child: Stack(
                       alignment: Alignment.topCenter,
                       children: <Widget>[
@@ -95,7 +100,7 @@ class CuisineCarousel extends StatelessWidget {
                               ],
                               // color: Colors.white,
                               // color: Color(0xffFFEF31),
-                              color: Colors.amber[300],
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
@@ -116,7 +121,7 @@ class CuisineCarousel extends StatelessWidget {
                                       ],
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: 1.0,
+                                      // letterSpacing: 1.0,
                                     ),
                                   ),
                                   SizedBox(height: 5.0,),
@@ -124,7 +129,7 @@ class CuisineCarousel extends StatelessWidget {
                                     cuisine.description,
                                     style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.grey[800],
+                                      color: Colors.grey,
                                     ),
                                   ),
                                 ],
@@ -223,7 +228,7 @@ class CuisineCarousel extends StatelessWidget {
                                             maxFontSize: 18.0,
                                             overflow: TextOverflow.ellipsis,
                                             style: TextStyle(
-                                              color: Colors.white,
+                                              color: Colors.white.withOpacity(0.8),
                                               fontSize: 20.0,
                                               fontWeight: FontWeight.w600,
                                               letterSpacing:  1.2,

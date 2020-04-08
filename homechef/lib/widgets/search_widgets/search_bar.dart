@@ -46,9 +46,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
   Map<String, bool>  cuisine;
   Map<String, bool>  time;
   
-  GlobalKey dietOptionKey = GlobalKey();
-
-  
   Future<List<Recipe>> search(String text) async {
 
     String apiKey = await getFileData('assets/API_KEY_RAPIDAPI.txt');
@@ -242,8 +239,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
           children: <Widget>[
             
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
+              child: Center(
                 child: Column(
                   children: <Widget>[
                     IconButton(
@@ -257,9 +253,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
                         });
                       },
                     ),
-
                     AutoSizeText(
                       'Time',
+                      style: TextStyle(color: Colors.grey),
                       maxLines: 1,
                       maxFontSize: 20.0,
                     ),
@@ -269,8 +265,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
             ),
 
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
+              child: Center(
                 child: Column(
                   children: <Widget>[
                     IconButton(
@@ -279,14 +274,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
                         color: Colors.black87,
                       ),
                       onPressed: () {
-
                         widget.callSearchScreenDiet();
-                    
                       },
                     ),
-
                     AutoSizeText(
                       'Diet',
+                      style: TextStyle(color: Colors.grey),
                       maxLines: 1,
                       maxFontSize: 20.0,
                     ),
@@ -296,22 +289,21 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
             ),
 
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
+              child: Center(
                 child: Column(
                   children: <Widget>[
                     IconButton(
                       icon: Icon(
-                        Icons.flag, 
+                        Icons.location_on, 
                         color: Colors.black87,
                       ),
                       onPressed: () {
                         widget.callSearchScreenCuisine();
                       },
                     ),
-
                     AutoSizeText(
                       'Cuisine',
+                      style: TextStyle(color: Colors.grey),
                       maxLines: 1,
                       maxFontSize: 20.0,
                     ),
@@ -321,8 +313,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
             ),
 
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(2.0),
+              child: Center(
                 child: Column(
                   children: <Widget>[
                     IconButton(
@@ -335,16 +326,15 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
                           return b.name.compareTo(a.name);
                         }) : widget.searchController.sortList((Recipe a, Recipe b) {
                           return a.name.compareTo(b.name);
-                        });
-                        
+                        });  
                         setState(() {
                           filterUp = !filterUp;
                         });
                       },
                     ),
-
                     AutoSizeText(
-                      'Filter',
+                      'Sort',
+                      style: TextStyle(color: Colors.grey),
                       maxLines: 1,
                       maxFontSize: 20.0,
                     ),
@@ -378,7 +368,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
                 onPressed: () {
                   widget.searchController.clear();
                   FocusScope.of(context).unfocus();
-                  // Navigator.pop(context);
                 },
                 icon: Icon(Icons.cancel))
             ),

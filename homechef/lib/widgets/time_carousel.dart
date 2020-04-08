@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/time_model.dart';
 import 'package:homechef/screens/all_categories/all_time_screen.dart';
 import 'package:homechef/screens/time_screen.dart';
-import 'package:homechef/widgets/size_route.dart';
 
 class TimeCarousel extends StatelessWidget {
   @override
@@ -11,23 +10,26 @@ class TimeCarousel extends StatelessWidget {
     return Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text(
-                'By cooking time',
-                style: TextStyle(
-                  shadows: [
-                    Shadow(
-                      color: Colors.black12,
-                      offset: Offset(1.0, 2.0),
-                      blurRadius: 10.0,
-                    ),
-                  ],
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.5
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+                child: Text(
+                  'By cooking time',
+                  style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.black12,
+                        offset: Offset(1.0, 2.0),
+                        blurRadius: 10.0,
+                      ),
+                    ],
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w600,
+                    // letterSpacing: 1.5
+                  ),
                 ),
               ),
               GestureDetector(
@@ -89,7 +91,7 @@ class TimeCarousel extends StatelessWidget {
                                 )
                               ],
                               // color: Colors.white,
-                              color: Colors.amber[300],
+                              color: Colors.white,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
@@ -110,7 +112,7 @@ class TimeCarousel extends StatelessWidget {
                                       ],
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.w600,
-                                      letterSpacing: 1.0,
+                                      // letterSpacing: 1.0,
                                     ),
                                   ),
                                   SizedBox(height: 5.0,),
@@ -118,7 +120,7 @@ class TimeCarousel extends StatelessWidget {
                                     time.description,
                                     style: TextStyle(
                                       fontSize: 14,
-                                      color: Colors.grey[800],
+                                      color: Colors.grey,
                                     ),
                                   ),
                                 ],
@@ -211,7 +213,7 @@ class TimeCarousel extends StatelessWidget {
                                     Text(
                                       time.name,
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Colors.white.withOpacity(0.8),
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.w600,
                                         letterSpacing: 1.2,

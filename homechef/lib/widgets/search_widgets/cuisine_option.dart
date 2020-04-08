@@ -59,7 +59,7 @@ class _CuisineOptionState extends State<CuisineOption> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Padding(
-                            padding: const EdgeInsets.only(top: 5.0, left: 0.0),
+                            padding: const EdgeInsets.only(top: 15.0, left: 0.0),
                             child: FlatButton(
                               onPressed: () {
                                 widget.callSearchScreen();

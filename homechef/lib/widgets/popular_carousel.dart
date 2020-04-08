@@ -35,27 +35,30 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
           ));
       },
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Stack(
           children: <Widget>[ 
             Container(
+              width: MediaQuery.of(context).size.width,
               height: height,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.0),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black26,
+                    color: Colors.black12,
                     offset: Offset(0.0, 2.0),
-                    blurRadius: 6.0,
+                    blurRadius: 10.0,
                   ),
                 ],
               ),
               
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30.0),
-                child: Image.network(
-                  populars[index].imageUrl,
-                  fit: BoxFit.cover,
+                child: Container(
+                  child: Image.network(
+                    populars[index].imageUrl,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),
@@ -68,30 +71,30 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
                   begin: FractionalOffset.topCenter,
                   end: FractionalOffset.bottomCenter,
                   colors: [
-                    Colors.black.withOpacity(0.9),
+                    // Colors.black.withOpacity(0.7),
                     Colors.transparent,
                     // Colors.transparent,
                     // Color(0xffFCD966),
-                    Colors.black.withOpacity(0.9),
+                    Colors.black.withOpacity(0.7),
                   ],
                   stops: [
-                    0.0,
-                    0.2,
-                    // 0.5,
+                    // 0.0,
+                    // 0.2,
+                    0.5,
                     1.0
                   ])
               ),
             ),
 
             Positioned(
-              bottom: 20.0,
+              bottom: 10.0,
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 18.0, bottom: 10.0),
                   child: AutoSizeText(
                     populars[index].name,
-                    maxFontSize: 55,
+                    maxFontSize: 35,
                     maxLines: 1,
                     style: TextStyle(
                       shadows: [
@@ -103,7 +106,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
                       ],
                       fontSize: 65.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.white,
+                      color: Colors.white.withOpacity(0.8),
                     ),
                   ),
                 )
@@ -124,8 +127,8 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
   return AnimatedContainer(
     duration: Duration(milliseconds: 150),
     margin: EdgeInsets.symmetric(horizontal: 8),
-    height: isActive ? 12 : 8,
-    width: isActive ? 12 : 8,
+    height: isActive ? 8 : 5,
+    width: isActive ? 8 : 5,
     decoration: BoxDecoration(
         color: isActive ? Colors.white : Colors.yellow,
         borderRadius: BorderRadius.all(Radius.circular(12))),
@@ -135,7 +138,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
   @override
   Widget build(BuildContext context) {
 
-    double height = MediaQuery.of(context).size.width * 0.7;
+    double height = MediaQuery.of(context).size.width * 0.5;
 
     return Column(
       children: <Widget>[

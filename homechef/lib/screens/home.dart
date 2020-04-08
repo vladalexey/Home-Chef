@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:homechef/screens/search_screen.dart';
@@ -27,9 +28,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget buildGradientTopCarousel() {
     return Padding(
       padding: EdgeInsets.only(
-        left: 20.0,
+        left: 2.0,
         right: 20.0,
-        top: 10.0,
+        top: 25.0,
         bottom: 5.0
       ),
       
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                padding: const EdgeInsets.only(left: 18.0),
                 child: Text(
                   'Most trending',
                   style: TextStyle(
@@ -50,12 +51,37 @@ class _MyHomePageState extends State<MyHomePage> {
                       Shadow(
                         color: Colors.black26,
                         offset: Offset(0.0, 2.0),
-                        blurRadius: 6.0,
+                        blurRadius: 10.0,
                       ),
                     ],
-                    fontSize: 30.0,
+                    fontSize: 18.0,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
+                    // letterSpacing: -0.5,
+                  ),
+                ),
+              )
+            ],
+          ),
+
+          Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 18.0, top: 2.0, bottom: 12.0),
+                child: Text(
+                  'Don\'t miss out on the latest recipes',
+                  style: TextStyle(
+                    shadows: [
+                      Shadow(
+                        color: Colors.black26,
+                        offset: Offset(0.0, 2.0),
+                        blurRadius: 10.0,
+                      ),
+                    ],
+                    fontSize: 12.0,
+                    // fontWeight: FontWeight.w600,
+                    color: Colors.grey,
+                    // letterSpacing: -0.5,
                   ),
                 ),
               )
@@ -63,67 +89,21 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.only(left: 18.0),
             child: Align(
               alignment: Alignment.topLeft,
               child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5,
+                width: MediaQuery.of(context).size.width * 0.7,
                 child: Divider(
-                  height: 2.0,
-                  color: Colors.yellow[500],
-                  thickness: 3.0,
+                  height: 1.0,
+                  // color: Colors.yellow[500],
+                  thickness: 1.0,
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
-    );
-  }
-
-  Widget searchBarHome() {
-    return GestureDetector(
-      onTap: () {
-
-        setState(() {
-          _searchBarWidth = 0.0;
-        });
-        
-        Navigator.push(
-          context, 
-          MaterialPageRoute(
-            builder: (_) => SearchScreen()
-          )
-        );
-      },
-      
-      child: Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black45,
-                offset: Offset(3, 5),
-                blurRadius: 20,
-                spreadRadius: 3
-              )
-            ],
-            color: Colors.amber[300].withOpacity(0.9),
-            
-          ),
-          height: 60.0,
-          width: 60.0,
-          child: Align(
-            alignment: Alignment.center,
-            child: Icon(Icons.search,
-              size: 30.0,
-              color: Colors.black87),
-            ),
-          ),
-      )
-
     );
   }
 
@@ -137,13 +117,42 @@ class _MyHomePageState extends State<MyHomePage> {
 
     _searchBarWidth = MediaQuery.of(context).size.width * 0.2;
 
+    Row appTitle = Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget> [
+        Image.asset(
+          'assets/imgs/appLogo3.png',
+          fit: BoxFit.contain,
+          height: 120.0,
+        ),
+    ]);
+
     return DefaultTabController (
 
       length:3,
       child: new Scaffold(
-        
-        floatingActionButton: searchBarHome(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+
+        appBar: AppBar(
+          elevation: 10.0,
+          backgroundColor: Colors.yellow[600],
+          title: appTitle,
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: InkWell(
+                child: IconButton(
+                  onPressed: () => Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (_) => SearchScreen())),
+                  icon: Icon(Icons.search),
+                  iconSize: 30.0,
+                  color: Colors.black87
+                ),
+              ),
+            ),
+          ],
+
+        ),
 
         body: TabBarView(
           children: <Widget>[
@@ -157,11 +166,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       buildGradientTopCarousel(),
 
                       PopularCarouselPage(),
-                      SizedBox(height: 15.0),
+                      // SizedBox(height: 10.0),
+                      
+                      Divider(indent: 8.0, endIndent: 8.0,),
                       CuisineCarousel(),
                       SizedBox(height: 5.0),
+                      
+                      Divider(indent: 8.0, endIndent: 8.0,),
                       DietCarousel(),
                       SizedBox(height: 5.0),
+                      
+                      Divider(indent: 8.0, endIndent: 8.0,),
                       TimeCarousel(),
                       
                     ],
