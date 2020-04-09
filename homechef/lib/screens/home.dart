@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:homechef/screens/profile/profile.dart';
 import 'package:homechef/screens/search_screen.dart';
@@ -42,10 +44,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
         children: <Widget>[
 
+          Padding(
+            padding: const EdgeInsets.only(left: 18.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: Divider(
+                  height: 1.0,
+                  // color: Colors.yellow[500],
+                  thickness: 1.0,
+                ),
+              ),
+            ),
+          ),
+
           Row(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 18.0),
+                padding: const EdgeInsets.only(left: 18.0, top: 5.0),
                 child: Text(
                   'Most Trending',
                   style: TextStyle(
@@ -89,21 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ],
           ),
-
-          Padding(
-            padding: const EdgeInsets.only(left: 18.0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.7,
-                child: Divider(
-                  height: 1.0,
-                  // color: Colors.yellow[500],
-                  thickness: 1.0,
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -113,7 +115,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Container(
       color: Colors.white,
       child: ListTile(
-        contentPadding: EdgeInsets.only(left: 20.0, top: 30.0, bottom: 20.0),
+        contentPadding: EdgeInsets.only(left: 20.0, right: 20.0, top: 30.0, bottom: 20.0),
         title: Text(
           'What would you like to make?',
           style: TextStyle( 
@@ -162,7 +164,13 @@ class _MyHomePageState extends State<MyHomePage> {
               Random randomInt = Random();
 
               return GestureDetector(
-                onTap: () => WarningComingFeature(),
+                onTap: () { 
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return WarningComingFeature();
+                    }); 
+                  },
                 child: Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: Container(
@@ -191,45 +199,48 @@ class _MyHomePageState extends State<MyHomePage> {
 
   SafeArea homeScreen() {
     return SafeArea(
-      child: Stack(
-        children: <Widget>[
-          SizedBox.expand(
-            child: Container(color: Colors.grey[50],)
-          ),
-          Scrollbar(
-            child: ListView(
-              children: <Widget>[
-
-                introPart(),
-
-                suggestionsBuilder(), 
-
-                Container(
-                  color: Colors.white,
-                  child: buildGradientTopCarousel()),
-
-                Container(
-                  color: Colors.white,
-                  child: PopularCarouselPage()),
-                Divider(height: 0.5,),
-
-                SizedBox(height: 10.0,),
-
-                CuisineCarousel(),
-                SizedBox(height: 5.0),
-                
-                Divider(indent: 8.0, endIndent: 8.0,),
-                DietCarousel(),
-                SizedBox(height: 5.0),
-                
-                Divider(indent: 8.0, endIndent: 8.0,),
-                TimeCarousel(),
-                
-              ],
+      child: Theme(
+        data: ThemeData.light(),
+        child: Stack(
+          children: <Widget>[
+            SizedBox.expand(
+              child: Container(color: Colors.grey[50],)
             ),
-          ),
-          
-        ],
+            Scrollbar(
+              child: ListView(
+                children: <Widget>[
+
+                  introPart(),
+
+                  suggestionsBuilder(), 
+
+                  Container(
+                    color: Colors.white,
+                    child: buildGradientTopCarousel()),
+
+                  Container(
+                    color: Colors.white,
+                    child: PopularCarouselPage()),
+                  Divider(height: 0.5,),
+
+                  SizedBox(height: 10.0,),
+
+                  CuisineCarousel(),
+                  SizedBox(height: 5.0),
+                  
+                  Divider(indent: 8.0, endIndent: 8.0,),
+                  DietCarousel(),
+                  SizedBox(height: 5.0),
+                  
+                  Divider(indent: 8.0, endIndent: 8.0,),
+                  TimeCarousel(),
+                  
+                ],
+              ),
+            ),
+            
+          ],
+        ),
       ),
     );
   }
@@ -237,10 +248,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    // Image appTitle = Image.asset(
-    //   'assets/imgs/appLogo9.png',
-    //   fit: BoxFit.contain,
-    //   height: 80.0,
+    // SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle(statusBarBrightness: Brightness.light) // Or Brightness.dark
     // );
 
     return DefaultTabController (
@@ -248,61 +257,13 @@ class _MyHomePageState extends State<MyHomePage> {
       length:3,
       child: new Scaffold(
 
-        // appBar: AppBar(
-        //   automaticallyImplyLeading: false, 
-        //   titleSpacing: 0.0,
-        //   elevation: 0.0,
-        //   backgroundColor: Colors.white,
-        //   title: appTitle,
-        //   actions: <Widget>[
-
-        //     Padding(
-        //       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
-        //       child: Center(
-        //         child: ClipOval(
-        //           child: Container(
-        //             height: 40.0,
-        //             width: 40.0,
-        //             color: Colors.grey[200],
-        //             child: IconButton(
-        //               onPressed: () => Navigator.push(
-        //                 context,
-        //                 MaterialPageRoute(
-        //                   builder: (_) => SearchScreen())
-        //               ),
-        //               icon: Icon(Icons.search),
-        //               iconSize: 20.0,
-        //               color: Colors.black87
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-
-        //     Padding(
-        //       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
-        //       child: Center(
-        //         child: ClipOval(
-        //           child: Container(
-        //             height: 40.0,
-        //             width: 40.0,
-        //             color: Colors.grey[200],
-        //             child: Center(
-        //               child: IconButton(
-        //                 onPressed: () {},
-        //                 icon: Icon(Ionicons.ios_log_out),
-        //                 iconSize: 20.0,
-        //                 color: Colors.black87
-        //               ),
-        //             ),
-        //           ),
-        //         ),
-        //       ),
-        //     ),
-
-        //   ],
-
-        // ),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(0.0),
+          child: AppBar(
+            backgroundColor: Colors.orange,
+            elevation: 0.0,
+          ),
+        ),
 
         body: TabBarView(
           children: <Widget>[
@@ -312,7 +273,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ProfileScreen(),
             
             new Container(
-              color: Colors.orange,
+              color: Colors.orange[400],
             ),
           ],
         ),
@@ -320,12 +281,12 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: new TabBar(
             tabs: [
               Tab(
-                icon: Image.asset('assets/imgs/appLogoOnly.png', height: 20.0,),
+                icon: Image.asset('assets/imgs/appLogoOnly.png', height: 18.0,),
               ),
               Tab(
-                icon: new Icon(Icons.person),
+                icon: new Icon(CupertinoIcons.person_solid),
               ),
-              Tab(icon: new Icon(Icons.favorite),)
+              Tab(icon: new Icon(CupertinoIcons.heart_solid),)
             ],
 
             labelColor: Colors.amber[700],
