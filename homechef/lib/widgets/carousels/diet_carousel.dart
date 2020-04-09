@@ -17,7 +17,7 @@ class DietCarousel extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+                padding: const EdgeInsets.only(top: 15.0),
                 child: Text(
                   'By Diet',
                   style: TextStyle(

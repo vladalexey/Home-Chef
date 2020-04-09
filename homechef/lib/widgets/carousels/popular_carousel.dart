@@ -19,7 +19,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
   void initState() {
     super.initState();
 
-    controller = PageController(initialPage: currentPage, viewportFraction: 0.8);
+    controller = PageController(initialPage: currentPage, viewportFraction: 0.9);
   }
 
   GestureDetector _buildPage(double height, int index) {
@@ -47,7 +47,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
                   width: MediaQuery.of(context).size.width * 0.9,
                   height: height,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black12,
@@ -58,7 +58,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
                   ),
                   
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     child: Container(
                       child: Image.network(
                         populars[index].imageUrl,
@@ -72,7 +72,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
                   height: height,
                   width: MediaQuery.of(context).size.width * 0.9,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                     gradient: LinearGradient(
                       begin: FractionalOffset.topCenter,
                       end: FractionalOffset.bottomCenter,
@@ -133,7 +133,7 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
     height: isActive ? 8 : 5,
     width: isActive ? 8 : 5,
     decoration: BoxDecoration(
-        color: isActive ? Colors.black : Colors.grey[600],
+        color: isActive ? Colors.amber : Colors.grey[400],
         borderRadius: BorderRadius.all(Radius.circular(12))),
   );
 }
@@ -161,6 +161,8 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
           )
         ),
 
+        SizedBox(height: 5.0,),
+
         Flexible(
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -173,7 +175,9 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
                   
             ],
           ),
-        )
+        ),
+
+        SizedBox(height: 10.0,)
       ],
     );
   }

@@ -3,7 +3,7 @@ import 'package:homechef/models/recipe_model.dart';
 final List<Recipe> populars = [
   Recipe(
     id: '1',
-    imageUrl: 'https://spoonacular.com/recipeImages/716394-636x393.jpg',
+    imageUrl: 'https://spoonacular.com/recipeImages/673845-636x393.jpg',
     name: 'Milkshake',
     description: 'Lorem ipsum dolor sit amet.',
     ingredients: [],

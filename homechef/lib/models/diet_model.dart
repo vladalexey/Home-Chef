@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homechef/models/recipe_model.dart';
-import 'package:homechef/widgets/bounce_button.dart';
+import 'package:homechef/widgets/search_widgets/bounce_button.dart';
 
 class Diet {
   String imageUrl;
@@ -36,13 +36,18 @@ List<AnimatedButton> getDietButtons(List<AnimationController> parentControllers)
     diets.length, (int index,) {
     
       return AnimatedButton(
+        chosenDiet: dietOptions[encodeDietName(diets[index].name)],
         parentController: parentControllers[index],
         parentControllers: parentControllers,
         onTap: () {
+
           if (dietOptions[encodeDietName(diets[index].name)] == false) {
             setAllFalse();
           }
           dietOptions[encodeDietName(diets[index].name)] = !dietOptions[encodeDietName(diets[index].name)];
+
+          print(dietOptions);
+
         },
 
         animationDuration: const Duration(milliseconds: 500),

@@ -20,7 +20,7 @@ class CuisineCarousel extends StatelessWidget {
             children: <Widget>[
 
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 0.0),
+                padding: const EdgeInsets.only(top: 15.0),
                 child: Text(
                   'By Cuisine',
                   style: TextStyle(

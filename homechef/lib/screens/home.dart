@@ -1,7 +1,8 @@
-import 'dart:convert';
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:homechef/screens/profile/profile.dart';
 import 'package:homechef/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -10,6 +11,7 @@ import 'package:homechef/widgets/carousels/cuisine_carousel.dart';
 import 'package:homechef/widgets/carousels/diet_carousel.dart';
 import 'package:homechef/widgets/carousels/popular_carousel.dart';
 import 'package:homechef/widgets/carousels/time_carousel.dart';
+import 'package:homechef/widgets/coming_feature.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -22,7 +24,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  GlobalKey topPartKey = GlobalKey();
+  List<String> suggestionList = ['Vietnamese', 'Top 10', 'New Vegan Recipes', 'Discovery', 'Explore Europe', 'Grandma Style', 'Best Cookies'];
+  List<Color> suggestionListColors = [Colors.amber[300], Colors.amber, Colors.yellow[700], Colors.orange, Colors.deepOrange[300]];
 
   Widget buildGradientTopCarousel() {
     return Padding(
@@ -53,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         blurRadius: 10.0,
                       ),
                     ],
-                    fontSize: 18.0,
+                    fontSize: 22.0,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
                     // letterSpacing: -0.5,
@@ -106,9 +109,84 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  double getPosTopPart() {
-    RenderBox topPart = topPartKey.currentContext.findRenderObject();
-    return topPart.localToGlobal(Offset.zero).dx;
+  Widget introPart() {
+    return Container(
+      color: Colors.white,
+      child: ListTile(
+        contentPadding: EdgeInsets.only(left: 20.0, top: 30.0, bottom: 20.0),
+        title: Text(
+          'What would you like to make?',
+          style: TextStyle( 
+            fontSize: 30.0,
+            fontWeight: FontWeight.bold
+          ),
+        ),
+        trailing: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          child: ClipOval(
+            child: Container(
+              color: Colors.grey[200],
+              height: 50.0,
+              width: 50.0,
+              child: FittedBox(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    // size: 22.0,
+                  ),
+                  onPressed: () => Navigator.push(
+                    context, 
+                    MaterialPageRoute(builder: (_) => SearchScreen())),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget suggestionsBuilder() {
+    return Container(
+      color: Colors.white,
+      height: 40.0,
+      width: MediaQuery.of(context).size.width,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15.0),
+        child: Scrollbar(
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: suggestionList.length,
+            itemBuilder: (context, index) {
+              
+              Random randomInt = Random();
+
+              return GestureDetector(
+                onTap: () => WarningComingFeature(),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: suggestionListColors[randomInt.nextInt(suggestionListColors.length)],
+                      borderRadius: BorderRadius.circular(20.0)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(
+                        child: Text(
+                          suggestionList[index],
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600
+                          ),)),
+                    ),
+                    ),
+                ),
+              );
+            } 
+          ),
+        ),
+      ),
+    );
   }
 
   SafeArea homeScreen() {
@@ -116,18 +194,27 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Stack(
         children: <Widget>[
           SizedBox.expand(
-            child: Container(color: Colors.grey[200],)
+            child: Container(color: Colors.grey[50],)
           ),
           Scrollbar(
             child: ListView(
               children: <Widget>[
-                
-                buildGradientTopCarousel(),
 
-                PopularCarouselPage(),
-                // SizedBox(height: 10.0),
-                
-                Divider(indent: 8.0, endIndent: 8.0,),
+                introPart(),
+
+                suggestionsBuilder(), 
+
+                Container(
+                  color: Colors.white,
+                  child: buildGradientTopCarousel()),
+
+                Container(
+                  color: Colors.white,
+                  child: PopularCarouselPage()),
+                Divider(height: 0.5,),
+
+                SizedBox(height: 10.0,),
+
                 CuisineCarousel(),
                 SizedBox(height: 5.0),
                 
@@ -150,69 +237,80 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    Row appTitle = Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget> [
-        Image.asset(
-          'assets/imgs/appLogo4.png',
-          fit: BoxFit.contain,
-          height: 120.0,
-        ),
-    ]);
+    // Image appTitle = Image.asset(
+    //   'assets/imgs/appLogo9.png',
+    //   fit: BoxFit.contain,
+    //   height: 80.0,
+    // );
 
     return DefaultTabController (
 
       length:3,
       child: new Scaffold(
 
-        appBar: AppBar(
-          elevation: 10.0,
-          backgroundColor: Colors.yellow[600],
-          title: appTitle,
-          actions: <Widget>[
+        // appBar: AppBar(
+        //   automaticallyImplyLeading: false, 
+        //   titleSpacing: 0.0,
+        //   elevation: 0.0,
+        //   backgroundColor: Colors.white,
+        //   title: appTitle,
+        //   actions: <Widget>[
 
-            Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: InkWell(
-                child: IconButton(
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => SearchScreen())
-                  ),
-                  icon: Icon(Icons.search),
-                  iconSize: 30.0,
-                  color: Colors.black87
-                ),
-              ),
-            ),
+        //     Padding(
+        //       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+        //       child: Center(
+        //         child: ClipOval(
+        //           child: Container(
+        //             height: 40.0,
+        //             width: 40.0,
+        //             color: Colors.grey[200],
+        //             child: IconButton(
+        //               onPressed: () => Navigator.push(
+        //                 context,
+        //                 MaterialPageRoute(
+        //                   builder: (_) => SearchScreen())
+        //               ),
+        //               icon: Icon(Icons.search),
+        //               iconSize: 20.0,
+        //               color: Colors.black87
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
 
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: InkWell(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Ionicons.ios_log_out),
-                    iconSize: 28.0,
-                    color: Colors.black87
-                  ),
-                ),
-              ),
-            ),
+        //     Padding(
+        //       padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2.0),
+        //       child: Center(
+        //         child: ClipOval(
+        //           child: Container(
+        //             height: 40.0,
+        //             width: 40.0,
+        //             color: Colors.grey[200],
+        //             child: Center(
+        //               child: IconButton(
+        //                 onPressed: () {},
+        //                 icon: Icon(Ionicons.ios_log_out),
+        //                 iconSize: 20.0,
+        //                 color: Colors.black87
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ),
+        //     ),
 
-          ],
+        //   ],
 
-        ),
+        // ),
 
         body: TabBarView(
           children: <Widget>[
 
             homeScreen(),
 
-            new Container(
-              color: Colors.yellow,
-            ),
+            ProfileScreen(),
+            
             new Container(
               color: Colors.orange,
             ),
@@ -222,15 +320,15 @@ class _MyHomePageState extends State<MyHomePage> {
         bottomNavigationBar: new TabBar(
             tabs: [
               Tab(
-                icon: new Icon(Icons.home),
+                icon: Image.asset('assets/imgs/appLogoOnly.png', height: 20.0,),
               ),
               Tab(
                 icon: new Icon(Icons.person),
               ),
               Tab(icon: new Icon(Icons.favorite),)
             ],
-            
-            labelColor: Colors.amber[300],
+
+            labelColor: Colors.amber[700],
             unselectedLabelColor: Colors.black,
             indicatorSize: TabBarIndicatorSize.label,
             indicatorPadding: EdgeInsets.all(5.0),

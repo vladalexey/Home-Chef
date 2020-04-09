@@ -55,6 +55,11 @@ flutter:
    - assets/imgs/appLogo4.png
    - assets/imgs/appLogo5.png
    - assets/imgs/appLogo6.png
+   - assets/imgs/appLogo7.png
+   - assets/imgs/appLogo8.png
+   - assets/imgs/appLogo9.png
+   - assets/imgs/appLogoOnly.png
+   - assets/imgs/appLogoOnlyBW.png
    
 
    - assets/imgs/food1.jpg
