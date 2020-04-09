@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/recipe_model.dart';
@@ -55,10 +56,10 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
 
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 250)
+      duration: Duration(milliseconds: 350)
     );
 
-    curve = CurvedAnimation(parent: _controller, curve: Curves.easeInOutExpo);
+    curve = CurvedAnimation(parent: _controller, curve: Curves.easeInOutQuart);
   }
 
   @override
@@ -334,6 +335,10 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+
+    // SystemChrome.setSystemUIOverlayStyle(
+    //   SystemUiOverlayStyle(statusBarBrightness: Brightness.dark) // Or Brightness.dark
+    // );
 
     mediaWidth = MediaQuery.of(context).size.width;
 
