@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/recipe_model.dart';
-import 'package:homechef/widgets/bounce_button.dart';
+import 'package:homechef/widgets/search_widgets/bounce_button.dart';
 import 'package:homechef/widgets/flappy_search_bar-1.7.2-modified/lib/flappy_search_bar.dart';
 
 class DietOption extends StatefulWidget {
@@ -25,6 +25,9 @@ class _DietOptionState extends State<DietOption> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
+    print('Open diet');
+    print(dietOptions);
     
     parentControllers = List<AnimationController>.generate(
       diets.length, (int index) {

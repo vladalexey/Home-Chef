@@ -39,14 +39,16 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
   SearchScreen parent;
   _SearchBarWidgetState({this.parent});
 
-  String _diet = '';
-  String _cuisine = '';
-  String _time = '';
+  
 
   Map<String, bool>  cuisine;
   Map<String, bool>  time;
   
   Future<List<Recipe>> search(String text) async {
+
+    String _diet = '';
+    String _cuisine = '';
+    String _time = '';
 
     String apiKey = await getFileData('assets/API_KEY_RAPIDAPI.txt');
     Map<String, String> _headers;
@@ -241,6 +243,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
             Expanded(
               child: Center(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     IconButton(
                       icon: Icon(
@@ -267,6 +270,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
             Expanded(
               child: Center(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     IconButton(
                       icon: Icon(
@@ -291,6 +295,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
             Expanded(
               child: Center(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     IconButton(
                       icon: Icon(
@@ -315,6 +320,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
             Expanded(
               child: Center(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     IconButton(
                       icon: Icon(
