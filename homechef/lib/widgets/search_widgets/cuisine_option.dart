@@ -77,15 +77,6 @@ class _CuisineOptionState extends State<CuisineOption> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: SearchBar<String>(
-                          header: Column(
-                            children: <Widget>[
-                              Divider(indent: 15.0, endIndent: 15.0,),
-                              Center(child: Text('Choose cuisines:')),
-                              Divider(indent: 15.0,endIndent: 15.0,),
-                            ],
-                          ),
-                          headerPadding: EdgeInsets.symmetric(horizontal: 5.0),
-
                           searchBarStyle: SearchBarStyle(
                             backgroundColor: Colors.white,
                           ),
