@@ -362,12 +362,13 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
       },
       child: new Scaffold(
         body: Stack(
-          children: <Widget> [Column(
-            children: <Widget>[
+          children: <Widget> [
+            Column(
+              children: <Widget>[
 
-              topPart(),
-              categoriesListBuilder()
-              
+                topPart(),
+                categoriesListBuilder()
+                
               ],
             ),
           ]
