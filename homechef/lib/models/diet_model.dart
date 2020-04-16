@@ -87,6 +87,8 @@ final List<Recipe> recipes = [
     imageUrl: 'assets/imgs/food4.jpg',
     name: 'Sushi',
     description: 'Lorem ipsum dolor sit amet.',
+    calories: 150,
+    servings: 4,
     ingredients: [],
     instruction: []
   ),
@@ -95,6 +97,8 @@ final List<Recipe> recipes = [
     imageUrl: 'assets/imgs/food5.jpg',
     name: 'Yellow Curry',
     description: 'Lorem ipsum dolor sit amet.',
+    calories: 480,
+    servings: 2,
     ingredients: [],
     instruction: []
   ),
@@ -103,6 +107,8 @@ final List<Recipe> recipes = [
     imageUrl: 'assets/imgs/food6.jpg',
     name: 'Cheeseburger',
     description: 'Lorem ipsum dolor sit amet.',
+    calories: 350,
+    servings: 6,
     ingredients: [],
     instruction: []
   ),
@@ -111,6 +117,8 @@ final List<Recipe> recipes = [
     imageUrl: 'assets/imgs/food4.jpg',
     name: 'Sushi',
     description: 'Lorem ipsum dolor sit amet.',
+    calories: 350,
+    servings: 5,
     ingredients: [],
     instruction: []
   ),
@@ -118,6 +126,8 @@ final List<Recipe> recipes = [
     id: '5',
     imageUrl: 'assets/imgs/food5.jpg',
     name: 'Yellow Curry',
+    calories: 150,
+    servings: 4,
     description: 'Lorem ipsum dolor sit amet.',
     ingredients: [],
     instruction: []
@@ -127,6 +137,8 @@ final List<Recipe> recipes = [
     imageUrl: 'assets/imgs/food6.jpg',
     name: 'Cheeseburger',
     description: 'Lorem ipsum dolor sit amet.',
+    calories: 120,
+    servings: 2,
     ingredients: [],
     instruction: []
   ),
