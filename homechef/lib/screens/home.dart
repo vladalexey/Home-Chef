@@ -66,13 +66,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(
                   'Most Trending',
                   style: TextStyle(
-                    shadows: [
-                      Shadow(
-                        color: Colors.black26,
-                        offset: Offset(0.0, 2.0),
-                        blurRadius: 10.0,
-                      ),
-                    ],
+                    // shadows: [
+                    //   Shadow(
+                    //     color: Colors.black26,
+                    //     offset: Offset(0.0, 2.0),
+                    //     blurRadius: 10.0,
+                    //   ),
+                    // ],
                     fontSize: 22.0,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
