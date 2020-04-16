@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/ingredients/ingredient_model.dart';
 import 'package:homechef/models/instructions/instruction_model.dart';
@@ -28,7 +29,7 @@ class _RecipePageState extends State<RecipePage>
   }
 
   List<IconData> iconCards = [
-    Icons.alarm,
+    FontAwesomeIcons.clock,
     FontAwesomeIcons.utensils,
     Ionicons.ios_flame
   ];
@@ -45,11 +46,23 @@ class _RecipePageState extends State<RecipePage>
     return res;
   }
 
+  String parseAmount(List<Ingredient> ingredients) {
+    String res = '';
+
+    for (var ingredient in ingredients) {
+      res = res +
+          ingredient.amount.toString() + ' ' +
+          ingredient.unit +
+          '\n\n';
+    }
+    return res;
+  }
+
   String parseInstruction(List<Instruction> instructions) {
     String res = '';
 
     for (var index = 1; index <= instructions.length; index++) {
-      res = res + '\u2022 \t' + instructions[index - 1].instruction + '\n\n';
+      res = res + '\u2022 \t\t' + instructions[index - 1].instruction + '\n\n';
     }
     return res;
   }
@@ -61,15 +74,32 @@ class _RecipePageState extends State<RecipePage>
         children: <Widget>[
           // LIST INGREDIENTS
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 5.0),
-            child: Text(
-              parseIngredients(widget.recipe.ingredients),
-              style: TextStyle(
-                color: Colors.black87,
-                fontSize: 14.0,
-                fontWeight: FontWeight.w400,
-                letterSpacing: 0.5,
-              ),
+            padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+
+                Text(
+                  parseIngredients(widget.recipe.ingredients),
+                  style: TextStyle(
+                    color: Colors.grey[700],
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 0.2,
+                  ),
+                ),
+
+                Text(
+                  parseAmount(widget.recipe.ingredients),
+                  style: TextStyle(
+                    color: Colors.grey[400],
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.2,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -85,15 +115,15 @@ class _RecipePageState extends State<RecipePage>
           // LIST INSTRUCTIONs
           Padding(
             padding:
-                const EdgeInsets.symmetric(horizontal: 30.0, vertical: 5.0),
+                const EdgeInsets.symmetric(horizontal: 50.0, vertical: 5.0),
             child: Text(
               parseInstruction(widget.recipe.instruction),
               style: TextStyle(
                 height: 1.5,
                 color: Colors.black87,
-                fontSize: 14.0,
-                fontWeight: FontWeight.w400,
-                letterSpacing: 0.5,
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.2,
               ),
             ),
           ),
@@ -196,25 +226,29 @@ class _RecipePageState extends State<RecipePage>
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 18.0),
-                      child: AutoSizeText(
-                        widget.recipe.name,
-                        maxFontSize: 55,
-                        maxLines: 2,
-                        style: TextStyle(
-                            shadows: [
-                              Shadow(
-                                color: Colors.black12,
-                                offset: Offset(0.0, 2.0),
-                                blurRadius: 10.0,
-                              ),
-                            ],
-                            fontSize: 65.0,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
-                            letterSpacing: 1),
+                    ConstrainedBox(
+                      constraints: BoxConstraints.loose(Size.fromWidth(
+                          MediaQuery.of(context).size.width * 0.8)),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 18.0, right: 10.0),
+                        child: AutoSizeText(
+                          widget.recipe.name,
+                          maxFontSize: 55,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black12,
+                                  offset: Offset(0.0, 2.0),
+                                  blurRadius: 10.0,
+                                ),
+                              ],
+                              fontSize: 65.0,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                              letterSpacing: 1),
+                        ),
                       ),
                     )
                   ],
@@ -224,7 +258,8 @@ class _RecipePageState extends State<RecipePage>
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0, bottom: 10.0),
                       child: RatingStars(rating: widget.recipe.rate),
-                    )],
+                    )
+                  ],
                 )
               ],
             ),
@@ -329,14 +364,16 @@ class _RecipePageState extends State<RecipePage>
                 indicatorSize: TabBarIndicatorSize.label,
                 indicatorColor: Colors.yellow,
                 labelColor: Colors.grey[700],
-                labelStyle: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18.0,
-                    letterSpacing: 0.5),
-                unselectedLabelStyle: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18.0,
-                    letterSpacing: 0.5),
+                labelStyle: GoogleFonts.overpass(
+                    textStyle: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.grey[700],
+                        fontWeight: FontWeight.w800)),
+                unselectedLabelStyle: GoogleFonts.overpass(
+                    textStyle: TextStyle(
+                        fontSize: 22.0,
+                        color: Colors.grey[500],
+                        fontWeight: FontWeight.w700)),
                 unselectedLabelColor: Colors.grey[400],
                 controller: _tabController,
               ),
