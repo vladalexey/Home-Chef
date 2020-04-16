@@ -254,7 +254,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return DefaultTabController (
 
-      length:3,
+      length: 2,
       child: new Scaffold(
 
         appBar: PreferredSize(
@@ -271,10 +271,7 @@ class _MyHomePageState extends State<MyHomePage> {
             homeScreen(),
 
             ProfileScreen(),
-            
-            new Container(
-              color: Colors.orange[400],
-            ),
+
           ],
         ),
 
@@ -286,7 +283,6 @@ class _MyHomePageState extends State<MyHomePage> {
               Tab(
                 icon: new Icon(CupertinoIcons.person_solid),
               ),
-              Tab(icon: new Icon(CupertinoIcons.heart_solid),)
             ],
 
             labelColor: Colors.amber[700],
