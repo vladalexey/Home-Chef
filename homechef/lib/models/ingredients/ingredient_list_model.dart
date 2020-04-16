@@ -16,7 +16,9 @@ class IngredientList {
 
       Ingredient ingredient = new Ingredient(
         id: ingredient_obj['id'],
-        name: ingredient_obj['name']
+        name: ingredient_obj['name'],
+        unit: ingredient_obj['amount']['metric']['unit'],
+        amount: ingredient_obj['amount']['metric']['value']
       );
 
       ingredients.add(ingredient);
