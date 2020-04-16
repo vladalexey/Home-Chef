@@ -19,6 +19,8 @@ class Recipe {
   String description;
   int rate;
   int cookTime;
+  int servings;
+  int calories;
   List<Ingredient> ingredients;
   List<Instruction> instruction;
 
@@ -29,6 +31,8 @@ class Recipe {
     this.rate = 4,
     this.cookTime = 45,
     this.description,
+    this.calories = 100,
+    this.servings = 2,
     this.ingredients = const [],
     this.instruction = const [],
   });
