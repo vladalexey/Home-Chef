@@ -26,7 +26,7 @@ dependencies:
   flutter_icons:
   flutter_statusbarcolor:
   liquid_swipe: ^1.4.2
-
+  google_fonts:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -43,6 +43,47 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+
+  # fonts:
+  # - family: BrandonText
+  #   fonts:
+  #     - asset: fonts/BrandonText-Black.otf
+      # - asset: fonts/BrandonText-BlackItalic.otf
+      # - asset: fonts/BrandonText-Bold.otf
+      # - asset: fonts/BrandonText-BoldItalic.otf
+      #   style: italic
+      # - asset: fonts/BrandonText-Italic.otf
+      #   style: italic
+      # - asset: fonts/BrandonText-Light.otf
+      # - asset: fonts/BrandonText-LightItalic.otf
+      #   style: italic
+      # - asset: fonts/BrandonText-Medium.otf
+      # - asset: fonts/BrandonText-MediumItalic.otf
+      #   style: italic
+      # - asset: fonts/BrandonText-Regular.otf
+      # - asset: fonts/BrandonText-Thin.otf
+      # - asset: fonts/BrandonText-ThinItalic.otf
+      #   style: italic
+  # - family: Roboto
+  #   fonts:
+  #     - asset: fonts/Roboto-Black.ttf
+  #     - asset: fonts/Roboto-BlackItalic.tff
+  #       style: italic
+  #     - asset: fonts/Roboto-Bold.tff
+  #     - asset: fonts/Roboto-BoldItalic.tff
+  #       style: italic
+  #     - asset: fonts/Roboto-Italic.tff
+  #       style: italic
+  #     - asset: fonts/Roboto-Light.tff
+  #     - asset: fonts/Roboto-LightItalic.tff
+  #       style: italic
+  #     - asset: fonts/Roboto-Medium.tff
+  #     - asset: fonts/Roboto-MediumItalic.tff
+  #       style: italic
+  #     - asset: fonts/Roboto-Regular.tff
+  #     - asset: fonts/Roboto-Thin.tff
+  #     - asset: fonts/Roboto-ThinItalic.tff
+  #       style: italic
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -129,28 +170,8 @@ flutter:
    - assets/API_KEY.txt
    - assets/API_KEY_RAPIDAPI.txt
 
-  # fonts:
-  #  - family: Roboto
-  #    fonts:
-  #      - asset: fonts/Roboto-Black.ttf
-  #      - asset: fonts/Roboto-BlackItalic.tff
-  #        style: italic
-  #      - asset: fonts/Roboto-Bold.tff
-  #      - asset: fonts/Roboto-BoldItalic.tff
-  #        style: italic
-  #      - asset: fonts/Roboto-Italic.tff
-  #        style: italic
-  #      - asset: fonts/Roboto-Light.tff
-  #      - asset: fonts/Roboto-LightItalic.tff
-  #        style: italic
-  #      - asset: fonts/Roboto-Medium.tff
-  #      - asset: fonts/Roboto-MediumItalic.tff
-  #        style: italic
-  #      - asset: fonts/Roboto-Regular.tff
-  #      - asset: fonts/Roboto-Thin.tff
-  #      - asset: fonts/Roboto-ThinItalic.tff
-  #        style: italic
-        
+  
+      
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
