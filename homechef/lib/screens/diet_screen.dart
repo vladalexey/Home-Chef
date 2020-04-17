@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
@@ -78,23 +79,14 @@ class _DietPageState extends State<DietPage> with SingleTickerProviderStateMixin
           Container(
             height: animation.value,
             width: mediaWidth,
-            decoration: BoxDecoration(  
-              borderRadius: BorderRadius.circular(30.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  offset: Offset(0.0, 2.0),
-                  blurRadius: 6.0,
-                )
-              ],
-            ),
             child: Hero(
               tag: widget.diet.imageUrl,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.0),
+                  bottomLeft: Radius.circular(30.0),
+                ),
                 child: Image(
-                  // height: double.maxFinite,
-                  // width: double.maxFinite,
                   image: AssetImage(widget.diet.imageUrl),
                   fit: BoxFit.cover,
                 ),
@@ -106,7 +98,10 @@ class _DietPageState extends State<DietPage> with SingleTickerProviderStateMixin
             height: animation.value,
             width: mediaWidth,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.0),
+                  bottomLeft: Radius.circular(30.0),
+                ),
               gradient: LinearGradient(
                 begin: FractionalOffset.topCenter,
                 end: FractionalOffset.bottomCenter,
@@ -124,7 +119,7 @@ class _DietPageState extends State<DietPage> with SingleTickerProviderStateMixin
           ),
 
           Positioned(
-            top: 60.0 + (animation.value - mediaWidth * 0.5) * 0.2,
+            top: 30.0 + (animation.value - mediaWidth * 0.5) * 0.2,
             child: Container(
               width: mediaWidth,
               child: Row(
@@ -198,11 +193,13 @@ class _DietPageState extends State<DietPage> with SingleTickerProviderStateMixin
                       child: AutoSizeText(
                         widget.diet.name,
                         maxLines: 1,
-                        style: TextStyle(
-                          // shadows: Sha,
-                          fontSize: 65.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            fontSize: 45.0,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.2
+                          ),
+                          color: Colors.white.withOpacity(0.9),
                         ),
                       ),
                     ),
@@ -300,7 +297,7 @@ class _DietPageState extends State<DietPage> with SingleTickerProviderStateMixin
                               color: Colors.grey,
                             ),
                           ),
-                          RatingStars(rating: recipe.rate),
+                          RatingStars(rating: recipe.rate, color: Colors.grey[700],),
                           SizedBox(height: 10.0),
                         ],
                       ),

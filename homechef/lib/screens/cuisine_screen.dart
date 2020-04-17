@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
@@ -80,23 +81,28 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
           Container(
             height: animation.value,
             width: mediaWidth,
-            decoration: BoxDecoration(  
-              borderRadius: BorderRadius.circular(30.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  offset: Offset(0.0, 2.0),
-                  blurRadius: 6.0,
-                )
-              ],
-            ),
+            // decoration: BoxDecoration(  
+            //   borderRadius: BorderRadius.only(
+            //       bottomRight: Radius.circular(30.0),
+            //       bottomLeft: Radius.circular(30.0),
+            //     ),
+            //   boxShadow: [
+            //     BoxShadow(
+            //       color: Colors.black26,
+            //       offset: Offset(0.0, 2.0),
+            //       blurRadius: 6.0,
+            //     )
+            //   ],
+            // ),
             child: Hero(
               tag: widget.cuisine.imageUrl,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(30.0),
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.0),
+                  bottomLeft: Radius.circular(30.0),
+                ),
+                // borderRadius: BorderRadius.circular(30.0),
                 child: Image(
-                  // height: double.maxFinite,
-                  // width: double.maxFinite,
                   image: AssetImage(widget.cuisine.imageUrl),
                   fit: BoxFit.cover,
                 ),
@@ -108,13 +114,16 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
             height: animation.value,
             width: mediaWidth,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.0),
+                  bottomLeft: Radius.circular(30.0),
+                ),
               gradient: LinearGradient(
                 begin: FractionalOffset.topCenter,
                 end: FractionalOffset.bottomCenter,
                 colors: [
                   Colors.black.withOpacity(0.9),
-                  Colors.transparent,
+                  Colors.black12,
                   Colors.black.withOpacity(0.9),
                 ],
                 stops: [
@@ -126,7 +135,7 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
           ),
 
           Positioned(
-            top: 60.0 + (animation.value - mediaWidth * 0.5) * 0.2,
+            top: 30.0 + (animation.value - mediaWidth * 0.5) * 0.2,
             child: Container(
               width: mediaWidth,
               child: Row(
@@ -182,13 +191,13 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
 
                   Flexible(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
+                      padding: const EdgeInsets.only(left: 18.0, bottom: 5.0, right: 15.0),
                       child: SizedBox(
                         width: mediaWidth * 0.5,
                         child: Divider(
                           height: 2.0,
                           color: Colors.yellow[500],
-                          thickness: 3.0,
+                          thickness: 2.0,
                         ),
                       ),
                     ),
@@ -200,12 +209,14 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
                       child: AutoSizeText(
                         widget.cuisine.name,
                         maxLines: 1,
-                        style: TextStyle(
-                          // shadows: Sha,
-                          fontSize: 65.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                        ),
+                        style: GoogleFonts.lato(
+                          textStyle: TextStyle(
+                            fontSize: 45.0,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.2
+                          ),
+                          color: Colors.white.withOpacity(0.9),
+                        )
                       ),
                     ),
                   )
@@ -303,7 +314,7 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
                               color: Colors.grey,
                             ),
                           ),
-                          RatingStars(rating: recipe.rate),
+                          RatingStars(rating: recipe.rate, color: Colors.grey[700],),
                           SizedBox(height: 10.0),
                         ],
                       ),
