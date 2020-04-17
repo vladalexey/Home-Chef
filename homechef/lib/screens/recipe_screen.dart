@@ -93,7 +93,7 @@ class _RecipePageState extends State<RecipePage>
                 Text(
                   parseAmount(widget.recipe.ingredients),
                   style: TextStyle(
-                    color: Colors.grey[400],
+                    color: Colors.grey[700],
                     fontSize: 16.0,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.2,
@@ -233,21 +233,17 @@ class _RecipePageState extends State<RecipePage>
                         padding: const EdgeInsets.only(left: 18.0, right: 10.0),
                         child: AutoSizeText(
                           widget.recipe.name,
-                          maxFontSize: 55,
+                          maxFontSize: 45,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                              shadows: [
-                                Shadow(
-                                  color: Colors.black12,
-                                  offset: Offset(0.0, 2.0),
-                                  blurRadius: 10.0,
-                                ),
-                              ],
-                              fontSize: 65.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                              letterSpacing: 1),
+                          style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                            // shadows: Sha,
+                            fontSize: 45.0,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          color: Colors.white.withOpacity(0.9),
+                        )
                         ),
                       ),
                     )
@@ -257,7 +253,7 @@ class _RecipePageState extends State<RecipePage>
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.only(left: 20.0, bottom: 10.0),
-                      child: RatingStars(rating: widget.recipe.rate),
+                      child: RatingStars(rating: widget.recipe.rate, color: Colors.grey[200],),
                     )
                   ],
                 )
