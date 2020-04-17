@@ -19,13 +19,6 @@ class TimeCarousel extends StatelessWidget {
                 child: Text(
                   'By Cook Time',
                   style: TextStyle(
-                    shadows: [
-                      Shadow(
-                        color: Colors.black12,
-                        offset: Offset(1.0, 2.0),
-                        blurRadius: 10.0,
-                      ),
-                    ],
                     fontSize: 20.0,
                     fontWeight: FontWeight.w600,
                     // letterSpacing: 1.5
@@ -84,7 +77,7 @@ class TimeCarousel extends StatelessWidget {
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black26,
+                                  color: Colors.grey[200],
                                   offset: Offset(0, 5),
                                   blurRadius: 10,
                                   spreadRadius: 1

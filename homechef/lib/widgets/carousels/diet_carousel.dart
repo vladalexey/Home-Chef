@@ -86,7 +86,7 @@ class DietCarousel extends StatelessWidget {
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black26,
+                                  color: Colors.grey[200],
                                   offset: Offset(0, 5),
                                   blurRadius: 10,
                                   spreadRadius: 1
@@ -105,13 +105,6 @@ class DietCarousel extends StatelessWidget {
                                   Text(
                                     '${diet.recipes.length} recipes',
                                     style: TextStyle(
-                                      shadows: [
-                                        Shadow(
-                                          color: Colors.black26,
-                                          offset: Offset(1.0, 2.0),
-                                          blurRadius: 10.0,
-                                        ),
-                                      ],
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.w600,
                                       // letterSpacing: 1.0,
