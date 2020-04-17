@@ -78,16 +78,6 @@ class _AllTimePageState extends State<AllTimePage>  with SingleTickerProviderSta
           Container(
             height: animation.value,
             width: mediaWidth,
-            decoration: BoxDecoration(  
-              borderRadius: BorderRadius.circular(30.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black26,
-                  offset: Offset(0.0, 2.0),
-                  blurRadius: 6.0,
-                )
-              ],
-            ),
             child: Hero(
               tag: "assets/imgs/time.jpg",
               child: ClipRRect(
@@ -106,7 +96,10 @@ class _AllTimePageState extends State<AllTimePage>  with SingleTickerProviderSta
             height: animation.value,
             width: mediaWidth,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30.0),
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.0),
+                  bottomLeft: Radius.circular(30.0),
+                ),
               gradient: LinearGradient(
                 begin: FractionalOffset.topCenter,
                 end: FractionalOffset.bottomCenter,
@@ -124,7 +117,7 @@ class _AllTimePageState extends State<AllTimePage>  with SingleTickerProviderSta
           ),
 
           Positioned(
-            top: 60.0 + (animation.value - mediaWidth * 0.5) * 0.2,
+            top: 30.0 + (animation.value - mediaWidth * 0.5) * 0.2,
             child: Container(
               width: mediaWidth,
               child: Row(
