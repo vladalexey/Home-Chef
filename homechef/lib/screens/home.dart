@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
         left: 2.0,
         right: 20.0,
         top: 25.0,
-        bottom: 5.0
+        bottom: 10.0
       ),
       
       child: Column(
@@ -43,21 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisSize: MainAxisSize.max,
 
         children: <Widget>[
-
-          Padding(
-            padding: const EdgeInsets.only(left: 18.0),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.3,
-                child: Divider(
-                  height: 1.0,
-                  // color: Colors.yellow[500],
-                  thickness: 1.0,
-                ),
-              ),
-            ),
-          ),
 
           Row(
             children: <Widget>[
@@ -86,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Row(
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(left: 18.0, top: 2.0, bottom: 12.0),
+                padding: const EdgeInsets.only(left: 18.0, top: 2.0, bottom: 10.0),
                 child: Text(
                   'Don\'t miss out on the latest recipes',
                   style: TextStyle(
