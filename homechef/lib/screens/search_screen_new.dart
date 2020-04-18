@@ -150,7 +150,7 @@ class _SearchScreenNewState extends State<SearchScreenNew> with SingleTickerProv
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              SizedBox(width: 20.0,),
+              SizedBox(width: 10.0, height: 100.0,),
               IconButton(
                 onPressed: () => Navigator.pop(context), 
                 icon: Icon(Icons.arrow_back_ios))
@@ -159,7 +159,7 @@ class _SearchScreenNewState extends State<SearchScreenNew> with SingleTickerProv
 
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.only(top: 30.0),
+              padding: const EdgeInsets.only(top: 0.0),
               child: searchBar(),
             ),
           ),

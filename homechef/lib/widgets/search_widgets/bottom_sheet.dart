@@ -11,8 +11,8 @@ class _BottomSheetBuilderState extends State<BottomSheetBuilder> {
   List<String> titles = [
     "Diet",
     "Cuisine",
-    "Exclude",
-    "Include",
+    "Exclude Ingredients",
+    "Include Ingredients",
   ];
   
   @override

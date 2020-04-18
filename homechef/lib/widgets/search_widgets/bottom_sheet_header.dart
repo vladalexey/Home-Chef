@@ -9,7 +9,7 @@ class BottomSheetHeader extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.grey[300],
+            color: Colors.grey[200],
             blurRadius: 5.0,
             spreadRadius: 2.0,
             offset: Offset(0, -3.0)
