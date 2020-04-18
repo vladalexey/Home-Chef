@@ -10,6 +10,7 @@ import 'package:homechef/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:homechef/screens/search_screen_new.dart';
 import 'package:homechef/widgets/carousels/cuisine_carousel.dart';
 import 'package:homechef/widgets/carousels/diet_carousel.dart';
 import 'package:homechef/widgets/carousels/popular_carousel.dart';
@@ -57,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text(
                   'Most Trending',
                   style: TextStyle(
-                    fontSize: 22.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
                     // letterSpacing: -0.5,
@@ -70,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               Padding(
                 padding:
-                    const EdgeInsets.only(left: 18.0, top: 2.0, bottom: 10.0),
+                    const EdgeInsets.only(left: 18.0, top: 5.0, bottom: 0.0),
                 child: Text(
                   'Don\'t miss out on the latest recipes',
                   style: TextStyle(
@@ -82,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ],
                     fontSize: 12.0,
-                    // fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                     color: Colors.grey[600],
                     // letterSpacing: -0.5,
                   ),
@@ -139,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     // size: 22.0,
                   ),
                   onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => SearchScreen())),
+                      MaterialPageRoute(builder: (_) => SearchScreenNew())),
                 ),
               ),
             ),
