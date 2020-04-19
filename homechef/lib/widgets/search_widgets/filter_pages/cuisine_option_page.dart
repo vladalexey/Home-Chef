@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:homechef/BLoC/bloc_filter_noti.dart';
+import 'package:homechef/BLoC/bloc_provider.dart';
 import 'package:homechef/models/cuisine_model.dart';
+import 'package:homechef/widgets/search_widgets/filter_pages/count_active_filter.dart';
 
 class CuisineOptionPage extends StatefulWidget {
   @override
@@ -48,6 +51,9 @@ class _CuisineOptionPageState extends State<CuisineOptionPage> {
                       setState(() {
                         cuisine_list[currentKey] = !cuisine_list[currentKey];
                       });
+
+                      final notiFilterBloc = BlocProvider.of<NotiFilterBloc>(context);
+                      notiFilterBloc.modifyNoti(numFilters());
                     },
                     selected: cuisine_list[currentKey],
                     backgroundColor: Colors.yellow[600],
