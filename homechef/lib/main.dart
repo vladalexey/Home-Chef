@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:homechef/BLoC/bloc_filter_noti.dart';
+import 'package:homechef/BLoC/bloc_provider.dart';
 import 'package:homechef/screens/home.dart';
 
 void main() => runApp(MyApp());
@@ -20,17 +23,24 @@ class MyApp extends StatelessWidget {
           currentFocus.unfocus();
         }
       },
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Home Chef',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
+      child: BlocProvider(
+        bloc: NotiFilterBloc(),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Home Chef',
+          theme: ThemeData(
+            // Rubik / Poppins / 
+            // textTheme: GoogleFonts.rubikTextTheme(
+            //   Theme.of(context).textTheme
+            // ),
+            primarySwatch: Colors.blue,
 
+          ),
+          // darkTheme: ThemeData(),
+          home: MyHomePage(title: 'Home Chef'),
+          
+          
         ),
-        // darkTheme: ThemeData(),
-        home: MyHomePage(title: 'Home Chef'),
-        
-        
       ),
     );
   }
