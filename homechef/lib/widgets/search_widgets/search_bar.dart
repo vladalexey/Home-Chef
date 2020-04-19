@@ -2,12 +2,10 @@ import 'dart:convert';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
-import 'package:homechef/screens/search_screen.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:homechef/widgets/rating_stars.dart';
 import 'package:http/http.dart' as http;
@@ -18,10 +16,7 @@ import '../flappy_search_bar-1.7.2-modified/lib/search_bar_style.dart';
 class SearchBarWidget extends StatefulWidget {
 
   final SearchBarController<Recipe> searchController;
-  final Function() callSearchScreenDiet, callSearchScreenCuisine;
   SearchBarWidget({
-    @required this.callSearchScreenDiet, 
-    @required this.callSearchScreenCuisine,
     @required this.searchController});
 
   @override
@@ -35,14 +30,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
   }
   
   bool filterUp = false;
+  TabController _tabController;
 
-  SearchScreen parent;
-  _SearchBarWidgetState({this.parent});
-
-  
-
-  Map<String, bool>  cuisine;
-  Map<String, bool>  time;
+  void initState() {
+    super.initState();
+    _tabController = new TabController(length: 2, vsync: this);
+  }
   
   Future<List<Recipe>> search(String text) async {
 
@@ -67,8 +60,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
 
     _cuisine = '&cuisine=';
 
-    for (String key in cuisineOptions.keys) {
-      if (cuisineOptions[key] == true) {
+    for (String key in cuisine_list.keys) {
+      if (cuisine_list[key] == true) {
         _cuisine = _cuisine + key + ',';
       }
     }
@@ -136,8 +129,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
       ),
       child: Stack(
         children: <Widget>[
+
           Container(
-            margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
+            margin: EdgeInsets.fromLTRB(20.0, 5.0, 20.0, 5.0),
             height: 170.0,
             width: double.infinity,
             decoration: BoxDecoration(
@@ -145,75 +139,58 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
               borderRadius: BorderRadius.circular(20.0),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black26,
+                  color: Colors.grey[300],
                   offset: Offset(0.0, 2.0),
-                  blurRadius: 6.0,
+                  blurRadius: 10.0,
                 ),
               ],
             ),
             child: Padding(
-              padding: EdgeInsets.fromLTRB(100.0, 20.0, 20.0, 20.0),
+              padding: EdgeInsets.fromLTRB(130.0, 0.0, 20.0, 20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
 
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        width: 120.0,
-                        child: AutoSizeText(
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        
+                        SizedBox(height: 20.0),
+                        AutoSizeText(
                           recipe.name,
-                          maxFontSize: 18.0,
+                          maxFontSize: 20.0,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                           ),
                           overflow: TextOverflow.ellipsis,
                           maxLines: 2,
                         ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: <Widget>[
-                            AutoSizeText(
-                              '${recipe.id}',
-                              maxLines: 1,
-                              style: TextStyle(
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            AutoSizeText(
-                              'Recipe ID',
-                              maxFontSize: 15.0,
-                              maxLines: 1,
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ],
+                        SizedBox(height: 10.0),
+                        Text(
+                          recipe.cookTime.toString() + ' minutes',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Text(
-                    recipe.cookTime.toString() + ' minutes',
-                    style: TextStyle(
-                      color: Colors.grey,
+                        
+                      ],
                     ),
                   ),
-                  RatingStars(rating: recipe.rate),
+                  
                   SizedBox(height: 10.0),
+                  RatingStars(rating: recipe.rate),
+                  // SizedBox(height: 10.0),
                 ],
               ),
             ),
           ),
+
           Positioned(
-            left: 20.0,
+            left: 30.0,
             top: 15.0,
             bottom: 15.0,
             child: ClipRRect(
@@ -231,130 +208,65 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
   }
 
   Widget buildHeaderRow() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        Divider(indent: 10.0, endIndent: 10.0,),
-        Row(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.access_time, 
-                        color: Colors.black87,
-                      ),
-                      onPressed: () {
-                        widget.searchController.sortList((Recipe a, Recipe b) {
-                          return a.name.compareTo(b.name);
-                        });
-                      },
-                    ),
-                    AutoSizeText(
-                      'Time',
-                      style: TextStyle(color: Colors.grey),
-                      maxLines: 1,
-                      maxFontSize: 20.0,
-                    ),
-                  ],
-                ),
-              ),
+      return Container(
+        decoration: BoxDecoration(
+          color: Colors.grey[50],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey[200],
+              blurRadius: 5.0,
+              spreadRadius: 2.0,
+              offset: Offset(0.0, 7.0)
+            )
+          ]
+        ),
+        child: TabBar(
+          controller: _tabController,
+          tabs: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 5.0, bottom: 5.0),
+              child: FlatButton.icon(
+                disabledTextColor: Colors.grey[700],
+                onPressed: null, icon: Icon(Icons.filter_list), label: Text("Custom"),),
             ),
-
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.warning, 
-                        color: Colors.black87,
-                      ),
-                      onPressed: () {
-                        widget.callSearchScreenDiet();
-                      },
-                    ),
-                    AutoSizeText(
-                      'Diet',
-                      style: TextStyle(color: Colors.grey),
-                      maxLines: 1,
-                      maxFontSize: 20.0,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.location_on, 
-                        color: Colors.black87,
-                      ),
-                      onPressed: () {
-                        widget.callSearchScreenCuisine();
-                      },
-                    ),
-                    AutoSizeText(
-                      'Cuisine',
-                      style: TextStyle(color: Colors.grey),
-                      maxLines: 1,
-                      maxFontSize: 20.0,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        filterUp ? FontAwesomeIcons.sortAlphaUp : FontAwesomeIcons.sortAlphaDown, 
-                        color: Colors.black87,
-                      ),
-                      onPressed: () {
-                        filterUp ? widget.searchController.sortList((Recipe a, Recipe b) {
-                          return b.name.compareTo(a.name);
-                        }) : widget.searchController.sortList((Recipe a, Recipe b) {
-                          return a.name.compareTo(b.name);
-                        });  
-                        setState(() {
-                          filterUp = !filterUp;
-                        });
-                      },
-                    ),
-                    AutoSizeText(
-                      'Sort',
-                      style: TextStyle(color: Colors.grey),
-                      maxLines: 1,
-                      maxFontSize: 20.0,
-                    ),
-                  ],
-                ),
-              ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 5.0, bottom: 5.0),
+              child: FlatButton.icon(
+                disabledTextColor: Colors.grey[700],
+                onPressed: null, icon: Icon(Icons.person_outline), label: Text("Profile"),),
             ),
           ],
+          indicator: UnderlineTabIndicator(
+            borderSide: BorderSide(color: Colors.red[400], width: 2.0),
+            insets: EdgeInsets.symmetric(horizontal: 70.0)),
+          labelColor: Colors.grey[800],
+          unselectedLabelColor: Colors.grey[600],
         ),
-        Divider(thickness: 1.0, indent: 5.0, endIndent: 5.0,),
-      ],
-    );
-  }
+      );
+    }
 
+    Align cancelWidget = Align(
+      alignment: Alignment.centerRight,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Container(
+          height: 50.0,
+          width: 50.0,
+          decoration: BoxDecoration(
+            color: Colors.white70,
+            borderRadius: BorderRadius.circular(30.0)
+          ),
+          child: Center(child: 
+              IconButton(
+                onPressed: () {
+                  // widget.searchController.clear();
+                  // FocusScope.of(context).unfocus();
+                },
+                icon: Icon(Icons.cancel))
+            ),
+        ),
+      ),
+    );
   @override
   Widget build(BuildContext context) {
 
@@ -381,24 +293,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
       ),
     );
 
-    Row emptyWidget = Row(
-      children: <Widget>[
-        Align(
-          alignment: Alignment.topRight,
-          child: Container(
-            child: Text(
-              'No results found',
-              style: TextStyle(
-                fontSize: 20.0,
-                color: Colors.white
-              ),
-              )
-            ),
-        ),
-      ],
-    );
-
     return SearchBar<Recipe>(
+
       searchBarStyle: SearchBarStyle(
         backgroundColor: Colors.white,
         borderRadius: BorderRadius.circular(30.0),
@@ -410,23 +306,24 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
       hintStyle: TextStyle(
         color: Colors.grey[400],
       ),
+
       shrinkWrap: true,
-      headerPadding: EdgeInsets.all(5.0),
-      searchBarPadding: EdgeInsets.only(left: 15.0, right: 15.0),
+
+      // headerPadding: EdgeInsets.all(5.0),
+      searchBarPadding: EdgeInsets.only(left: 20.0, right: 20.0),
       searchBarController: widget.searchController,
+      
+      header: buildHeaderRow(),
+
       cancellationWidget: cancelWidget,
       onError: (Error error) { return Text(error.toString());},
       onCancelled: () {
         print('Cancel Search');
       },
 
-      header: buildHeaderRow(),
-
       debounceDuration: Duration(milliseconds: 1500),
-      emptyWidget: emptyWidget,
-
       minimumChars:2,
-      onSearch: search, 
+      onSearch: search,
       onItemFound: (Recipe recipe, int index) {
 
         return Container(
