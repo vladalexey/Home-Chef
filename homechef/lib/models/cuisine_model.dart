@@ -16,75 +16,99 @@ class Cuisine {
 }
 
 
-// final List<Recipe> recipes = [
-//   Recipe(
-//     id: '1',
-//     imageUrl: 'assets/imgs/food4.jpg',
-//     name: 'Sushi',
-//     description: 'Lorem ipsum dolor sit amet.',
-//     ingredients: [],
-//     instruction: []
-//   ),
-//   Recipe(
-//     id: '2',
-//     imageUrl: 'assets/imgs/food5.jpg',
-//     name: 'Yellow Curry',
-//     description: 'Lorem ipsum dolor sit amet.',
-//     ingredients: [],
-//     instruction: []
-//   ),
-//   Recipe(
-//     id: '3',
-//     imageUrl: 'assets/imgs/food6.jpg',
-//     name: 'Cheeseburger',
-//     description: 'Lorem ipsum dolor sit amet.',
-//     ingredients: [],
-//     instruction: []
-//   ),
-// ];
+Map<String, bool> cuisine_list = {
+  'African': false,
+  'American': false,
+  'British': false,
+  'Cajun': false,
+  'Caribbean': false,
+  'Chinese': false,
+  'Eastern European': false,
+  'European': false,
+  'French': false,
+  'German': false,
+  'Greek': false,
+  'Indian': false,
+  'Irish': false,
+  'Italian': false,
+  'Japanese': false,
+  'Jewish': false,
+  'Korean': false,
+  'Latin American': false,
+  'Mediterranean': false,
+  'Mexican': false,
+  'Middle Eastern': false,
+  'Nordic': false,
+  'Southern': false,
+  'Spanish': false,
+  'Thai': false,
+  'Vietnamese': false,
+};
 
-List<String> cuisine_list = [
-  'African',
+Map<String, List<String>> cuisineGroups = {
+  "African": african,
+  "Asian": asian,
+  "America": america,
+  "Euroupe": euroupe,
+  "Middle Eastern": middle_eastern
+};
+
+List<String> african = [
+  'African'
+];
+
+List<String> asian = [
+  'Chinese',
+  'Indian',
+  'Japanese',
+  'Korean',
+  'Thai',
+  'Vietnamese',
+];
+
+List<String> america = [
   'American',
-  'British',
   'Cajun',
   'Caribbean',
-  'Chinese',
-  'Eastern European',
+  'Latin American',
+  'Mexican',
+  'Southern',
+];
+
+List<String> euroupe = [
+  'British',
   'European',
+  'Eastern European',
   'French',
   'German',
   'Greek',
   'Indian',
   'Irish',
   'Italian',
-  'Japanese',
-  'Jewish',
-  'Korean',
-  'Latin American',
   'Mediterranean',
-  'Mexican',
-  'Middle Eastern',
   'Nordic',
-  'Southern',
-  'Spanish',
-  'Thai',
-  'Vietnamese',
+  'Spanish'
 ];
+
+List<String> middle_eastern = [
+  'Jewish',
+  'Middle Eastern',
+];
+
 
 String encodeCuisineName(String toEncode) {
   return toEncode.replaceAll(' ', '').toLowerCase();
 }
 
-Map<String, bool> cuisineOptions = Map.fromIterable(cuisine_list,
+Map<String, bool> cuisineOptions = Map.fromIterable(cuisine_list.keys,
   key: (cuisine) => encodeCuisineName(cuisine),
   value: (_) => false
 );
 
-List<Cuisine> cuisines = new List<Cuisine>.generate(cuisine_list.length, (int index) {
+List<Cuisine> cuisines = new List<Cuisine>.generate(cuisine_list.keys.length, (int index) {
   return new Cuisine(
-    imageUrl: 'assets/imgs/' + encodeCuisineName(cuisine_list[index]) + '.jpg',
-    name: cuisine_list[index],
+    imageUrl: 'assets/imgs/' + encodeCuisineName(cuisine_list.keys.toList()[index]) + '.jpg',
+    name: cuisine_list.keys.toList()[index],
     description: 'Lorem ipsum dolor sit amet.',
     recipes: recipes
   );
