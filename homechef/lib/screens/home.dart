@@ -10,7 +10,7 @@ import 'package:homechef/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:homechef/screens/search_screen_new.dart';
+import 'package:homechef/screens/search_screen.dart';
 import 'package:homechef/widgets/carousels/cuisine_carousel.dart';
 import 'package:homechef/widgets/carousels/diet_carousel.dart';
 import 'package:homechef/widgets/carousels/popular_carousel.dart';
@@ -105,17 +105,6 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
-            //   child: Text(
-            //     "Hi Quan",
-            //     style: GoogleFonts.montserrat(
-            //         textStyle: TextStyle(
-            //             fontSize: 25,
-            //             color: Colors.grey[900],
-            //             fontWeight: FontWeight.w700)),
-            //   ),
-            // ),
             Text(
                 "What would you like to make?",
                 style: GoogleFonts.montserrat(
@@ -137,10 +126,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: IconButton(
                   icon: Icon(
                     Icons.search,
-                    // size: 22.0,
                   ),
                   onPressed: () => Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => SearchScreenNew())),
+                      MaterialPageRoute(builder: (_) => SearchScreen())),
                 ),
               ),
             ),
@@ -196,46 +184,45 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  SafeArea homeScreen() {
-    return SafeArea(
-      child: Theme(
-        data: ThemeData.light(),
-        child: Stack(
-          children: <Widget>[
-            SizedBox.expand(
-                child: Container(
-              color: Colors.white,
-            )),
-            Scrollbar(
-              child: ListView(
-                children: <Widget>[
-                  introPart(),
+  Widget homeScreen() {
+    return Scaffold(
+      body: SafeArea(
+        child: Theme(
+          data: ThemeData.light(),
+          child: Stack(
+            children: <Widget>[
+              SizedBox.expand(
+                  child: Container(
+                color: Colors.white,
+              )),
+              Scrollbar(
+                child: ListView(
+                  children: <Widget>[
+                    introPart(),
 
-                  suggestionsBuilder(),
+                    suggestionsBuilder(),
 
-                  Container(
-                      color: Colors.white, child: buildGradientTopCarousel()),
+                    Container(
+                        color: Colors.white, child: buildGradientTopCarousel()),
 
-                  Container(color: Colors.white, child: PopularCarouselPage()),
-                  // Divider(height: 0.5,),
+                    Container(color: Colors.white, child: PopularCarouselPage()),
 
-                  SizedBox(
-                    height: 20.0,
-                  ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
 
-                  CuisineCarousel(),
-                  SizedBox(height: 20.0),
+                    CuisineCarousel(),
+                    SizedBox(height: 20.0),
 
-                  // Divider(indent: 8.0, endIndent: 8.0,),
-                  DietCarousel(),
-                  SizedBox(height: 10.0),
+                    DietCarousel(),
+                    SizedBox(height: 10.0),
 
-                  // Divider(indent: 8.0, endIndent: 8.0,),
-                  TimeCarousel(),
-                ],
+                    TimeCarousel(),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -243,9 +230,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(
-    //   SystemUiOverlayStyle(statusBarBrightness: Brightness.light) // Or Brightness.dark
-    // );
 
     return DefaultTabController(
       length: 2,
