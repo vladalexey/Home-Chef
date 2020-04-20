@@ -20,9 +20,10 @@ class Recipe {
   int rate;
   int cookTime;
   int servings;
-  int calories;
+  double calories;
   List<Ingredient> ingredients;
   List<Instruction> instruction;
+  String author;
 
   Recipe({
     this.id,
@@ -35,7 +36,18 @@ class Recipe {
     this.servings = 2,
     this.ingredients = const [],
     this.instruction = const [],
+    this.author = 'FoodNetwork'
   });
+}
+
+List<Ingredient> getIngredientsOffline(Map<String, dynamic> ingredientResp) {
+  
+  return IngredientList.fromJson(ingredientResp).ingredients;
+}
+
+List<Instruction> getInstructionsOffline(List<dynamic> instructionResp) {
+  
+  return InstructionList.fromJson(instructionResp).instructions;  
 }
 
 Future<List<Ingredient>> getIngredients(Recipe recipe) async {
