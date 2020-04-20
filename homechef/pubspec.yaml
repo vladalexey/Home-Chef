@@ -119,9 +119,12 @@ flutter:
    - assets/imgs/food9.jpg
    - assets/imgs/food10.jpg
 
-   - assets/imgs/15min.jpg
-   - assets/imgs/30min.jpg
-   - assets/imgs/45min.jpg
+   - assets/imgs/15.jpg
+   - assets/imgs/30.jpg
+   - assets/imgs/60.jpg
+   - assets/imgs/90.jpg
+   - assets/imgs/120.jpg
+   - assets/imgs/180.jpg
 
    - assets/imgs/cuisines.jpg
    - assets/imgs/diet.jpg
