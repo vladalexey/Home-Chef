@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/diet_model.dart';
+import 'package:homechef/models/nutrients/nutrients_list_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -43,7 +44,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
     String _cuisine = '';
     String _time = '';
 
-    String apiKey = await getFileData('assets/API_KEY_RAPIDAPI.txt');
+    String apiKey = await getFileData('assets/API_KEY.txt');
     Map<String, String> _headers;
 
     List<Recipe> apiResult = [];
@@ -75,12 +76,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
 
     // Get list recipe IDs with search text
 
-    // String baseURL = 'https://api.spoonacular.com';
-    String baseURL = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
+    String baseURL = 'https://api.spoonacular.com';
+    // String baseURL = 'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
 
-    String searchURL = baseURL + '/recipes/search?query=' + text + 
+    String searchURL = baseURL + '/recipes/complexSearch?query=' + text + 
       _cuisine + _diet + _time +
-      '&number=5&apiKey=' + apiKey;
+      "addRecipeInformation=true&addRecipeNutrition=true" +
+      '&number=1&apiKey=' + apiKey;
 
     if (searchURL.contains('rapidapi')) {
        _headers = {
@@ -96,16 +98,21 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
     if (searchResult.statusCode == 200) {
 
       final Map<String, dynamic> result = json.decode(searchResult.body);
-      
+
       for (Map<String, dynamic> obj in result['results']) {
 
         Recipe newRecipe = new Recipe(
           id: obj['id'].toString(),
-          imageUrl: 'https://spoonacular.com/recipeImages/' + obj['id'].toString() + '-556x370.jpg' ,
+          imageUrl: obj['image'] ,
           name: obj['title'],
           cookTime: obj['readyInMinutes'],
+          servings: obj['servings'],
         );
 
+        newRecipe.ingredients = getIngredientsOffline(obj['nutrition']);
+        newRecipe.instruction = getInstructionsOffline(obj['analyzedInstructions']);
+        
+        newRecipe.calories = NutrientList.fromJson(obj['nutrition']).getCalories();
         apiResult.add(
           newRecipe
         );
