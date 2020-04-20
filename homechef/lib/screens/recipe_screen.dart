@@ -374,46 +374,12 @@ class _RecipePageState extends State<RecipePage>
                 controller: _tabController,
               ),
 
-              // SizedBox(
-              //   height: 5.0,
-              // ),
-
               Expanded(
                 child: TabBarView(controller: _tabController, children: [
-                  FutureBuilder<List>(
-                      future: getIngredients(widget.recipe),
-                      builder:
-                          (BuildContext context, AsyncSnapshot<List> snapshot) {
-                        print(snapshot.data);
-
-                        if (snapshot.hasError)
-                          return ErrorWidget(snapshot.error);
-                        if (snapshot.hasData) {
-                          return displayIngredientList();
-                        } else {
-                          return Center(
-                            child: new Container(
-                                child: const CircularProgressIndicator()),
-                          );
-                        }
-                      }),
-                  FutureBuilder<List>(
-                      future: getInstructions(widget.recipe),
-                      builder:
-                          (BuildContext context, AsyncSnapshot<List> snapshot) {
-                        print(snapshot.data);
-
-                        if (snapshot.hasError)
-                          return ErrorWidget(snapshot.error);
-                        if (snapshot.hasData) {
-                          return displayInstructionList();
-                        } else {
-                          return Center(
-                            child: Container(
-                                child: const CircularProgressIndicator()),
-                          );
-                        }
-                      }),
+                  
+                  displayIngredientList(),
+                  displayInstructionList(),
+                  
                 ]),
               )
             ]));
