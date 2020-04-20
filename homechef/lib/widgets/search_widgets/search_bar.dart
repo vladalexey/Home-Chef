@@ -6,6 +6,7 @@ import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/models/nutrients/nutrients_list_model.dart';
 import 'package:homechef/models/recipe_model.dart';
+import 'package:homechef/models/time_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:homechef/widgets/rating_stars.dart';
@@ -70,9 +71,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
     _cuisine = _cuisine.substring(0, _cuisine.length - 1);
     
 
-    // if (time != null) {
-    //   _time = '&time=' + time.name;
-    // }
+    if (timesOptions.containsValue(true)) {
+      _time = '&maxReadyTime=';
+
+      for (String key in timesOptions.keys) {
+        if (timesOptions[key]) _time += getMinutes(key);
+      }
+    }
 
     // Get list recipe IDs with search text
 
@@ -81,8 +86,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
 
     String searchURL = baseURL + '/recipes/complexSearch?query=' + text + 
       _cuisine + _diet + _time +
-      "addRecipeInformation=true&addRecipeNutrition=true" +
-      '&number=1&apiKey=' + apiKey;
+      "&addRecipeInformation=true&addRecipeNutrition=true" +
+      '&number=4&apiKey=' + apiKey;
 
     if (searchURL.contains('rapidapi')) {
        _headers = {
@@ -111,7 +116,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> with TickerProviderSt
 
         newRecipe.ingredients = getIngredientsOffline(obj['nutrition']);
         newRecipe.instruction = getInstructionsOffline(obj['analyzedInstructions']);
-        
+
         newRecipe.calories = NutrientList.fromJson(obj['nutrition']).getCalories();
         apiResult.add(
           newRecipe
