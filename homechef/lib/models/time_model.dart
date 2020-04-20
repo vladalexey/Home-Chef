@@ -15,51 +15,47 @@ class Time {
   });
 }
 
+Map<String, bool> timesOptions = {
+  "Under 180 minutes": false,
+  "Under 120 minutes": false,
+  "Under 90 minutes": false,
+  "Under 60 minutes": false,
+  "Under 30 minutes": false,
+  "Under 15 minutes": false,
+};
 
-// final List<Recipe> recipes = [
-//   Recipe(
-//     id: '1',
-//     imageUrl: 'assets/imgs/food4.jpg',
-//     name: 'Sushi',
+String getMinutes(String timeOption) {
+  print(timeOption.split(' '));
+  return (timeOption.split(' ')[1]);
+}
+
+List<Time> times = new List<Time>.generate(timesOptions.keys.length, (int index) {
+  return new Time(
+    imageUrl: 'assets/imgs/' + getMinutes(timesOptions.keys.toList()[index]) + '.jpg',
+    name: timesOptions.keys.toList()[index],
+    description: timesOptions.keys.toList()[index],
+    recipes: recipes
+  );
+});
+
+
+// final List<Time> times = [
+//   Time(
+//     imageUrl: 'assets/imgs/45min.jpg',
+//     name: '45 minutes',
 //     description: 'Lorem ipsum dolor sit amet.',
-//     ingredients: [],
-//     instruction: []
+//     recipes: recipes,
 //   ),
-//   Recipe(
-//     id: '2',
-//     imageUrl: 'assets/imgs/food5.jpg',
-//     name: 'Yellow Curry',
+//   Time(
+//     imageUrl: 'assets/imgs/30min.jpg',
+//     name: '30 minutes',
 //     description: 'Lorem ipsum dolor sit amet.',
-//     ingredients: [],
-//     instruction: []
+//     recipes: recipes,
 //   ),
-//   Recipe(
-//     id: '3',
-//     imageUrl: 'assets/imgs/food6.jpg',
-//     name: 'Cheeseburger',
+//   Time(
+//     imageUrl: 'assets/imgs/15min.jpg',
+//     name: '15 minutes',
 //     description: 'Lorem ipsum dolor sit amet.',
-//     ingredients: [],
-//     instruction: []
+//     recipes: recipes,
 //   ),
 // ];
-
-final List<Time> times = [
-  Time(
-    imageUrl: 'assets/imgs/45min.jpg',
-    name: '45 minutes',
-    description: 'Lorem ipsum dolor sit amet.',
-    recipes: recipes,
-  ),
-  Time(
-    imageUrl: 'assets/imgs/30min.jpg',
-    name: '30 minutes',
-    description: 'Lorem ipsum dolor sit amet.',
-    recipes: recipes,
-  ),
-  Time(
-    imageUrl: 'assets/imgs/15min.jpg',
-    name: '15 minutes',
-    description: 'Lorem ipsum dolor sit amet.',
-    recipes: recipes,
-  ),
-];
