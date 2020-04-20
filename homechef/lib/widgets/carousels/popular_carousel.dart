@@ -120,50 +120,64 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
                             ],
                           ),
 
-                          Container(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 0.0, right: 0.0),
-                              child: Text(
-                                populars[index].name,
-                                // maxFontSize: 22,
-                                maxLines: 1,
-                                style: GoogleFonts.lato(
-                                  textStyle: TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.w700,
+                          Flexible(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+
+                                Expanded(
+                                  flex: 2,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0, top: 5.0),
+                                    child: Text(
+                                      populars[index].name,
+                                      maxLines: 1,
+                                      style: GoogleFonts.lato(
+                                        textStyle: TextStyle(
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                        color: Colors.grey[900],
+                                        letterSpacing: 0.2
+                                      ),
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
-                                  color: Colors.grey[900],
-                                  letterSpacing: 0.2
                                 ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            )
+
+                                Flexible(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 5.0, right: 10.0),
+                                    child: RatingStars(rating: populars[index].rate, color: Colors.grey[700],)
+                                  ),
+                                ),
+
+                              ],
+                            ),
                           ),
 
-                          Container(
+                          Flexible(
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 3.0, right: 10.0),
-                              child: RatingStars(rating: populars[index].rate, color: Colors.grey[700],)
-                            )
+                              padding: const EdgeInsets.only(left: 20.0, top: 2.0, right: 0.0),
+                              child: Text(
+                                populars[index].cookTime.toString() + " minutes",
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                    color: Colors.grey[500],
+                                    fontSize: 13.0,
+                                    fontWeight: FontWeight.w500
+                                  )
+                                ),
+                              ),
+                            ),
                           )
-                          
+
                         ],
                       ),
                     ),
                   ),
-
-                  
-                  
-                  // Align(
-                  //   alignment: Alignment.topCenter,
-                  //   child: 
-                  // ),
-                      
-                  // Positioned(
-                  //   top: 10.0,
-                  //   child: 
-                  // ),
-
                   
                 ]
               ),
