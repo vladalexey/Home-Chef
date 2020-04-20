@@ -165,10 +165,6 @@ flutter:
    - assets/imgs/thai.jpg
    - assets/imgs/vietnamese.jpg
 
-   - assets/sample_instruction_spoonacular.txt
-   - assets/sample_ingredients_spoonacular.json
-   - assets/sample_search_result.json
-
    - assets/API_KEY.txt
    - assets/API_KEY_RAPIDAPI.txt
 
