@@ -1,13 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:homechef/models/diet_model.dart';
-import 'package:homechef/models/ingredients/ingredient_model.dart';
-import 'package:homechef/models/instructions/instruction_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/search_screen.dart';
+import 'package:homechef/widgets/helpers/recipe_helper.dart';
 import 'package:homechef/widgets/rating_stars.dart';
 
 class RecipePage extends StatefulWidget {
@@ -19,13 +18,92 @@ class RecipePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<RecipePage>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   TabController _tabController;
+  ScrollController _scrollController, _scrollControllerIns, _scrollControllerIng;
+  AnimationController _controller;
+  Animation<double> animation;
+  Animation curve;
+  double height, width;
+  bool isScrollDown = false;
+  bool isShow = true;
+  bool initScreen = true;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+    _scrollControllerIns = ScrollController();
+    _scrollControllerIng = ScrollController();
+
+    _scrollController.addListener( () {
+      if (_scrollController.position.userScrollDirection == ScrollDirection.reverse) {
+        if (!isScrollDown) {
+          initScreen = false;
+          isScrollDown = true;
+          isShow = false;  
+          _controller.forward();
+        }
+      }
+      if (_scrollController.position.userScrollDirection == ScrollDirection.forward) {
+        if (isScrollDown) {
+          isScrollDown = false;
+          isShow = true;
+          _controller.reverse(); 
+        }
+      }
+    });
+
+    _scrollControllerIng.addListener(() {
+      if (_scrollControllerIng.position.userScrollDirection == ScrollDirection.reverse) {
+        if (!isScrollDown) {
+          initScreen = false;
+          isScrollDown = true;
+          isShow = false;  
+          _controller.forward();
+        }
+      }
+      if (_scrollControllerIng.position.userScrollDirection == ScrollDirection.forward) {
+        if (isScrollDown) {
+          isScrollDown = false;
+          isShow = true;
+          _controller.reverse(); 
+        }
+      }
+    });
+
+    _scrollControllerIns.addListener( () {
+      if (_scrollControllerIns.position.userScrollDirection == ScrollDirection.reverse) {
+        if (!isScrollDown) {
+          initScreen = false;
+          isScrollDown = true;
+          isShow = false;  
+          _controller.forward();
+        }
+      }
+      if (_scrollControllerIns.position.userScrollDirection == ScrollDirection.forward) {
+        if (isScrollDown) {
+          isScrollDown = false;
+          isShow = true;
+          _controller.reverse(); 
+        }
+      }
+    });
+
     _tabController = new TabController(length: 2, vsync: this);
+    _controller = new AnimationController(
+        vsync: this, duration: Duration(milliseconds: 200));
+    
+    curve = CurvedAnimation(parent: _controller, curve: Curves.linearToEaseOut);
+  }
+
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+    _scrollControllerIns.dispose();
+    _scrollController.dispose();
+    _scrollControllerIng.dispose();
+    _tabController.dispose();
   }
 
   List<IconData> iconCards = [
@@ -34,43 +112,11 @@ class _RecipePageState extends State<RecipePage>
     Ionicons.ios_flame
   ];
 
-  String parseIngredients(List<Ingredient> ingredients) {
-    String res = '';
-
-    for (var ingredient in ingredients) {
-      res = res +
-          ingredient.name.substring(0, 1).toUpperCase() +
-          ingredient.name.substring(1) +
-          '\n\n';
-    }
-    return res;
-  }
-
-  String parseAmount(List<Ingredient> ingredients) {
-    String res = '';
-
-    for (var ingredient in ingredients) {
-      res = res +
-          ingredient.amount.toString() + ' ' +
-          ingredient.unit +
-          '\n\n';
-    }
-    return res;
-  }
-
-  String parseInstruction(List<Instruction> instructions) {
-    String res = '';
-
-    for (var index = 1; index <= instructions.length; index++) {
-      res = res + '\u2022 \t\t' + instructions[index - 1].instruction + '\n\n';
-    }
-    return res;
-  }
-
   Widget displayIngredientList() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.8,
       child: ListView(
+        controller: _scrollControllerIng,
         children: <Widget>[
           // LIST INGREDIENTS
           Padding(
@@ -79,7 +125,6 @@ class _RecipePageState extends State<RecipePage>
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-
                 Text(
                   parseIngredients(widget.recipe.ingredients),
                   style: TextStyle(
@@ -89,7 +134,6 @@ class _RecipePageState extends State<RecipePage>
                     letterSpacing: 0.2,
                   ),
                 ),
-
                 Text(
                   parseAmount(widget.recipe.ingredients),
                   style: TextStyle(
@@ -111,6 +155,7 @@ class _RecipePageState extends State<RecipePage>
     return Container(
       width: MediaQuery.of(context).size.width * 0.8,
       child: ListView(
+        controller: _scrollControllerIns,
         children: <Widget>[
           // LIST INSTRUCTIONs
           Padding(
@@ -136,17 +181,20 @@ class _RecipePageState extends State<RecipePage>
     return Container(
       height: MediaQuery.of(context).size.height * 0.45,
       width: MediaQuery.of(context).size.width,
-      // color: Colors.blue,
       child: Stack(
         children: <Widget>[
           Positioned(
             top: 0.0,
-            child: (widget.recipe.imageUrl.contains("asset"))
-                ? Image(image: AssetImage(widget.recipe.imageUrl))
-                : Image.network(
-                    widget.recipe.imageUrl,
-                    fit: BoxFit.cover,
-                  ),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.5,
+              width: MediaQuery.of(context).size.width,
+              child: (widget.recipe.imageUrl.contains("asset"))
+                  ? Image(image: AssetImage(widget.recipe.imageUrl), fit: BoxFit.cover,)
+                  : Image.network(
+                      widget.recipe.imageUrl,
+                      fit: BoxFit.cover,
+                    ),
+            ),
           ),
           Positioned(
             top: 0.0,
@@ -158,11 +206,13 @@ class _RecipePageState extends State<RecipePage>
                       begin: FractionalOffset.topCenter,
                       end: FractionalOffset.bottomCenter,
                       colors: [
-                    Colors.grey[700].withOpacity(0.2),
+                    Colors.black.withOpacity(0.5),
+                    Colors.black.withOpacity(0.1),
                     Colors.black.withOpacity(0.8),
                   ],
                       stops: [
                     0.0,
+                    0.3,
                     1.0
                   ])),
             ),
@@ -201,13 +251,14 @@ class _RecipePageState extends State<RecipePage>
             ),
           ),
           Positioned(
-            bottom: MediaQuery.of(context).size.height * 0.1,
+            bottom: MediaQuery.of(context).size.height * 0.05,
             left: 20.0,
             right: 20.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
+
                 Padding(
                   padding: const EdgeInsets.only(left: 15.0),
                   child: Align(
@@ -231,20 +282,18 @@ class _RecipePageState extends State<RecipePage>
                           MediaQuery.of(context).size.width * 0.8)),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 18.0, right: 10.0),
-                        child: AutoSizeText(
-                          widget.recipe.name,
-                          maxFontSize: 45,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(
-                            // shadows: Sha,
-                            fontSize: 45.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                          color: Colors.white.withOpacity(0.9),
-                        )
-                        ),
+                        child: AutoSizeText(widget.recipe.name,
+                            maxFontSize: 45,
+                            minFontSize: 25,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                fontSize: 45.0,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              color: Colors.white.withOpacity(0.9),
+                            )),
                       ),
                     )
                   ],
@@ -252,8 +301,13 @@ class _RecipePageState extends State<RecipePage>
                 Row(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0, bottom: 10.0),
-                      child: RatingStars(rating: widget.recipe.rate, color: Colors.grey[200],),
+                      padding: const EdgeInsets.only(
+                          left: 20.0, bottom: 15.0, top: 10.0),
+                      child: RatingStars(
+                        rating: widget.recipe.rate,
+                        color: Colors.grey[200],
+                        borderColor: Colors.grey[200],
+                      ),
                     )
                   ],
                 )
@@ -267,128 +321,141 @@ class _RecipePageState extends State<RecipePage>
 
   Widget buildInstructionIngredients(height, width) {
     List<String> nameCards = [
-      widget.recipe.cookTime.toString() + "\'",
+      widget.recipe.cookTime.toString() + " mins",
       widget.recipe.servings.toString() + " servings",
-      widget.recipe.calories.toString() + " cal"
+      widget.recipe.calories.truncate().toString() + " cal"
     ];
 
-    return Container(
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(40.0)),
-        height: height * 0.65,
-        width: width,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Divider(
-                color: Colors.grey[200],
-                indent: 80.0,
-                endIndent: 80.0,
-                thickness: 3.0,
-              ),
-              SizedBox(height: 20.0),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                child: Row(
+    return GestureDetector(
+      onVerticalDragUpdate: (details) {
+        if (details.primaryDelta < 0) _controller.forward();
+        else if (details.primaryDelta > 0) _controller.reverse(); 
+      },
+      child: AnimatedBuilder(
+          animation: _controller,
+          builder: (_, child) {
+            return Container(
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(40.0)),
+                height: animation.value,
+                width: width,
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      for (var idx = 0; idx < iconCards.length; idx++)
-                        Container(
-                          height: width * 0.25,
-                          width: width * 0.25,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.transparent),
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey[200],
-                                  blurRadius: 6.0,
-                                  spreadRadius: 0.0,
-                                  offset: Offset(4.0, 2.0))
-                            ],
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                          child: Center(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Icon(
-                                    iconCards[idx],
-                                    size: 20.0,
-                                    color: Colors.grey[300],
+                      Divider(
+                        color: Colors.grey[200],
+                        indent: 80.0,
+                        endIndent: 80.0,
+                        thickness: 3.0,
+                      ),
+                      SizedBox(height: 0.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              for (var idx = 0; idx < iconCards.length; idx++)
+                                Container(
+                                  height: width * 0.25,
+                                  width: width * 0.25,
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.transparent),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Padding(
+                                          padding: const EdgeInsets.all(4.0),
+                                          child: Icon(
+                                            iconCards[idx],
+                                            size: 20.0,
+                                            color: Colors.grey[300],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(5.0),
+                                          child: Text(
+                                            nameCards[idx],
+                                            style: TextStyle(
+                                                fontSize: 14.0,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.grey[800]),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: Text(
-                                    nameCards[idx],
-                                    style: TextStyle(
-                                        fontSize: 14.0,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.grey[800]),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                            ]),
+                      ),
+                      Divider(
+                        indent: 50.0,
+                        endIndent: 50.0,
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
                         ),
-                    ]),
-              ),
-
-              SizedBox(
-                height: 20.0,
-              ),
-
-              TabBar(
-                tabs: <Widget>[
-                  Tab(
-                    child: Text(
-                      "Ingredients",
-                    ),
-                  ),
-                  Tab(
-                    child: Text(
-                      "Directions",
-                    ),
-                  ),
-                ],
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorColor: Colors.yellow,
-                labelColor: Colors.grey[700],
-                labelStyle: GoogleFonts.overpass(
-                    textStyle: TextStyle(
-                        fontSize: 22.0,
-                        color: Colors.grey[700],
-                        fontWeight: FontWeight.w800)),
-                unselectedLabelStyle: GoogleFonts.overpass(
-                    textStyle: TextStyle(
-                        fontSize: 22.0,
-                        color: Colors.grey[500],
-                        fontWeight: FontWeight.w700)),
-                unselectedLabelColor: Colors.grey[400],
-                controller: _tabController,
-              ),
-
-              Expanded(
-                child: TabBarView(controller: _tabController, children: [
-                  
-                  displayIngredientList(),
-                  displayInstructionList(),
-                  
-                ]),
-              )
-            ]));
+                        child: TabBar(
+                          tabs: <Widget>[
+                            Tab(
+                              child: Text(
+                                "Ingredients",
+                              ),
+                            ),
+                            Tab(
+                              child: Text(
+                                "Directions",
+                              ),
+                            ),
+                          ],
+                          indicatorSize: TabBarIndicatorSize.label,
+                          indicatorColor: Colors.yellow,
+                          indicatorWeight: 2.0,
+                          labelColor: Colors.grey[700],
+                          labelStyle: GoogleFonts.overpass(
+                              textStyle: TextStyle(
+                                  fontSize: 22.0,
+                                  color: Colors.grey[700],
+                                  fontWeight: FontWeight.w800)),
+                          unselectedLabelStyle: GoogleFonts.overpass(
+                              textStyle: TextStyle(
+                                  fontSize: 22.0,
+                                  color: Colors.grey[500],
+                                  fontWeight: FontWeight.w700)),
+                          unselectedLabelColor: Colors.grey[400],
+                          controller: _tabController,
+                        ),
+                      ),
+                      Expanded(
+                        child: TabBarView(controller: _tabController, children: [
+                          displayIngredientList(),
+                          displayInstructionList(),
+                        ]),
+                      )
+                    ]));
+          }),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
+    height = MediaQuery.of(context).size.height;
+    width = MediaQuery.of(context).size.width;
+
+    animation = Tween(
+      begin: height * 0.6, 
+      end: height * 0.8,).animate(curve);
 
     return GestureDetector(
       onTap: () {
