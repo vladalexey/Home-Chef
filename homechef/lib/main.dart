@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:homechef/BLoC/bloc_filter_noti.dart';
 import 'package:homechef/BLoC/bloc_provider.dart';
-import 'package:homechef/screens/home.dart';
+import 'package:homechef/screens/menu_dashboard.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,8 +33,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
 
           ),
-          // darkTheme: ThemeData(),
-          home: MyHomePage(title: 'Home Chef'),
+          home: MenuDashboard(),
           
           
         ),
