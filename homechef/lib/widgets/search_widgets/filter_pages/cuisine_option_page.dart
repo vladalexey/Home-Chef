@@ -53,7 +53,10 @@ class _CuisineOptionPageState extends State<CuisineOptionPage> {
                       });
 
                       final notiFilterBloc = BlocProvider.of<NotiFilterBloc>(context);
-                      notiFilterBloc.modifyNoti(numFilters());
+                      final newFilterChanges = {
+                        'numNoti': numFilters(),
+                      };
+                      notiFilterBloc.modifyNoti(newFilterChanges);
                     },
                     selected: cuisine_list[currentKey],
                     backgroundColor: Colors.yellow[600],

@@ -31,7 +31,10 @@ class _TimeOptionPageState extends State<TimeOptionPage> {
               });
 
               final notiFilterBloc = BlocProvider.of<NotiFilterBloc>(context);
-              notiFilterBloc.modifyNoti(numFilters());
+              final newFilterChanges = {
+                'numNoti': numFilters(),
+              };
+              notiFilterBloc.modifyNoti(newFilterChanges);
             },
             selected: timesOptions[times[index].name],
             selectedColor: Colors.yellow[400],
