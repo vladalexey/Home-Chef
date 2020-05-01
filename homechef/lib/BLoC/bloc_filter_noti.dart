@@ -5,15 +5,24 @@ import 'package:homechef/BLoC/bloc.dart';
 class NotiFilterBloc implements Bloc {
   
   int _numNoti = 0;
+  bool _saveProfileSelect = false;
+  Map<String, dynamic> _filterChanges = {
+    'numNoti': 0,
+    'saveProfileSeleect': false
+  };
+
   int get selectedNoti => _numNoti;
-  
-  final _numNotiController = StreamController<int>.broadcast();
+  bool get saveProfileSelect => _saveProfileSelect;
+  Map get filterChanges => _filterChanges;
 
-  Stream<int> get notiStream => _numNotiController.stream;
+  final _numNotiController = StreamController<Map<String, dynamic>>.broadcast();
 
-  void modifyNoti(int numNoti) {
-    _numNoti = numNoti;
-    _numNotiController.sink.add(numNoti);
+  Stream<Map<String, dynamic>> get notiStream => _numNotiController.stream;
+
+  void modifyNoti(Map<String, dynamic> filterChanges) {
+    if (filterChanges.containsKey('numNoti')) _numNoti = filterChanges['numNoti'];
+    if (filterChanges.containsKey('saveProfileSelect')) _saveProfileSelect = filterChanges['saveProfileSelect'];
+    _numNotiController.sink.add(filterChanges);
   }
 
   @override
