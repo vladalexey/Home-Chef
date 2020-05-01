@@ -57,7 +57,7 @@ class _AllCuisinePageState extends State<AllCuisinePage> with SingleTickerProvid
       duration: Duration(milliseconds: 250)
     );
 
-    curve = CurvedAnimation(parent: _controller, curve: Curves.easeInOutExpo);
+    curve = CurvedAnimation(parent: _controller, curve: Curves.decelerate);
   }
 
   @override

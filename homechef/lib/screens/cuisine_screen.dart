@@ -8,6 +8,7 @@ import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
 import 'package:homechef/screens/search_screen.dart';
+import 'package:homechef/widgets/helpers/cuisine_helpers.dart';
 import 'package:homechef/widgets/rating_stars.dart';
 
 class CuisinePage extends StatefulWidget {
@@ -25,6 +26,7 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
   Animation<double> animation;
   Animation curve;
   ScrollController _scrollController;
+  
   bool isScrollDown = false;
   bool isShow = true;
   bool initScreen = true;
@@ -60,7 +62,7 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
       duration: Duration(milliseconds: 350)
     );
 
-    curve = CurvedAnimation(parent: _controller, curve: Curves.easeInOutQuart);
+    curve = CurvedAnimation(parent: _controller, curve: Curves.decelerate);
   }
 
   @override
@@ -72,162 +74,178 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
 
   Widget topPart() {
 
-    return Container(
-      height: animation.value,
-      width: mediaWidth,
-      child: Stack(
-        children: <Widget>[
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (_, child) {
+        return Container(
+        height: animation.value,
+        width: mediaWidth,
+        child: Stack(
+          children: <Widget>[
 
-          Container(
-            height: animation.value,
-            width: mediaWidth,
-            // decoration: BoxDecoration(  
-            //   borderRadius: BorderRadius.only(
-            //       bottomRight: Radius.circular(30.0),
-            //       bottomLeft: Radius.circular(30.0),
-            //     ),
-            //   boxShadow: [
-            //     BoxShadow(
-            //       color: Colors.black26,
-            //       offset: Offset(0.0, 2.0),
-            //       blurRadius: 6.0,
-            //     )
-            //   ],
-            // ),
-            child: Hero(
-              tag: widget.cuisine.imageUrl,
-              child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30.0),
-                  bottomLeft: Radius.circular(30.0),
-                ),
-                // borderRadius: BorderRadius.circular(30.0),
-                child: Image(
-                  image: AssetImage(widget.cuisine.imageUrl),
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-          
-          Container(
-            height: animation.value,
-            width: mediaWidth,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(30.0),
-                  bottomLeft: Radius.circular(30.0),
-                ),
-              gradient: LinearGradient(
-                begin: FractionalOffset.topCenter,
-                end: FractionalOffset.bottomCenter,
-                colors: [
-                  Colors.black.withOpacity(0.9),
-                  Colors.black12,
-                  Colors.black.withOpacity(0.9),
-                ],
-                stops: [
-                  0.0,
-                  0.5,
-                  1.0
-                ])
-            ),
-          ),
-
-          Positioned(
-            top: 30.0 + (animation.value - mediaWidth * 0.5) * 0.2,
-            child: Container(
+            Container(
+              height: animation.value,
               width: mediaWidth,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Flexible(
-                    flex: 1,
-                    child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios),
-                      iconSize: 30.0,
-                      color: Colors.white,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                  ), 
-                  Flexible(
-                    flex: 5,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.search),
-                          iconSize: 30.0,
-                          color: Colors.white,
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => SearchScreen())
-                          ),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.sort),
-                          iconSize: 30.0,
-                          color: Colors.white,
-                          onPressed: () => Navigator.pop(context),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-
-          Positioned(
-            bottom: 20.0,
-            child: Container(
-              width: mediaWidth,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget> [
-
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 18.0, bottom: 5.0, right: 15.0),
-                      child: SizedBox(
-                        width: mediaWidth * 0.5,
-                        child: Divider(
-                          height: 2.0,
-                          color: Colors.yellow[500],
-                          thickness: 2.0,
-                        ),
-                      ),
-                    ),
+              child: Hero(
+                tag: widget.cuisine.imageUrl,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(30.0),
+                    bottomLeft: Radius.circular(30.0),
                   ),
-
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
-                      child: AutoSizeText(
-                        widget.cuisine.name,
-                        maxLines: 1,
-                        style: GoogleFonts.lato(
-                          textStyle: TextStyle(
-                            fontSize: 45.0,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0.2
-                          ),
-                          color: Colors.white.withOpacity(0.9),
-                        )
-                      ),
-                    ),
-                  )
-                ]
+                  // borderRadius: BorderRadius.circular(30.0),
+                  child: Image(
+                    image: AssetImage(widget.cuisine.imageUrl),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
-          )
-        ],
-      ),
-    );
+            
+            Container(
+              height: animation.value,
+              width: mediaWidth,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(30.0),
+                    bottomLeft: Radius.circular(30.0),
+                  ),
+                gradient: LinearGradient(
+                  begin: FractionalOffset.topCenter,
+                  end: FractionalOffset.bottomCenter,
+                  colors: [
+                    Colors.black.withOpacity(0.9),
+                    Colors.black12,
+                    Colors.black.withOpacity(0.9),
+                  ],
+                  stops: [
+                    0.0,
+                    0.5,
+                    1.0
+                  ])
+              ),
+            ),
+
+            Positioned(
+              top: 30.0 + (animation.value - mediaWidth * 0.5) * 0.2,
+              child: Container(
+                width: mediaWidth,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Flexible(
+                      flex: 1,
+                      child: IconButton(
+                        icon: Icon(Icons.arrow_back_ios),
+                        iconSize: 30.0,
+                        color: Colors.white,
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ), 
+                    Flexible(
+                      flex: 5,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.search),
+                            iconSize: 30.0,
+                            color: Colors.white,
+                            onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => SearchScreen())
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.sort),
+                            iconSize: 30.0,
+                            color: Colors.white,
+                            onPressed: () => Navigator.pop(context),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+
+            Positioned(
+              bottom: 20.0,
+              child: Container(
+                width: mediaWidth,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget> [
+
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 18.0, bottom: 5.0, right: 15.0),
+                        child: SizedBox(
+                          width: mediaWidth * 0.5,
+                          child: Divider(
+                            height: 2.0,
+                            color: Colors.yellow[500],
+                            thickness: 2.0,
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    Flexible(
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 18.0, bottom: 0.0, right: 15.0),
+                        child: AutoSizeText(
+                          widget.cuisine.name,
+                          maxLines: 1,
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 45.0,
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 0.2
+                            ),
+                            color: Colors.white.withOpacity(0.9),
+                          )
+                        ),
+                      ),
+                    )
+                  ]
+                ),
+              ),
+            )
+          ],
+        ),
+      );
+      });
   }
+
+  Widget callbackRecipes() {
+    return (resultRecipes[widget.cuisine.name].length == 6) 
+    ? FutureBuilder<List<Recipe>>(
+      future: getCuisineCategoryRecipes(4, widget.cuisine.name),
+      builder: (context, snapshot) {
+
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting: 
+            return Center(child: CircularProgressIndicator(),);
+          case ConnectionState.active:
+            return Center(child: CircularProgressIndicator(),);
+          case ConnectionState.done:
+            if (snapshot.hasData) resultRecipes[widget.cuisine.name] = snapshot.data;
+            break;
+          default:
+
+        }
+
+        return categoriesListBuilder();
+      })
+
+    : categoriesListBuilder();
+  }
+
 
   Widget categoriesListBuilder() {
 
@@ -237,9 +255,9 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
           separatorBuilder: (BuildContext context, int index) => Divider(indent: 20.0, endIndent: 20.0,),
           controller: _scrollController,
           padding: EdgeInsets.only(top: 10.0, bottom: 15.0),
-          itemCount: widget.cuisine.recipes.length,
+          itemCount: resultRecipes[widget.cuisine.name].length,
           itemBuilder: (BuildContext context, int index) {
-            Recipe recipe = widget.cuisine.recipes[index];
+            Recipe recipe = resultRecipes[widget.cuisine.name][index];
             return GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -314,7 +332,7 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
                               color: Colors.grey,
                             ),
                           ),
-                          RatingStars(rating: recipe.rate, color: Colors.grey[700],),
+                          RatingStars(rating: recipe.rate, color: Colors.grey[700], borderColor: Colors.grey[700],),
                           SizedBox(height: 10.0),
                         ],
                       ),
@@ -326,11 +344,17 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
                     bottom: 15.0,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
-                      child: Image(
+                      child: (recipe.imageUrl.contains('assets')) 
+                      ? Image(
                         width: 110.0,
                         image: AssetImage(
                           recipe.imageUrl,
                         ),
+                        fit: BoxFit.cover,
+                      )
+                      : Image.network(
+                        recipe.imageUrl,
+                        width: 100,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -355,12 +379,7 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
 
     animation = Tween(
       begin: mediaWidth * 0.7, 
-      end: mediaWidth * 0.5).animate(curve)
-      ..addListener( () {
-        setState(() {
-        });
-      }
-    );
+      end: mediaWidth * 0.5).animate(curve);
 
     return GestureDetector(
       onTap: () {
@@ -378,7 +397,7 @@ class _CuisinePageState extends State<CuisinePage> with SingleTickerProviderStat
               children: <Widget>[
 
                 topPart(),
-                categoriesListBuilder()
+                callbackRecipes()
                 
               ],
             ),
