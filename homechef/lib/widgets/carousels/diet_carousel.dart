@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:homechef/models/diet_model.dart';
 import 'package:homechef/screens/all_categories/all_diet_screen.dart';
 import 'package:homechef/screens/diet_screen.dart';
@@ -17,20 +18,14 @@ class DietCarousel extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 15.0),
+                padding: const EdgeInsets.only(top: 5.0),
                 child: Text(
-                  'By Diet',
-                  style: TextStyle(
-                    shadows: [
-                      Shadow(
-                        color: Colors.black12,
-                        offset: Offset(1.0, 2.0),
-                        blurRadius: 10.0,
-                      ),
-                    ],
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
-                    // letterSpacing: 1.5
+                  'Diets',
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
@@ -43,14 +38,17 @@ class DietCarousel extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: Text(
-                  'See all',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.w600
+                child: Chip(
+                  backgroundColor: Colors.yellow[100],
+                  label: Text(
+                    'See all',
+                    style: TextStyle(
+                      color: Colors.amber[600],
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600
+                    ),
                   ),
-                ),
+                ) 
               ),
             ],
           ),
@@ -73,7 +71,7 @@ class DietCarousel extends StatelessWidget {
                     ),
                   ),
                   child: Container(
-                    margin: EdgeInsets.all(10.0),
+                    margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
                     width: 200.0,
                     child: Stack(
                       alignment: Alignment.topCenter,

@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:homechef/models/time_model.dart';
 import 'package:homechef/screens/all_categories/all_time_screen.dart';
 import 'package:homechef/screens/time_screen.dart';
@@ -15,13 +17,14 @@ class TimeCarousel extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 15.0),
+                padding: const EdgeInsets.only(top: 5.0),
                 child: Text(
-                  'By Cook Time',
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
-                    // letterSpacing: 1.5
+                  'Cook Times',
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
@@ -34,14 +37,17 @@ class TimeCarousel extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: Text(
-                  'See all',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.w600
+                child: Chip(
+                  backgroundColor: Colors.yellow[100],
+                  label: Text(
+                    'See all',
+                    style: TextStyle(
+                      color: Colors.amber[600],
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600
+                    ),
                   ),
-                ),
+                ) 
               ),
             ],
           ),
@@ -88,7 +94,7 @@ class TimeCarousel extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(8.0),
+                              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,8 +115,11 @@ class TimeCarousel extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: 5.0,),
-                                  Text(
+                                  AutoSizeText(
                                     time.description,
+                                    maxFontSize: 20.0,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.grey,
@@ -181,6 +190,8 @@ class TimeCarousel extends StatelessWidget {
                                 left: 10.0,
                                 bottom: 10.0,
                                 child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
 
@@ -203,15 +214,23 @@ class TimeCarousel extends StatelessWidget {
                                       ],
                                     ),
                                     
-                                    Text(
-                                      time.name,
-                                      style: TextStyle(
-                                        color: Colors.white.withOpacity(0.8),
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 1.2,
+                                    Flexible(
+                                        child: SizedBox(
+                                          width: 130,
+                                          child: AutoSizeText(
+                                            time.name.replaceAll('ute', ''),
+                                            maxLines: 2,
+                                            maxFontSize: 18.0,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Colors.white.withOpacity(0.8),
+                                              fontSize: 20.0,
+                                              fontWeight: FontWeight.w600,
+                                              letterSpacing:  1.2,
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ),

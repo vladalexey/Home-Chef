@@ -1,40 +1,43 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:homechef/models/popular_model.dart';
+import 'package:homechef/models/recipe_model.dart';
 import 'package:homechef/screens/recipe_screen.dart';
+import 'package:homechef/widgets/popular_recipes.dart';
 import 'package:homechef/widgets/rating_stars.dart';
 
 class PopularCarouselPage extends StatefulWidget {
-
   @override
   _PopularCarouselPageState createState() => _PopularCarouselPageState();
 }
 
 class _PopularCarouselPageState extends State<PopularCarouselPage> {
-
   int currentPage = 0;
   PageController controller;
 
   @override
   void initState() {
     super.initState();
-
-    controller = PageController(initialPage: currentPage, viewportFraction: 0.9);
+    controller =
+        PageController(initialPage: currentPage, viewportFraction: 0.9);
   }
 
-  GestureDetector _buildPage(double height, int index) {
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
 
+  GestureDetector _buildPage(List<Recipe> populars, double height, int index) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => RecipePage(
-              recipe: populars[index],
-            )
-          ));
+            context,
+            MaterialPageRoute(
+                builder: (_) => RecipePage(
+                      recipe: populars[index],
+                    )));
       },
       child: Center(
         child: Padding(
@@ -43,210 +46,296 @@ class _PopularCarouselPageState extends State<PopularCarouselPage> {
             width: MediaQuery.of(context).size.width * 0.9,
             child: Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Stack(
-                children: <Widget>[
-
-                  Positioned(
-                    top: 0.0,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      height: height * 1.1,
-
-                      decoration: BoxDecoration(
+              child: Stack(children: <Widget>[
+                Positioned(
+                  top: 0.0,
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    height: height * 1.1,
+                    decoration: BoxDecoration(
                         color: Colors.white,
                         boxShadow: [
                           BoxShadow(
-                            offset: Offset(1.0, 1.0),
-                            blurRadius: 10.0,
-                            spreadRadius: 2.0,
-                            color: Colors.grey[300]
-                          )
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 10.0,
+                              spreadRadius: 2.0,
+                              color: Colors.grey[300])
                         ],
-                        borderRadius: BorderRadius.circular(12.0)
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-
-                          Stack(
-                            children: <Widget>[
-
-                              ConstrainedBox(
-                                constraints: BoxConstraints.expand(
-                                  width: MediaQuery.of(context).size.width * 0.8,
-                                  height: height * 0.85,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    child: Image.network(
-                                      populars[index].imageUrl,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ),
-
-                              ConstrainedBox(
-                                constraints: BoxConstraints.expand(
-                                  width: MediaQuery.of(context).size.width * 0.8,
-                                  height: height * 0.85,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    // height: height * 0.85,
-                                    // width: MediaQuery.of(context).size.width * 0.8,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(15.0),
-                                      gradient: LinearGradient(
-                                        begin: FractionalOffset.topCenter,
-                                        end: FractionalOffset.bottomCenter,
-                                        colors: [
-                                          Colors.transparent,
-                                          Colors.black.withOpacity(0.9),
-                                        ],
-                                        stops: [
-                                          0.3,
-                                          1.0
-                                        ])
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                        borderRadius: BorderRadius.circular(18.0)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        ConstrainedBox(
+                          constraints: BoxConstraints.expand(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            height: height * 0.7,
                           ),
-
-                          Flexible(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-
-                                Expanded(
-                                  flex: 2,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0, top: 5.0),
-                                    child: Text(
-                                      populars[index].name,
-                                      maxLines: 1,
-                                      style: GoogleFonts.lato(
-                                        textStyle: TextStyle(
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w700,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(18.0),
+                                topLeft: Radius.circular(18.0)),
+                            child: Image.network(
+                              populars[index].imageUrl,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Flexible(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(
+                                10.0, 10.0, 5.0, 10.0),
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12.0),
+                                // color: Colors.yellow
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex: 2,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 10.0, top: 3.0),
+                                          child: Text(
+                                            populars[index].name,
+                                            maxLines: 1,
+                                            style: GoogleFonts.lato(
+                                                textStyle: TextStyle(
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                                color: Colors.grey[900],
+                                                letterSpacing: 0.1),
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
                                         ),
-                                        color: Colors.grey[900],
-                                        letterSpacing: 0.2
                                       ),
-                                      overflow: TextOverflow.ellipsis,
+                                      Flexible(
+                                        child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 3.0, right: 0.0),
+                                            child: RatingStars(
+                                              rating: populars[index].rate,
+                                              color: Colors.yellow[600],
+                                              borderColor: Colors.grey[100],
+                                            )),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 5.0,),
+                                  Flexible(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 7.0, top: 5.0, right: 0.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: <Widget>[
+                                          Chip(
+                                            backgroundColor: Colors.grey[50],
+                                            label: Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                Icon(
+                                                  Icons.timer,
+                                                  size: 20.0,
+                                                  color: Colors.grey[400],
+                                                ),
+                                                SizedBox(
+                                                  width: 5.0,
+                                                ),
+                                                Text(
+                                                  populars[index]
+                                                          .cookTime
+                                                          .toString() +
+                                                      " mins",
+                                                  style: GoogleFonts.lato(
+                                                      textStyle: TextStyle(
+                                                          color:
+                                                              Colors.grey[400],
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.3,
+                                                          fontWeight:
+                                                              FontWeight.w700)),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(width: 10.0),
+                                          Chip(
+                                            backgroundColor: Colors.grey[50],
+                                            label: Row(
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                
+                                                Icon(
+                                                  Ionicons.ios_flame,
+                                                  size: 20.0,
+                                                  color: Colors.grey[400],
+                                                ),
+                                                SizedBox(
+                                                  width: 5.0,
+                                                ),
+                                                Text(
+                                                  populars[index]
+                                                          .calories
+                                                          .toInt()
+                                                          .toString() +
+                                                      " cal",
+                                                  style: GoogleFonts.lato(
+                                                      textStyle: TextStyle(
+                                                          color:
+                                                              Colors.grey[400],
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.3,
+                                                          fontWeight:
+                                                              FontWeight.w700)),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-
-                                Flexible(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 5.0, right: 10.0),
-                                    child: RatingStars(rating: populars[index].rate, color: Colors.grey[700],)
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                          ),
-
-                          Flexible(
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20.0, top: 2.0, right: 0.0),
-                              child: Text(
-                                populars[index].cookTime.toString() + " minutes",
-                                style: GoogleFonts.montserrat(
-                                  textStyle: TextStyle(
-                                    color: Colors.grey[500],
-                                    fontSize: 13.0,
-                                    fontWeight: FontWeight.w500
-                                  )
-                                ),
+                                ],
                               ),
                             ),
-                          )
-
-                        ],
-                      ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  
-                ]
-              ),
+                ),
+              ]),
             ),
           ),
         ),
       ),
     );
   }
-  
+
   void getChangedPage(int index) {
     currentPage = index;
     setState(() {});
   }
 
   Widget circleBar(bool isActive) {
-  return AnimatedContainer(
-    duration: Duration(milliseconds: 150),
-    margin: EdgeInsets.symmetric(horizontal: 4),
-    height: isActive ? 7 : 6,
-    width: isActive ? 7 : 6,
-    decoration: BoxDecoration(
-        color: isActive ? Colors.grey[600] : Colors.transparent,
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 150),
+      margin: EdgeInsets.symmetric(horizontal: 3),
+      height: isActive ? 6 : 4,
+      width: isActive ? 6 : 4,
+      decoration: BoxDecoration(
+        color: isActive ? Colors.amber[400] : Colors.grey[200],
         borderRadius: BorderRadius.all(Radius.circular(12)),
-        border: Border.all(color: Colors.grey[600])),
-  );
-}
+        // border: Border.all(color: isActive ? Colors.amber[300] : Colors.grey[600])
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    bool errorGetPopular = false;
 
     double height = MediaQuery.of(context).size.width * 0.55;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-
         Container(
-          height: height * 1.25,
-          child: PageView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return _buildPage(height, index);
-            },
-            onPageChanged: (int index) {
-              getChangedPage(index);
-            },
-            itemCount: populars.length,
-            controller: controller,
-          )
+            height: height * 1.25,
+            child: (newPopulars.length == 0 || errorGetPopular)
+                ? FutureBuilder<List<Recipe>>(
+                    future: getPopularRecipes(4),
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        case ConnectionState.active:
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        case ConnectionState.done:
+                          if (snapshot.hasData) newPopulars = snapshot.data;
+                          if (snapshot.hasError) errorGetPopular = true;
+                          break;
+
+                        default:
+                      }
+
+                      return PageView.builder(
+                        itemBuilder: (BuildContext context, int index) {
+                          return _buildPage(
+                              (newPopulars.length != 0)
+                                  ? newPopulars
+                                  : populars,
+                              height,
+                              index);
+                        },
+                        onPageChanged: (int index) {
+                          getChangedPage(index);
+                        },
+                        itemCount: (newPopulars.length != 0)
+                            ? newPopulars.length
+                            : populars.length,
+                        controller: controller,
+                      );
+                    },
+                  )
+                : PageView.builder(
+                    itemBuilder: (BuildContext context, int index) {
+                      return _buildPage(
+                          (newPopulars.length != 0) ? newPopulars : populars,
+                          height,
+                          index);
+                    },
+                    onPageChanged: (int index) {
+                      getChangedPage(index);
+                    },
+                    itemCount: (newPopulars.length != 0)
+                        ? newPopulars.length
+                        : populars.length,
+                    controller: controller,
+                  )),
+        SizedBox(
+          height: 5.0,
         ),
-
-        SizedBox(height: 5.0,),
-
         SizedBox(
           height: 10.0,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-
-              for (int i = 0; i < populars.length; i++)
+              for (int i = 0;
+                  i <
+                      ((newPopulars.length != 0)
+                          ? newPopulars.length
+                          : populars.length);
+                  i++)
                 if (i == currentPage) ...[circleBar(true)] else
                   circleBar(false),
-                  
             ],
           ),
         ),
-
-        SizedBox(height: 10.0,)
+        SizedBox(
+          height: 10.0,
+        )
       ],
     );
   }

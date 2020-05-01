@@ -1,13 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:homechef/models/cuisine_model.dart';
 import 'package:homechef/screens/all_categories/all_cuisine_screen.dart';
 import 'package:homechef/screens/cuisine_screen.dart';
 
 class CuisineCarousel extends StatelessWidget {
 
-  final List<Cuisine> shuffled = cuisines.toList()..shuffle();
+  final List<Cuisine> shuffled = cuisines.toList();
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +21,14 @@ class CuisineCarousel extends StatelessWidget {
             children: <Widget>[
 
               Padding(
-                padding: const EdgeInsets.only(top: 15.0),
+                padding: const EdgeInsets.only(top: 5.0),
                 child: Text(
-                  'By Cuisine',
-                  style: TextStyle(
-                    // shadows: [
-                    //   Shadow(
-                    //     color: Colors.grey[200],
-                    //     offset: Offset(2.0, 3.0),
-                    //     blurRadius: 10.0,
-                    //   ),
-                    // ],
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.w600,
-                    // letterSpacing: 1.5
+                  'Cuisines',
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                      fontSize: 22.0,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
@@ -47,14 +42,17 @@ class CuisineCarousel extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: Text(
-                  'See all',
-                  style: TextStyle(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.w600
+                child: Chip(
+                  backgroundColor: Colors.yellow[100],
+                  label: Text(
+                    'See all',
+                    style: TextStyle(
+                      color: Colors.amber[600],
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w600
+                    ),
                   ),
-                ),
+                ) 
               ),
             ],
           ),
@@ -64,7 +62,6 @@ class CuisineCarousel extends StatelessWidget {
           child: Scrollbar(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              // itemCount: cuisines.length,
               itemCount: 5,
               itemBuilder: (BuildContext context, int index) {
                 
@@ -80,7 +77,7 @@ class CuisineCarousel extends StatelessWidget {
                   ),
 
                   child: Container(
-                    margin: EdgeInsets.all(10.0),
+                    margin: EdgeInsets.symmetric(horizontal: 12.0, vertical: 10.0),
                     width: 150.0,
                     child: Stack(
                       alignment: Alignment.topCenter,
@@ -104,7 +101,7 @@ class CuisineCarousel extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: Padding(
-                              padding: EdgeInsets.all(10.0),
+                              padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,8 +115,11 @@ class CuisineCarousel extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(height: 5.0,),
-                                  Text(
+                                  AutoSizeText(
                                     cuisine.description,
+                                    maxFontSize: 20.0,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.grey,
@@ -215,7 +215,8 @@ class CuisineCarousel extends StatelessWidget {
                                       ),
 
                                       Flexible(
-                                        child: FittedBox(
+                                        child: SizedBox(
+                                          width: 140,
                                           child: AutoSizeText(
                                             cuisine.name,
                                             maxLines: 2,
