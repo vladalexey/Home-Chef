@@ -6,7 +6,7 @@ A mobile app project aiming to provide cooking recipes with smart lookup taking 
 **Frontend**
 - Flutter
 
-**Backend**
+**Backend:** https://github.com/vladalexey/api_homechef_backend 
 - Nodejs
 - PostgreSQL
 
