@@ -1,5 +1,5 @@
 import 'package:homechef/models/cuisine_model.dart';
-import 'package:homechef/models/diet_model.dart';
+import 'package:homechef/models/diets_model.dart';
 import 'package:homechef/models/time_model.dart';
 
 int numFilters() {
