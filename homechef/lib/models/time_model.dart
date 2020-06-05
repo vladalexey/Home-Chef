@@ -24,6 +24,12 @@ Map<String, bool> timesOptions = {
   "Under 15 minutes": false,
 };
 
+Map<String, bool> timeOptionsCopy;
+
+void getTimesCopy() {
+  timeOptionsCopy = new Map<String, bool>.of(timesOptions);
+}
+
 String getMinutes(String timeOption) {
   print(timeOption.split(' '));
   return (timeOption.split(' ')[1]);
@@ -37,25 +43,3 @@ List<Time> times = new List<Time>.generate(timesOptions.keys.length, (int index)
     recipes: recipes
   );
 });
-
-
-// final List<Time> times = [
-//   Time(
-//     imageUrl: 'assets/imgs/45min.jpg',
-//     name: '45 minutes',
-//     description: 'Lorem ipsum dolor sit amet.',
-//     recipes: recipes,
-//   ),
-//   Time(
-//     imageUrl: 'assets/imgs/30min.jpg',
-//     name: '30 minutes',
-//     description: 'Lorem ipsum dolor sit amet.',
-//     recipes: recipes,
-//   ),
-//   Time(
-//     imageUrl: 'assets/imgs/15min.jpg',
-//     name: '15 minutes',
-//     description: 'Lorem ipsum dolor sit amet.',
-//     recipes: recipes,
-//   ),
-// ];
