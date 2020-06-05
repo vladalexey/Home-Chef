@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:homechef/models/diets_model.dart';
 import 'package:homechef/models/recipe_model.dart';
-import 'package:homechef/widgets/search_widgets/bounce_button.dart';
 
 class Diet {
   String imageUrl;
@@ -16,70 +15,19 @@ class Diet {
   });
 }
 
-Map<String, bool> dietOptions = {'veganBool': false, 'vegetarianBool': false, 'ovoVegetarianBool': false, 'lactoVegetarianBool': false, 'glutenFreeBool': false, 
-  'paleoBool': false, 'pescetarianBool': false, 'primalBool': false, 'whole30Bool': false, 'ketoBool': false};
+Map<String, bool> dietOptionsCopy;
 
-void setAllFalse() {
-  for (String key in dietOptions.keys) {
-    dietOptions[key] = false;
-  }
+void getDietsCopy() {
+  dietOptionsCopy = new Map<String, bool>.of(dietOptions);
 }
+
+// Map<String, bool> dietOptions = {'veganBool': false, 'vegetarianBool': false, 'ovoVegetarianBool': false, 'lactoVegetarianBool': false, 'glutenFreeBool': false, 
+//   'paleoBool': false, 'pescetarianBool': false, 'primalBool': false, 'whole30Bool': false, 'ketoBool': false};
 
 String encodeDietName(String name) {
 
   return name.substring(0, 1).toLowerCase() + name.substring(1, name.length).replaceAll(' ', '') + 'Bool';
 }
-
-List<AnimatedButton> getDietButtons(List<AnimationController> parentControllers) {
-
-  return List<AnimatedButton>.generate(
-    diets.length, (int index,) {
-    
-      return AnimatedButton(
-        chosenDiet: dietOptions[encodeDietName(diets[index].name)],
-        parentController: parentControllers[index],
-        parentControllers: parentControllers,
-        onTap: () {
-
-          if (dietOptions[encodeDietName(diets[index].name)] == false) {
-            setAllFalse();
-          }
-          dietOptions[encodeDietName(diets[index].name)] = !dietOptions[encodeDietName(diets[index].name)];
-
-          print(dietOptions);
-
-        },
-
-        animationDuration: const Duration(milliseconds: 500),
-        initialText: diets[index].name,
-        finalText: diets[index].name,
-        iconData: Icons.check,
-        iconSize: 18.0,
-
-        buttonStyle: ButtonStyle(
-          primaryColor: Colors.white,
-          secondaryColor: Colors.amber[300],
-          elevation: 5.0,
-          initialTextStyle: TextStyle(
-            fontSize: 15,
-            color: Colors.black87,
-          ),
-          finalTextStyle: TextStyle(
-            fontSize: 10.0,
-            color: Colors.black87,
-          ),
-          borderRadius: 10.0,
-        ),
-      );
-    } 
-  ); 
-}
-
-// void assignControllerDietButtons(List<AnimationController> parentControllers) {
-//   dietButtons.forEach( (AnimatedButton button) {
-//     button.parentController = parentControllers[dietButtons.indexOf(button)];
-//   });
-// }
 
 final List<Recipe> recipes = [
   Recipe(
