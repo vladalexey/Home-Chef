@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:homechef/screens/auth/login.dart';
+import 'package:homechef/widgets/helpers/auth-helpers.dart';
 import 'package:homechef/widgets/helpers/menu_clipper.dart';
 
 class Menu extends StatefulWidget {
+  final String username;
+  Menu({@required this.username});
+
   @override
   _MenuState createState() => _MenuState();
 }
@@ -12,10 +18,12 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
   double screenWidth;
   final _animationDuration = const Duration(milliseconds: 500);
   Animation<double> _animation;
+  final AuthHelper authHelper = AuthHelper();
+
   @override
   void initState() {
     super.initState();
-    
+
     _animationController =
         AnimationController(vsync: this, duration: _animationDuration);
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
@@ -28,7 +36,6 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
   }
 
   void onIconPressed() {
-
     if (_animationController.isCompleted) {
       setState(() {
         isCollapsed = true;
@@ -48,7 +55,6 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
 
     return Stack(
       children: <Widget>[
-
         AnimatedPositioned(
           curve: Curves.decelerate,
           duration: _animationDuration,
@@ -81,7 +87,9 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
                         height: 30,
                       ),
                       Text(
-                        "Quan Phan",
+                        (widget.username != null)
+                            ? widget.username
+                            : "Quan Phan",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 30,
@@ -94,6 +102,17 @@ class _MenuState extends State<Menu> with SingleTickerProviderStateMixin {
                         indent: 32,
                         endIndent: 32,
                       ),
+                      IconButton(
+                        color: Colors.white,
+                        icon: Icon(Ionicons.ios_log_out),
+                        onPressed: () {
+                          authHelper.logout();
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => LoginPage()),
+                              (route) => false);
+                        },
+                      )
                     ],
                   ),
                 ),
