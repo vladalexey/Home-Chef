@@ -33,6 +33,7 @@ class _SearchScreenState extends State<SearchScreen>
       bloc: NotiFilterBloc(),
 
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -60,6 +61,7 @@ class _SearchScreenState extends State<SearchScreen>
           ],
         ),
         bottomSheet: SolidBottomSheet(
+          canUserSwipe: true,
             onHide: () {
               _searchController.triggerSearch();
             },
