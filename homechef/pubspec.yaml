@@ -74,9 +74,9 @@ flutter:
    - assets/imgs/appLogoOnly.png
    - assets/imgs/appLogoOnlyBW.png
 
-   - assets/imgs/LoginWave.png
-   - assets/imgs/LoginWave@2x.png
-   - assets/imgs/LoginWave@3x.png
+  #  - assets/imgs/LoginWave.png
+  #  - assets/imgs/LoginWave@2x.png
+  #  - assets/imgs/LoginWave@3x.png
    
 
    - assets/imgs/food1.jpg
